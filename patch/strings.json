@@ -39,5 +39,19 @@
 
         "Learn SvelteKit":
         "Изучить SvelteKit"
+    },
+
+    "sites/kit.svelte.dev/src/routes/$layout.svelte":{
+        ">Docs<":
+        ">Документация<",
+
+        ">Migrating<":
+        ">Миграция<",
+
+        "https://svelte.dev/chat":
+        "https://t.me/sveltejs",
+
+        "Discord Chat":
+        "Какал в Telegram"
     }
 }
