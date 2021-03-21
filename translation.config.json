@@ -1,0 +1,8 @@
+{
+    "lang": "ru",
+    "repo": "https://github.com/sveltejs/sites",
+    "setup": "npx pnpm install",
+    "dev": "npm run dev",
+    "build": "svelte-kit build",
+    "start": "svelte-kit start"
+}

@@ -1,0 +1,19 @@
+{
+  "name": "russian-sites",
+  "description": "Russian translation of the svelte.dev sites",
+  "scripts": {
+    "download": "trpatcher download",
+    "postdownload": "node scripts/hook_post_download",
+    "apply": "trpatcher apply",
+    "setup": "trpatcher setup",
+    "dev:kit": "node scripts/dev --kit",
+    "start": "trpatcher start",
+    "build": "trpatcher build"
+  },
+  "dependencies": {
+    "trpatcher": "^1.0.5"
+  },
+  "devDependencies": {
+    "node-watch": "^0.6.4"
+  }
+}
