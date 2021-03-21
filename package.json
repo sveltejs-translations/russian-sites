@@ -10,7 +10,8 @@
     "start": "trpatcher start",
     "build": "trpatcher build",
     "postinstall": "npm run download && npm run apply && npm run setup",
-    "update": "npm run download && npm run apply"
+    "update": "npm run download && npm run apply",
+    "copy:kit": "node scripts/copy --kit"
   },
   "dependencies": {
     "trpatcher": "^1.0.5"
