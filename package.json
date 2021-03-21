@@ -8,7 +8,9 @@
     "setup": "trpatcher setup",
     "dev:kit": "node scripts/dev --kit",
     "start": "trpatcher start",
-    "build": "trpatcher build"
+    "build": "trpatcher build",
+    "postinstall": "npm run download && npm run apply && npm run setup",
+    "update": "npm run download && npm run apply"
   },
   "dependencies": {
     "trpatcher": "^1.0.5"

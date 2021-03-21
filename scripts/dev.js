@@ -5,6 +5,8 @@ const child = require('child_process');
 let dir;
 if(KIT) dir = '__BUILD/sites/kit.svelte.dev';
 
+runApply();
+
 const site = child.spawn('npm', ['run', 'dev'], {
     cwd: dir,
     stdio: ['ignore', 'inherit', 'inherit'],
@@ -14,10 +16,12 @@ const site = child.spawn('npm', ['run', 'dev'], {
 process.on('SIGTERM', ()=>site.kill(0));
 process.on('exit', ()=>site.kill(0));
 
-watch('patch',{recursive:true},()=>{
+watch('patch',{recursive:true},runApply);
+
+function runApply(){
     try{
         child.execSync('npm run apply');
     }catch{
         console.error('Something wrong in patch directory')
     }
-});
+}
