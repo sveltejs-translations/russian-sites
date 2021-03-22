@@ -10,7 +10,7 @@
     "update": "npm run download && npm run apply && npm run setup",
     "dev:kit": "node scripts/dev --kit",
     "build:kit": "npm run apply && cd __BUILD/sites/kit.svelte.dev && npm run build  --ignore-scripts && mkdir -p build/src && cp -r src/content build/src/",
-    "start:kit": "cd __BUILD/sites/kit.svelte.dev/build && node index",
+    "start:kit": "cd __BUILD/sites/kit.svelte.dev/build && node -r esm index",
     "copy:kit": "node scripts/copy --kit"
   },
   "dependencies": {
