@@ -5,8 +5,8 @@ on:
     paths:
       - '.github/workflows/deploy-kit.yml'
       - 'docker/Dockerfile'
-      - 'patch/packages/**'
-      - 'sites/kit.svelte.dev/**'
+      - 'patch/packages/**/*'
+      - 'sites/kit.svelte.dev/**/*'
 
 jobs:
   deploy:
