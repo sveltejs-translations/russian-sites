@@ -1,0 +1,55 @@
+name: Deploy ru.kit.svelte.dev
+
+on:
+  push:
+    paths:
+      - '.github/workflows/deploy-kit.yml'
+      - 'docker/Dockerfile'
+      - 'patch/packages/*'
+      - 'sites/kit.svelte.dev/*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: 15
+          registry-url: https://registry.npmjs.org/
+
+      - name: Installing deps and getting original resources
+        run: npm install
+
+      - name: Build translated site
+        run: npm run build:kit
+
+      - name: Copy Dockerfile to build dir
+        run: cp docker/Dockerfile __BUILD/sites/kit.svelte.dev/build/
+
+      - name: Copy build dir to the server
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: __BUILD/sites/kit.svelte.dev/build
+          remote: /tmp/kit.svelte.dev
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASS }}
+
+      - name: Build and start Docker container
+        uses: garygrossgarten/github-action-ssh@release
+        with:
+          command: |
+            cd /tmp/kit.svelte.dev
+            docker build -t svelte-kit-site .
+            docker run -d -p 3004:3000 --name Svelte-Kit-Site --restart=unless-stopped svelte-kit-site
+            rm -rf /tmp/kit.svelte.dev
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          password: ${{ secrets.SSH_PASS }}
+      
+      
