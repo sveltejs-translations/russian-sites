@@ -46,6 +46,8 @@ jobs:
           command: |
             cd /tmp/kit.svelte.dev
             docker build -t svelte-kit-site .
+            docker stop Svelte-Kit-Site
+            docker rm Svelte-Kit-Site
             docker run -d -p 3004:3000 --name Svelte-Kit-Site --restart=unless-stopped svelte-kit-site
             rm -rf /tmp/kit.svelte.dev
           host: ${{ secrets.SSH_HOST }}
