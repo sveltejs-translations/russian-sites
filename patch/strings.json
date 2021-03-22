@@ -7,6 +7,10 @@
         "UNICODE =  false":
         "UNICODE =  true"
     },
+    "sites/kit.svelte.dev/svelte.config.cjs":{
+        "adapter-netlify":
+        "adapter-node"
+    },
     "sites/kit.svelte.dev/src/routes/index.svelte": {
 
         "The fastest way to build Svelte apps": 
