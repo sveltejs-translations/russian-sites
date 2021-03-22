@@ -4,7 +4,7 @@ title: package.json
 
 ### dependencies
 
-Удалите `polka` или `express`, если вы их используете, а также любые миддлвары, такие как `sirv` или `compression`.
+Удалите `polka` или `express`, если вы их используете, а также любые промежуточные обработчики, такие как `sirv` или `compression`.
 
 ### devDependencies
 

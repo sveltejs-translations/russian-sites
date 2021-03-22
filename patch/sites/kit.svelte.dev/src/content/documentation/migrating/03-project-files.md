@@ -8,7 +8,7 @@ title: Файлы проекта
 
 Замените `webpack.config.js` или `rollup.config.js` на `svelte.config.cjs`, как описано в [документации](/docs#configuration). Опции препроцессора переместите в `config.preprocess`.
 
-Добавьте [adapter](/docs#adapters): 
+Добавьте [адаптер](/docs#adapters): 
 * `sapper build` ~ [adapter-node](https://github.com/sveltejs/kit/tree/master/packages/adapter-node);
 * `sapper export` ~ [adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static);
 * или адаптер, для вашей платформы.
@@ -17,11 +17,11 @@ title: Файлы проекта
 
 ### src/client.js
 
-У этого файла нет эквивалента в SvelteKit. Любая настраиваемая логика (за пределами `sapper.start(...)`) должна быть описана в `$layout.svelte`, внутри обратного вызова `onMount`.
+У этого файла нет эквивалента в SvelteKit. Любая настраиваемая логика (за пределами `sapper.start(...)`) должна быть описана в `$layout.svelte`, внутри функции обратного вызова `onMount`.
 
 ### src/server.js
 
-Этот файл также не имеет прямого эквивалента, поскольку приложения SvelteKit могут работать в бессерверных средах. Однако вы можете использовать [setup module](/docs#setup) для реализации логики сессии.
+Этот файл также не имеет прямого эквивалента, поскольку приложения SvelteKit могут работать в бессерверных средах. Однако вы можете использовать [файл установок](/docs#setup) для реализации логики сессии.
 
 ### src/service-worker.js
 
