@@ -1,4 +1,12 @@
 {
+    "sites/kit.svelte.dev/src/lib/generate_docs.js":{
+        "[^a-z0-9-]":
+        "[^a-zа-я0-9-]"
+    },
+    "sites/kit.svelte.dev/config.js":{
+        "UNICODE =  false":
+        "UNICODE =  true"
+    },
     "sites/kit.svelte.dev/src/routes/index.svelte": {
 
         "The fastest way to build Svelte apps": 
@@ -52,6 +60,6 @@
         "https://t.me/sveltejs",
 
         "Discord Chat":
-        "Какал в Telegram"
+        "Канал в Telegram"
     }
 }
