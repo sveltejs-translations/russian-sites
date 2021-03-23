@@ -14,7 +14,7 @@ title: package.json
 
 Все скрипты `sapper` должны быть заменены:
 
-* `sapper build` или `sapper export` замените на [`svelte-kit build`](/docs#command-line-interface-svelte-kit-build)
-* `sapper dev` замените на [`svelte-kit dev`](/docs#command-line-interface-svelte-kit-dev)
+* `sapper build` или `sapper export` замените на [`svelte-kit build`](/docs#svelte-kit-cli-svelte-kit-build)
+* `sapper dev` замените на [`svelte-kit dev`](/docs#svelte-kit-cli-svelte-kit-dev)
 
-Кроме того, [`svelte-kit start`](/docs#command-line-interface-svelte-kit-start) заменяет любую команду, которая запускает сервер собранный Sapper.
+Кроме того, [`svelte-kit start`](/docs#svelte-kit-cli-svelte-kit-start) заменяет любую команду, которая запускает сервер собранный Sapper.
