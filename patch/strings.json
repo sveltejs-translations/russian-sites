@@ -63,7 +63,66 @@
         "https://svelte.dev/chat":
         "https://t.me/sveltejs",
 
+        "https://svelte.dev":
+        "https://ru.svelte.dev",
+
         "Discord Chat":
         "Канал в Telegram"
+    },
+    "sites/kit.svelte.dev/src/routes/$error.svelte":{
+
+        "Yikes!":
+        "Бдыщ!",
+
+        "Encountered a {status} error":
+        "Произошла ошибка #{status}",
+
+        "Please try reloading the page":
+        "Попробуйте перезагрузить страницу",
+
+        "If the error persists, please drop by":
+        "Если ошибка сохраняется, сообщите об этом",
+        "https://svelte.dev/chat":
+        "https://t.me/sveltejs",
+        "Discord chatroom":
+        "Telegram-канале",
+        "and let us know, or raise an issue on":
+        "или опишите проблему в нашем репозитории на",
+        "Thanks!":
+        "Спасибо!",
+
+        "It looks like you're offline": 
+        "Похоже, что у вас нет сети",
+
+        "Reload the page once you've found the internet": 
+        "Перезагрузите страницу, как только появится связь"
+    },
+    "sites/kit.svelte.dev/src/routes/docs/index.svelte":{
+
+        "Docs • SvelteKit":
+        "Документация • SvelteKit",
+
+        "SvelteKit docs":
+        "Документация SvelteKit",
+
+        "The fastest way to build Svelte apps":
+        "Быстрейший способ сделать Svelte приложение",
+
+        "<Docs {sections} project=\"kit\" path=\"/documentation\" />":
+        "<Docs {sections} owner=\"sveltejs-translations\" project=\"russian-sites\" path=\"/patch/sites/kit.svelte.dev/src/content/documentation\" edit_title=\"редактировать этот раздел\" />"
+    },
+    "sites/kit.svelte.dev/src/routes/migrating/index.svelte":{
+
+        "Migration • SvelteKit":
+        "Руководство по миграции • SvelteKit",
+
+        "SvelteKit migration guides":
+        "Руководство по миграции на SvelteKit",
+
+        "The fastest way to build Svelte apps":
+        "Быстрейший способ сделать Svelte приложение",
+
+        "<Docs {sections} project=\"kit\" path=\"/documentation\" dir=\"migrating\" />":
+        "<Docs {sections} owner=\"sveltejs-translations\" project=\"russian-sites\" path=\"/patch/sites/kit.svelte.dev/src/content/documentation\" dir=\"migrating\" edit_title=\"редактировать этот раздел\" />"
     }
 }
