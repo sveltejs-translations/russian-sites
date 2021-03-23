@@ -2,10 +2,10 @@
 title: События
 ---
 
-SvelteKit пробрасывает [CustomEvents](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent) на объект `window` когда:
+SvelteKit запускает [пользовательские события](https://learn.javascript.ru/dispatch-events) на объекте `window` когда:
 
-* `sveltekit:start` — приложение гидрируется
+* `sveltekit:start` — приложение закончило гидрацию
 * `sveltekit:navigation-start` — навигация началась
 * `sveltekit:navigation-end` — навигация закончилась
 
-Возможно, вам не понадобится их использовать, но они могут быть полезны, например, в контексте интеграционных тестов.
+Возможно, вам не понадобится их использовать, но они могут быть полезны, например, в интеграционных тестах.
