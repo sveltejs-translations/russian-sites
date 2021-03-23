@@ -35,7 +35,7 @@ const { preloading, page, session } = stores();
 
 В SvelteKit вы получаете к ним доступ по-другому. `stores` теперь называется `getStores`, но в большинстве случаев в этом нет необходимости, поскольку вы можете импортировать `navigating`, `page` и `session` прямо из [`$app/stores`](/docs#modules-app-stores).
 
-### Атрибуты ссылок;
+### Атрибуты ссылок
 
 * `sapper:prefetch` => `sveltekit:prefetch`
 * `sapper:noscroll` => `sveltekit:noscroll`
