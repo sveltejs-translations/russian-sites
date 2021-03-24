@@ -1,0 +1,19 @@
+on:
+  schedule:
+    - cron:  '0 5 * * *'
+
+jobs:
+  test-action:
+    runs-on: ubuntu-latest
+    name: Check sveltejs/kit repo for new commits
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Check new commits in sveltejs/kit
+      uses: AlexxNB/track-commits-to-issue@master
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        owner: sveltejs
+        repo: kit
+        dir: documentation
+        days: 1
