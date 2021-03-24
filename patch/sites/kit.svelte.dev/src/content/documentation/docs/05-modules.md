@@ -56,7 +56,7 @@ import { getStores, navigating, page, session } from '$app/stores';
 
 ### $service-worker
 
-Этот модуль доступен только в [сервис-воркерах](#service-workers).
+Этот модуль доступен только в [сервис-воркерах](#сервис-воркеры).
 
 ```js
 import { build, files, timestamp } from '$service-worker';
