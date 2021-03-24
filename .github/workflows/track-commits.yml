@@ -1,11 +1,13 @@
+name: Check sveltejs/kit repo for new commits
+
 on:
   schedule:
     - cron:  '0 5 * * *'
 
 jobs:
-  test-action:
+  traack-commits:
     runs-on: ubuntu-latest
-    name: Check sveltejs/kit repo for new commits
+    name: Checking new commits...
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
