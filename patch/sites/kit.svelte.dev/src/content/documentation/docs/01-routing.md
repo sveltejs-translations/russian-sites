@@ -66,9 +66,7 @@ type Response = {
 import db from '$lib/database';
 
 /**
- * @param {import('@sveltejs/kit').Request} request
- * @param {any} context
- * @returns {import('@sveltejs/kit').Response}
+ * @type {import('@sveltejs/kit').RequestHandler}
  */
 export async function get(request, context) {
 	// у нас есть доступ к параметру `slug`, потому что
