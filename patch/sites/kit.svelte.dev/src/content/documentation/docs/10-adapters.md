@@ -42,4 +42,4 @@ module.exports = {
 - [`adapter-node`](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) — для создания автономных приложений Node
 - [`adapter-static`](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) — для пререндера приложения и получения статического сайта
 
-> API адаптера все еще находится в разработке и, вероятно, изменится до версии 1.0.
+> API адаптеров всё ещё находится в разработке и, вероятно, изменится до версии 1.0.
