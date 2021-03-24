@@ -1,5 +1,5 @@
 ---
-title: Атрибуты ссылок;
+title: Атрибуты ссылок
 ---
 
 ### sveltekit:prefetch
