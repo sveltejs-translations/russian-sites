@@ -32,7 +32,7 @@ type LoadOutput = {
 ```html
 <script context="module">
 	/**
-	 * @type {import('@sveltejs/kit).Load}
+	 * @type {import('@sveltejs/kit').Load}
 	 */
 	export async function load({ page, fetch, session, context }) {
 		const url = `/blog/${page.params.slug}.json`;
@@ -83,7 +83,7 @@ type LoadOutput = {
 
 #### session
 
-`session` может использоваться для передачи данных от сервера в текущий запрос, например идентификатор авторизованного пользователя. По умолчанию значение равно `undefined`. См. раздел [Установки](#установки-getsession), чтобы узнать как использовать этот объект.
+`session` может использоваться для передачи данных от сервера в текущий запрос, например идентификатор авторизованного пользователя. По умолчанию значение равно `undefined`. См. [`getSession`](#хуки-getsession) в разделе [`Хуки`](#хуки), чтобы узнать как использовать этот объект.
 
 #### context
 

@@ -10,7 +10,7 @@ module.exports = {
 	// параметры для svelte.compile (https://svelte.dev/docs#svelte_compile)
 	compilerOptions: null,
 
-	// массив расширений, котрые будут считаться компонентами Svelte
+	// массив расширений, которые будут считаться компонентами Svelte
 	extensions: ['.svelte'],
 
 	kit: {
@@ -19,10 +19,10 @@ module.exports = {
 		appDir: '_app',
 		files: {
 			assets: 'static',
+			hooks: 'src/hooks',
 			lib: 'src/lib',
 			routes: 'src/routes',
 			serviceWorker: 'src/service-worker',
-			setup: 'src/setup',
 			template: 'src/app.html'
 		},
 		host: null,
@@ -66,7 +66,7 @@ module.exports = {
 - `lib` — внутренняя библиотека вашего приложения, доступная во всей кодовой базе как `$lib`
 - `routes` — файлы, которые определяют структуру вашего приложения ([Маршруты](#маршруты))
 - `serviceWorker` — точка входа [сервис-воркера](#сервис-воркеры)
-- `setup` — путь к файлу установок (см. [Установки](#установки))
+- `hooks` — путь к файлу хуков (see [Хуки](#хуки))
 - `template` — расположение шаблона для HTML-ответов сервера
 
 #### host

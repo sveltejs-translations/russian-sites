@@ -41,11 +41,10 @@ title: Маршруты
 
 ### Эндпоинты
 
-
-Эндпоинты — это модули, написанные в файлах `.js` (или `.ts`), которые экспортируют функции, соответствующие HTTP методам. Каждая функция получает в качестве аргументов объекты HTTP `request` и `context`. Например, наша гипотетическая страница блога `/blog/cool-article`, может запрашивать данные из `/blog/cool-article.json`, который может быть представлен эндпоинтом `src/routes/blog/[slug].json.js`:
+Эндпоинты — это модули, написанные в файлах `.js` (или `.ts`), которые экспортируют функции, соответствующие HTTP методам. Например, наша гипотетическая страница блога `/blog/cool-article`, может запрашивать данные из `/blog/cool-article.json`, который может быть представлен эндпоинтом `src/routes/blog/[slug].json.js`:
 
 ```ts
-type Request = {
+type Request<Context = any> = {
 	host: string;
 	method: 'GET';
 	headers: Record<string, string>;
@@ -53,6 +52,7 @@ type Request = {
 	params: Record<string, string | string[]>;
 	query: URLSearchParams;
 	body: string | Buffer | ReadOnlyFormData;
+	context: Context; // см. getContext ниже
 };
 
 type Response = {
@@ -60,6 +60,10 @@ type Response = {
 	headers?: Record<string, string>;
 	body?: any;
 };
+
+type RequestHandler<Context = any> = {
+	(request: Request<Context>) => Response | Promise<Response>;
+}
 ```
 
 ```js
@@ -68,10 +72,10 @@ import db from '$lib/database';
 /**
  * @type {import('@sveltejs/kit').RequestHandler}
  */
-export async function get(request, context) {
+export async function get({ params }) {
 	// у нас есть доступ к параметру `slug`, потому что
 	// файл называется [slug].json.js
-	const { slug } = request.params;
+	const { slug } = params;
 
 	const article = await db.get(slug);
 
@@ -88,14 +92,12 @@ export async function get(request, context) {
 
 Поскольку модуль запускается только на сервере (или при сборке сайта, в случае [пререндера](#пререндер)), вы можете легко получить доступ к вещам вроде базы данных. (Пока не обращайте внимание на `$lib`, об этом мы узнаем [позднее](#модули-lib).)
 
-Второй аргумент `context` – это нечто, что вы определили в [Установках](#установки) при необходимости.
-
 Цель данной функции – вернуть объект `{status, headers, body}`, который является ответом на запрос. Если `body` является объектом и в `headers` нет заголовка `content-type`, то он по автоматически превратится в JSON строку.
 
 Для эндпоинтов, которые должны обрабатывать иные HTTP методы, например POST, экспортируйте соответствующую функцию:
 
 ```js
-export function post(request, context) {...}
+export function post(request) {...}
 ```
 
 Поскольку `delete` является зарезервированным словом JavaScript, запросы методом DELETE обрабатываются функцией с именем `del`.
