@@ -2,6 +2,10 @@
 title: package.json
 ---
 
+### type : "module"
+
+Добавьте `"type": "module"` в `package.json`
+
 ### dependencies
 
 Удалите `polka` или `express`, если вы их используете, а также любые промежуточные обработчики, такие как `sirv` или `compression`.
