@@ -54,7 +54,7 @@ type LoadOutput = {
 </script>
 ```
 
-`load` в SvelteKit является эквивалентом функциям `getStaticProps` или `getServerSideProps` в Next.js или `asyncData` в Nuxt.js.
+`load` в SvelteKit является эквивалентом функциям `getStaticProps` или `getServerSideProps` в Next.js или `asyncData` в Nuxt.js, за исключением того, что он работает как на сервере, так и на клиенте.
 
 Если функция `load` ничего не возвращает, SvelteKit будет [перебирать маршруты](#маршруты-дополнительно-перебор-маршрутов) пока один из них что-то не вернёт, или вернёт ответ с кодом 404.
 
