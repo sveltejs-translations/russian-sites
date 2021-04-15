@@ -66,14 +66,15 @@ type LoadOutput = {
 
 #### page
 
-`page` является объектом `{ host, path, params, query }` где `host` и`path` — это соответственно часть хоста и путь из URL, `params` вычисляется из `path` и имени файла страницы, и `query` – экземпляр объекта `URLSearchParams`.
+`page` является объектом `{ host, path, params, query }` где `host` и`path` — это соответственно часть хоста и путь из URL, `params` вычисляется из `path` и имени файла страницы, и `query` – экземпляр объекта [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams).
 
-Таким образом для примера выше `src/routes/blog/[slug].svelte` и для запрошенного URL `/blog/some-post?foo=bar&baz`, следующее будет верным:
+Таким образом для примера выше `src/routes/blog/[slug].svelte` и для запрошенного URL `/blog/some-post?foo=bar&baz&bizz=a&bizz=b`, следующее будет верным:
 
 - `page.path === '/blog/some-post'`
 - `page.params.slug === 'some-post'`
 - `page.query.get('foo') === 'bar'`
 - `page.query.has('baz')`
+- `page.query.getAll('bizz') === ['a', 'b']`
 
 #### fetch
 

@@ -86,10 +86,10 @@ type Response = {
 	headers?: Headers;
 	body?: any;
 };
-type Handle<Context = any> = (
+type Handle<Context = any> = ({
 	request: Request<Context>,
 	render: (request: Request<Context>) => Promise<Response>
-) => Response | Promise<Response>;
+}) => Response | Promise<Response>;
 ```
 ```js
 /** @type {import('@sveltejs/kit').Handle} */
