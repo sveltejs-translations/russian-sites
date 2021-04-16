@@ -114,6 +114,15 @@
         "<Docs {sections} project=\"kit\" path=\"/documentation\" />":
         "<Docs {sections} owner=\"sveltejs-translations\" project=\"russian-sites\" path=\"/patch/sites/kit.svelte.dev/src/content/documentation\" edit_title=\"редактировать этот раздел\" />"
     },
+    "sites/kit.svelte.dev/src/routes/faq/index.svelte":{
+
+        "Frequently Asked Questions":
+        "Часто задаваемые вопросы",
+
+        "See also the <a href=\"https://ru.svelte.dev/faq\" rel=\"external\">Svelte FAQ</a> for questions relating to Svelte directly.":
+        "По вопросам, относящимся непосредственно к Svelte смотрите <a href=\"https://ru.svelte.dev/faq\" rel=\"external\">Svelte FAQ</a>."
+
+    },
     "sites/kit.svelte.dev/src/routes/migrating/index.svelte":{
 
         "Migration • SvelteKit":

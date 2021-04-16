@@ -26,9 +26,8 @@ SvelteKit — это фреймворк для создания невероят
 Самый простой способ начать создавать приложение SvelteKit — запустить команду `npm init`:
 
 ```bash
-mkdir my-app
+npm init svelte@next my-app
 cd my-app
-npm init svelte@next
 npm install
 npm run dev
 ```
