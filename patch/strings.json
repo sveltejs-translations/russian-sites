@@ -119,9 +119,14 @@
         "Frequently Asked Questions":
         "Часто задаваемые вопросы",
 
-        "See also the <a href=\"https://ru.svelte.dev/faq\" rel=\"external\">Svelte FAQ</a> for questions relating to Svelte directly.":
-        "По вопросам, относящимся непосредственно к Svelte смотрите <a href=\"https://ru.svelte.dev/faq\" rel=\"external\">Svelte FAQ</a>."
+        "See also the <a href=\"https://svelte.dev/faq\" rel=\"external\">Svelte FAQ</a> for questions relating":
+        "По вопросам, относящимся непосредственно к Svelte смотрите <a href=\"https://ru.svelte.dev/faq\" rel=\"external\">Svelte FAQ</a>.",
 
+        "to Svelte directly.":
+        "",
+
+        "The fastest way to build Svelte apps":
+        "Быстрейший способ сделать Svelte приложение"
     },
     "sites/kit.svelte.dev/src/routes/migrating/index.svelte":{
 
