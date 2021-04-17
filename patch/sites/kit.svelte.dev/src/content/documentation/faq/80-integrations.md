@@ -19,3 +19,7 @@ SvelteKit предоставляет [svelte-preprocess](https://github.com/svel
 ### Как использовать Axios?
 
 Скорее всего он вам не нужен. Обычно мы рекомендуем использовать `fetch`. При необходимости, лучше использовать не Axios, а его полную замену написанную на ES модулях – `redaxios`, [пока в Axios не будет поддержки ES модулей](https://github.com/axios/axios/issues/1879). В крайнем случае, при желании использовать сам Axios, попробуйте поместить его в `optimizeDeps.include`.
+
+### Поддерживается ли Yarn 2?
+
+Вроде того. Функция Plug'n'Play (или 'pnp') сломана – она резолвит Node-модули нестандартным способом и [пока не работает с нативными JavaScript модулями](https://github.com/yarnpkg/berry/issues/638), которым является SvelteKit и [непрерывно растущее число других пакетов](https://blog.sindresorhus.com/get-ready-for-esm-aa53530b3f77). Вы можете настроить `nodeLinker: 'node-modules'` в вашем файле [`.yarnrc.yml`](https://yarnpkg.com/configuration/yarnrc#nodeLinker) для отключения pnp, но возможно проще просто  использовать  npm или [pnpm](https://pnpm.io/), который так же быстр и эффективен, но лучше решает проблемы совместимости модулей.

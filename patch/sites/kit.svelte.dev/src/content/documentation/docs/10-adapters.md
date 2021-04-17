@@ -33,9 +33,10 @@ module.exports = {
 
 Для бессерверных платформ существует множество официальных адаптеров...
 
-- [`adapter-begin`](https://github.com/sveltejs/kit/tree/master/packages/adapter-begin) — для [begin.com](https://begin.com)
-- [`adapter-netlify`](https://github.com/sveltejs/kit/tree/master/packages/adapter-netlify) — для [netlify.com](https://netlify.com)
-- [`adapter-vercel`](https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel) — для [vercel.com](https://vercel.com)
+- [`adapter-begin`](https://github.com/sveltejs/kit/tree/master/packages/adapter-begin) — для [Begin](https://begin.com)
+- [`adapter-cloudflare-workers`](https://github.com/sveltejs/kit/tree/master/packages/adapter-cloudflare-workers) — для [Cloudflare Workers](https://developers.cloudflare.com/workers/)
+- [`adapter-netlify`](https://github.com/sveltejs/kit/tree/master/packages/adapter-netlify) — для [Netlify](https://netlify.com)
+- [`adapter-vercel`](https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel) — для [Vercel](https://vercel.com)
 
 ...и другие:
 
