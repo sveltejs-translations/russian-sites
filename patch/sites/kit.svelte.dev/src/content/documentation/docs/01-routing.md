@@ -55,7 +55,8 @@ type Request<Context = any> = {
 	path: string;
 	params: Record<string, string | string[]>;
 	query: URLSearchParams;
-	body: string | Buffer | ReadOnlyFormData;
+	rawBody: string | ArrayBuffer;
+ 	body: string | ArrayBuffer | ReadOnlyFormData | any;
 	context: Context; // см. getContext ниже
 };
 
@@ -96,10 +97,10 @@ export async function get({ params }) {
 
 Цель данной функции – вернуть объект `{status, headers, body}`, который является ответом на запрос, где `status` является [кодом ответа HTTP](https://httpstatusdogs.com):
 
-* `2xx` — успешный ответ (по умолчанию `200`)
-* `3xx` — перенаправление (используется совместно с заголовком `location`)
-* `4xx` — ошибка от клиента
-* `5xx` — ошибка на сервере
+- `2xx` — успешный ответ (по умолчанию `200`)
+- `3xx` — перенаправление (используется совместно с заголовком `location`)
+- `4xx` — ошибка от клиента
+- `5xx` — ошибка на сервере
 
 > Для успешных ответов, SvelteKit затем автоматически будет отдавать статус 304
 
@@ -126,7 +127,6 @@ export function post(request) {...}
  	}
  };
  ```
- 
 
 ### Приватные модули 
 
