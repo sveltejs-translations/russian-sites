@@ -11,46 +11,66 @@
         "adapter-netlify":
         "adapter-node"
     },
+    "packages/site-kit/components/Hero.svelte":{
+        "max-width: 12em;":
+        "max-width: auto;"
+    },
     "sites/kit.svelte.dev/src/routes/index.svelte": {
 
         "The fastest way to build Svelte apps": 
-        "Быстрейший способ сделать Svelte приложение",
+        "Быстрейший способ создать Svelte приложение",
 
-        "Big ideas, small size": 
-        "Большие идеи, скромный размер",
+        "The fastest way to build svelte apps": 
+        "Быстрейший способ создать Svelte приложение",
 
-        "SvelteKit is an application framework powered by Svelte — build ambitious apps with a smaller footprint":
-        "SvelteKit — это фреймворк для создания web-приложений, основанный на Svelte. Разрабатывайте амбициозные приложения без лишнего шаблонного кода",
+        "Powered by Svelte": 
+        "Основан на Svelte",
+
+        "SvelteKit is an application framework powered by Svelte — build bigger apps with a smaller":
+        "SvelteKit — это фреймворк для создания web-приложений, основанный на Svelte. Разрабатывайте амбициозные приложения c минимальным размером.",
+        "footprint":"",
 
         "Best of both worlds": 
-        "Лучшее из обоих миров",
+        "Лучшее из двух миров",
 
-        "All the SEO and progressive enhancement of a server-rendered app, with the slick navigation of an SPA":
+        "All the SEO and progressive enhancement of a server-rendered app, with the slick navigation of":
         "Все преимущества SEO и прогрессивного улучшения при рендеринге на стороне сервера вместе с удобной навигацией SPA-приложений",
+        "an SPA":"",
         
         "Build fast": 
         "Быстрая сборка",
 
-        "World-class developer experience powered by Vite — see your changes instantly":
-        "Режим разработки от Vite - все изменения отобразятся мгновенно",
+        "Hit the ground running with advanced routing, server-side rendering, code-splitting, offline":
+        "Мгновенный старт с поддержкой маршрутизации, отрисовки на сервере, разделения кода, работы без сети и многое другое",
+        "support and more":"",
 
-        "Read the introductory blog post":
-        "Прочтите вводную статью в блоге",
+        "Read the <a href=\"https://svelte.dev/blog/whats-the-deal-with-sveltekit\">introductory blog</a>":
+        "Прочтите <a href=\"https://ru.svelte.dev/blog/whats-the-deal-with-sveltekit\">вводную статью в блоге</a>",
 
-        "to learn more":
+        "post to learn more.":
         ", чтобы узнать больше",
 
-        "learn more":
-        "узнать больше",
+        "learn Svelte":
+        "узнать о Svelte",
 
-        "SvelteKit is a framework for building web applications of all sizes, with a beautiful development experience and flexible filesystem-based routing.":
-        "SvelteKit - это фреймворк для создания web-приложений любых размеров, предлагающий прекрасный опыт разработки и гибкую маршрутизацию на основе файловой системы.",
+        "read the docs":
+        "читать документацию",
 
-        "Unlike single-page apps, SvelteKit doesn't compromise on SEO, progressive enhancement or the initial load experience — but unlike traditional server-rendered apps, navigation is instantaneous for that app-like feel.":
-        "В отличие от одностраничных приложений, SvelteKit не жертвует SEO, прогрессивным улучшением или скоростью начальной загрузки, но в отличие от традиционных приложений, которые рендерятся на сервере, навигация по старницам происходит мгновенно как в типичном SPA-приложении.",
+        "get started":
+        "начать работу",
 
-        "Learn SvelteKit":
-        "Изучить SvelteKit",
+        "SvelteKit is a framework for building web applications of all sizes, with a beautiful":
+        "SvelteKit - это фреймворк для создания web-приложений любых размеров, предлагающий",
+        
+        "development experience and flexible filesystem-based routing.":
+        "прекрасный опыт разработки и гибкую маршрутизацию на основе файловой системы.",
+
+        "Unlike single-page apps, SvelteKit doesn't compromise on SEO, progressive enhancement or the":
+        "В отличие от одностраничных приложений, SvelteKit не жертвует SEO, прогрессивным улучшением или",
+        "initial load experience — but unlike traditional server-rendered apps, navigation is":
+        "скоростью начальной загрузки, но в отличие от традиционных приложений, которые рендерятся на сервере, навигация по старницам",
+        "instantaneous for that app-like feel.":
+        "происходит мгновенно как в типичном SPA-приложении.",
 
         "https://svelte.dev":
         "https://ru.svelte.dev"
@@ -109,7 +129,7 @@
         "Документация SvelteKit",
 
         "The fastest way to build Svelte apps":
-        "Быстрейший способ сделать Svelte приложение",
+        "Быстрейший способ создать Svelte приложение",
 
         "<Docs {sections} project=\"kit\" path=\"/documentation\" />":
         "<Docs {sections} owner=\"sveltejs-translations\" project=\"russian-sites\" path=\"/patch/sites/kit.svelte.dev/src/content/documentation\" edit_title=\"редактировать этот раздел\" />"
@@ -126,7 +146,7 @@
         "",
 
         "The fastest way to build Svelte apps":
-        "Быстрейший способ сделать Svelte приложение"
+        "Быстрейший способ создать Svelte приложение"
     },
     "sites/kit.svelte.dev/src/routes/migrating/index.svelte":{
 
@@ -137,7 +157,7 @@
         "Руководство по миграции на SvelteKit",
 
         "The fastest way to build Svelte apps":
-        "Быстрейший способ сделать Svelte приложение",
+        "Быстрейший способ создать Svelte приложение",
 
         "<Docs {sections} project=\"kit\" path=\"/documentation\" dir=\"migrating\" />":
         "<Docs {sections} owner=\"sveltejs-translations\" project=\"russian-sites\" path=\"/patch/sites/kit.svelte.dev/src/content/documentation\" dir=\"migrating\" edit_title=\"редактировать этот раздел\" />"
