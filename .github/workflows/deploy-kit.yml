@@ -33,13 +33,16 @@ jobs:
         run: cp docker/Dockerfile __BUILD/sites/kit.svelte.dev/build/
 
       - name: Install deps for build
-        run: cd __BUILD/sites/kit.svelte.dev/build && npm install @sveltejs/kit svelte
+        run: cd __BUILD/sites/kit.svelte.dev/build && npm install @sveltejs/kit@next svelte
+
+      - name: Packing to archive
+        run: tar -czvf files.tar.gz ./*
 
       - name: Copy build dir to the server
         uses: garygrossgarten/github-action-scp@release
         with:
-          local: __BUILD/sites/kit.svelte.dev/build
-          remote: /tmp/kit.svelte.dev
+          local: __BUILD/sites/kit.svelte.dev/build/files.tar.gz
+          remote: /tmp/kit.svelte.dev/files.tar.gz
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           password: ${{ secrets.SSH_PASS }}
@@ -49,6 +52,7 @@ jobs:
         with:
           command: |
             cd /tmp/kit.svelte.dev
+            tar -xvf files.tar.gz && rm files.tar.gz
             docker build -t svelte-kit-site .
             docker stop Svelte-Kit-Site
             docker rm Svelte-Kit-Site
