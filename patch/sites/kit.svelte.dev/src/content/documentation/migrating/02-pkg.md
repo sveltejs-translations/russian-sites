@@ -20,9 +20,9 @@ title: package.json
 Все скрипты, которые ссылаются на `sapper`, должны быть обновлены:
 
 <!-- * `sapper build` или `sapper export` замените на [`svelte-kit build`](/docs#svelte-kit-cli-svelte-kit-build) -->
-* `sapper build` замените на [`svelte-kit build`](/docs#svelte-kit-cli-svelte-kit-build) с использованием [адаптера Node](/docs#адаптеры)
-* `sapper export` замените на [`svelte-kit build`](/docs#svelte-kit-cli-svelte-kit-build) с использованием [адаптера Static](/docs#адаптеры)
-* `sapper dev` замените на [`svelte-kit dev`](/docs#svelte-kit-cli-svelte-kit-dev)
-* `node __sapper__/build` замените на `node build`
+- `sapper build` замените на [`svelte-kit build`](/docs#svelte-kit-cli-svelte-kit-build) с использованием [адаптера Node](/docs#адаптеры)
+- `sapper export` замените на [`svelte-kit build`](/docs#svelte-kit-cli-svelte-kit-build) с использованием [адаптера Static](/docs#адаптеры)
+- `sapper dev` замените на [`svelte-kit dev`](/docs#svelte-kit-cli-svelte-kit-dev)
+- `node __sapper__/build` замените на `node build`
 
 <!-- Кроме того, [`svelte-kit start`](/docs#svelte-kit-cli-svelte-kit-start) заменяет любую команду, которая запускает сервер собранный Sapper. -->
