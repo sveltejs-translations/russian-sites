@@ -12,7 +12,7 @@ title: package.json
 
 ### devDependencies
 
-Удалите `sapper` из `devDependencies` и замените его на `@sveltejs/kit`, `vite` и выбранный вами [адаптер](/docs#адаптеры) (на этапе [конфигурации](#файлы-проекта-конфигурация)).
+Удалите `sapper` из `devDependencies` и замените его на `@sveltejs/kit`, `vite` и выбранный вами [адаптер](/docs#adaptery) (на этапе [конфигурации](#fajly-proekta-konfiguracziya)).
 
 ### scripts
 
@@ -20,8 +20,8 @@ title: package.json
 Все скрипты, которые ссылаются на `sapper`, должны быть обновлены:
 
 <!-- * `sapper build` или `sapper export` замените на [`svelte-kit build`](/docs#svelte-kit-cli-svelte-kit-build) -->
-- `sapper build` замените на [`svelte-kit build`](/docs#svelte-kit-cli-svelte-kit-build) с использованием [адаптера Node](/docs#адаптеры)
-- `sapper export` замените на [`svelte-kit build`](/docs#svelte-kit-cli-svelte-kit-build) с использованием [адаптера Static](/docs#адаптеры)
+- `sapper build` замените на [`svelte-kit build`](/docs#svelte-kit-cli-svelte-kit-build) с использованием [адаптера Node](/docs#adaptery)
+- `sapper export` замените на [`svelte-kit build`](/docs#svelte-kit-cli-svelte-kit-build) с использованием [адаптера Static](/docs#adaptery)
 - `sapper dev` замените на [`svelte-kit dev`](/docs#svelte-kit-cli-svelte-kit-dev)
 - `node __sapper__/build` замените на `node build`
 
