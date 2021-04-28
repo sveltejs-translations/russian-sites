@@ -33,7 +33,7 @@ jobs:
         run: cp docker/Dockerfile __BUILD/sites/kit.svelte.dev/build/
 
       - name: Install deps for build
-        run: cd __BUILD/sites/kit.svelte.dev/build && npm install @svelte/kit svelte
+        run: cd __BUILD/sites/kit.svelte.dev/build && npm install @sveltejs/kit svelte
 
       - name: Copy build dir to the server
         uses: garygrossgarten/github-action-scp@release
