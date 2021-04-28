@@ -12,7 +12,9 @@ const LIST = [
 (async()=>{
     for(let module of LIST){
         console.log('Downloading',module.src,'...')
-        await fs.rmdir(module.dst,{ recursive: true });
+        try{
+            await fs.rm(module.dst,{ recursive: true });
+        }catch{}
         await fetchRepoDir({
             src: module.src,
             dir: module.dst
