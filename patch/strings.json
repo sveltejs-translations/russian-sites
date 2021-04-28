@@ -122,6 +122,9 @@
     },
     "sites/kit.svelte.dev/src/routes/docs/index.svelte":{
 
+        "https://api.svelte.dev/docs/kit/docs?content":
+        "/api/docs/kit/docs.json",
+
         "Docs • SvelteKit":
         "Документация • SvelteKit",
 
@@ -136,6 +139,9 @@
     },
     "sites/kit.svelte.dev/src/routes/faq/index.svelte":{
 
+        "https://api.svelte.dev/docs/kit/faq?content":
+        "/api/docs/kit/faq.json",
+
         "Frequently Asked Questions":
         "Часто задаваемые вопросы",
 
@@ -149,6 +155,9 @@
         "Быстрейший способ создать Svelte приложение"
     },
     "sites/kit.svelte.dev/src/routes/migrating/index.svelte":{
+
+        "https://api.svelte.dev/docs/kit/migrating?content":
+        "/api/docs/kit/migrating.json",
 
         "Migration • SvelteKit":
         "Руководство по миграции • SvelteKit",

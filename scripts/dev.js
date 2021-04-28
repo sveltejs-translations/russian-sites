@@ -21,6 +21,7 @@ watch('patch',{recursive:true},runApply);
 function runApply(){
     try{
         child.execSync('npm run apply');
+        if(KIT) child.execSync('npm run fetch:kit');
     }catch{
         console.error('Something wrong in patch directory')
     }
