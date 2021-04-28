@@ -36,7 +36,7 @@ jobs:
         run: cd __BUILD/sites/kit.svelte.dev/build && npm install @sveltejs/kit@next svelte
 
       - name: Packing to archive
-        run: tar -czvf files.tar.gz ./*
+        run: cd __BUILD/sites/kit.svelte.dev/build && tar -czvf files.tar.gz ./*
 
       - name: Copy build dir to the server
         uses: garygrossgarten/github-action-scp@release
