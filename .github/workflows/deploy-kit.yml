@@ -32,6 +32,9 @@ jobs:
       - name: Copy Dockerfile to build dir
         run: cp docker/Dockerfile __BUILD/sites/kit.svelte.dev/build/
 
+      - name: Copy Node Modules to build dir
+        run: cp -r__BUILD/sites/kit.svelte.dev/node_modules __BUILD/sites/kit.svelte.dev/build/
+
       - name: Copy build dir to the server
         uses: garygrossgarten/github-action-scp@release
         with:
