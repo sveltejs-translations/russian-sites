@@ -78,13 +78,13 @@ module.exports = {
 
 Google [FLoC](https://github.com/WICG/floc) — это технология таргетированной рекламы, которую [Electronic Frontier Foundation](https://www.eff.org/) сочла [вредной](https://www.eff.org/deeplinks/2021/03/googles-floc-terrible-idea) для конфиденциальности пользователей. [Браузеры, отличные от Chrome](https://www.theverge.com/2021/4/16/22387492/google-floc-ad-tech-privacy-browsers-brave-vivaldi-edge-mozilla-chrome-safari) отказались её реализовать.
 
-Как и такие службы, как [GitHub Pages](https://github.blog/changelog/2021-04-27-github-pages-permissions-policy-interest-cohort-header-added-to-all-pages-sites/ ), SvelteKit защищает ваших пользователей, автоматически отказываясь от FLoC. Он добавляет следующий заголовок к ответам, если для `floc` не установлено значение `true`:
+SvelteKit по умолчанию отключает использование FLoC в вашем приложении, также как это делают другие сервисы, например [GitHub Pages](https://github.blog/changelog/2021-04-27-github-pages-permissions-policy-interest-cohort-header-added-to-all-pages-sites/ ). Если для параметра `floc` не установлено значение `true`, к ответу сервера будет добавлен такой заголовок:
 
 ``` 
 Permissions-Policy: Interest-cohort = () 
 ```
 
-> Это применимо только к ответам, c серверным рендерингом — заголовки для предварительно отрисованных страниц (например, созданных с помощью [adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static)) определены платформой хостинга.
+> Это может применяться только при серверном рендеринге — заголовки для предварительно отрисованных страниц (например, созданных с помощью [adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static)) определяются платформой хостинга.
 
 
 ### host
