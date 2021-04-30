@@ -25,6 +25,7 @@ module.exports = {
 			serviceWorker: 'src/service-worker',
 			template: 'src/app.html'
 		},
+		floc: false,
 		host: null,
 		hostHeader: null,
 		hydrate: true,
@@ -71,6 +72,20 @@ module.exports = {
 - `serviceWorker` — точка входа [сервис-воркера](#servis-vorkery)
 - `hooks` — путь к файлу хуков (см. [Хуки](#huki))
 - `template` — расположение шаблона для HTML-ответов сервера
+
+
+### floc
+
+Google [FLoC](https://github.com/WICG/floc) — это технология таргетированной рекламы, которую [Electronic Frontier Foundation](https://www.eff.org/) сочла [вредной](https://www.eff.org/deeplinks/2021/03/googles-floc-terrible-idea) для конфиденциальности пользователей. [Браузеры, отличные от Chrome](https://www.theverge.com/2021/4/16/22387492/google-floc-ad-tech-privacy-browsers-brave-vivaldi-edge-mozilla-chrome-safari) отказались её реализовать.
+
+Как и такие службы, как [GitHub Pages](https://github.blog/changelog/2021-04-27-github-pages-permissions-policy-interest-cohort-header-added-to-all-pages-sites/ ), SvelteKit защищает ваших пользователей, автоматически отказываясь от FLoC. Он добавляет следующий заголовок к ответам, если для `floc` не установлено значение `true`:
+
+``` 
+Permissions-Policy: Interest-cohort = () 
+```
+
+> Это применимо только к ответам, c серверным рендерингом — заголовки для предварительно отрисованных страниц (например, созданных с помощью [adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static)) определены платформой хостинга.
+
 
 ### host
 
