@@ -31,8 +31,8 @@ import { goto, prefetch, prefetchRoutes } from '$app/navigation';
 import { base, assets } from '$app/paths';
 ```
 
-- `base` — строка с путём, относительно корня (т.е. начинается с `/`), которая соответствует параметру `config.kit.files.base` в [конфигурации проекта](#konfiguracziya)
-- `assets` — путь от корня или абсолютный путь который соответствует параметру `config.kit.files.assets` (после его разрешения относительно `base`)
+- `base` — строка с путём, относительно корня (т.е. начинается с `/`), которая соответствует параметру `config.kit.paths.base` в [конфигурации проекта](#konfiguracziya)
+- `assets` — путь от корня или абсолютный путь который соответствует параметру `config.kit.paths.assets` (после его разрешения относительно `base`)
 
 ### $app/stores
 
