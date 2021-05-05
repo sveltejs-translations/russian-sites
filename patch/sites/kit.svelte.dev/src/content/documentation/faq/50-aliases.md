@@ -2,14 +2,15 @@
 question: Как мне настроить подмену пути(aliases)?
 ---
 
-Обратите внимание, что нужно настроить подмену сразу в двух файлах.
+Сначала её нужно добавить в конфигурацию Vite. В файле `svelte.config.js` добавьте [`vite.resolve.alias`](https://vitejs.dev/config/#resolve-alias):
 
 В `svelte.config.cjs` добавьте [`vite.resolve.alias`](https://vitejs.dev/config/#resolve-alias):
 
 ```js
-// svelte.config.cjs
-const path = require('path');
-module.exports = {
+// svelte.config.js
+import path from 'path';
+
+export default {
   kit: {
     vite: {
       resolve: {
@@ -22,7 +23,7 @@ module.exports = {
 };
 ```
 
-Чтобы VS Code учитывал подмену путей, добавьте аналогичные записи и в `tsconfig.json` (для пользователей TypeScript) или `jsconfig.json` (для JavaScript):
+Затем, чтобы TypeScript тоже учитывал подмену путей, добавьте аналогичные записи и в `tsconfig.json` (для пользователей TypeScript) или `jsconfig.json`:
 
 ```js
 {

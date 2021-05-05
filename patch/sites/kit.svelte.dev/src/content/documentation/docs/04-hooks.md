@@ -2,78 +2,20 @@
 title: Хуки
 ---
 
-Необязательный файл `src/hooks.js` (или `src/hooks.ts`, или `src/hooks/index.js`) может экспортировать три функции, которые будут запускаться на сервере — **getContext**, **getSession** и **handle**
+Необязательный файл `src/hooks.js` (или `src/hooks.ts`, или `src/hooks/index.js`) может экспортировать две функции, которые будут запускаться на сервере — **handle** и **getSession**.
 
 > Расположение этого файла может быть [настроено](#konfiguracziya-files) в опции `config.kit.files.hooks`
 
-### getContext
-
-Эта функция будет запускаться при каждом входящем запросе. Она возвращает объект, который будет доступен обработчикам в [эндпоинтах](#marshruty-endpointy) как `request.context`. На основе этого объекта формируется объект [`session`](#huki-getsession), который будет доступен в браузере.
-
-Если функция не была задана, то объект `context` будет равен`{}`.
-
-```ts
-type Incoming = {
-	method: string;
-	host: string;
-	headers: Headers;
-	path: string;
-	query: URLSearchParams;
-	body: string | Buffer | ReadOnlyFormData;
-};
-type GetContext<Context = any> = {
-	(incoming: Incoming): Context;
-};
-```
-
-```js
-import * as cookie from 'cookie';
-import db from '$lib/db';
-/** @type {import('@sveltejs/kit').GetContext} */
-export async function getContext({ headers }) {
-	const cookies = cookie.parse(headers.cookie || '');
-	return {
-		user: (await db.get_user(cookies.session_id)) || { guest: true }
-	};
-}
-```
-
-### getSession
-
-<!-- Эта функция принимает объект [`context`](#huki-getcontext) и возвращает объект сессии, который можно безопасно передать в браузер. Эта функция запускается всякий раз, когда SvelteKit отрисовывает страницу на сервере. -->
-
-Эта функция принимает объект [`context`](#huki-getcontext) и возвращает объект `session`, который [доступен на клиенте](#moduli-$app-stores) и, следовательно, должен быть безопасным для предоставления пользователям. Он запускается всякий раз, когда SvelteKit выполняет рендеринг страницы на сервере.
-
-Если функция не задана, объект сессии будет равен `{}`.
-
-```ts
-type GetSession<Context = any, Session = any> = {
-	({ context }: { context: Context }): Session | Promise<Session>;
-};
-```
-
-```js
-/** @type {import('@sveltejs/kit').GetSession} */
-export function getSession({ context }) {
-	return {
-		user: {
-			// укажите здесь только необходимые клиенту свойства,
-			// не указывайте другой информации вроде
-			// токенов, ключей или хешей
-			name: context.user?.name,
-			email: context.user?.email,
-			avatar: context.user?.avatar
-		}
-	};
-}
-```
-> Объект `session` должен быть сериализуемым, то есть  не должен содержать вещей вроде функций или классов, только встроенные в JavaScript типы данных.
-
 ### handle
+
 Эта функция запускается при каждом запросе и задаёт структуру ответа от сервера. Она получает объект `request` и метод` render`, который вызывает стандартную отрисовку ответа от SvelteKit. Функция `handle` позволяет модифицировать заголовки и тело ответа или совсем не использовать SvelteKit для обработки запроса(например, для программной реализации своих эндпоинтов).
+
 Если функция не задана будет использоваться её вариант по умолчанию `({ request, render }) => render(request)`.
+
+Чтобы передетаь какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объекту `request` поле `locals`, как показано ниже:
+
 ```ts
-type Request<Context = any> = {
+type Request<Locals = Record<string, any>> = {
 	method: string;
 	host: string;
 	headers: Headers;
@@ -81,23 +23,29 @@ type Request<Context = any> = {
 	params: Record<string, string>;
 	query: URLSearchParams;
 	rawBody: string | ArrayBuffer;
- 	body: string | ArrayBuffer | ReadOnlyFormData | any;
-	context: Context;
+	body: string | ArrayBuffer | ReadOnlyFormData | any;
+	locals: Locals;
 };
+
 type Response = {
 	status?: number;
 	headers?: Headers;
 	body?: any;
 };
-type Handle<Context = any> = ({
-	request: Request<Context>,
-	render: (request: Request<Context>) => Promise<Response>
+
+type Handle<Locals = Record<string, any>> = ({
+	request: Request<Locals>,
+	render: (request: Request<Locals>) => Promise<Response>
 }) => Response | Promise<Response>;
 ```
+
 ```js
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ request, render }) {
+	request.locals.user = await getUserInformation(request.headers.cookie);
+
 	const response = await render(request);
+
 	return {
 		...response,
 		headers: {
@@ -107,3 +55,33 @@ export async function handle({ request, render }) {
 	};
 }
 ```
+
+### getSession
+
+Эта функция принимает объект `request` и возвращает объект `session`, который [доступен на клиенте](#moduli-$app-stores) и, следовательно, должен быть безопасным для предоставления пользователям. Он запускается всякий раз, когда SvelteKit выполняет рендеринг страницы на сервере.
+
+Если функция не задана, объект сессии будет равен `{}`.
+
+```ts
+type GetSession<Locals = Record<string, any>, Session = any> = {
+	(request: Request<Locals>): Session | Promise<Session>;
+};
+```
+
+```js
+/** @type {import('@sveltejs/kit').GetSession} */
+export function getSession(request) {
+	return {
+		user: {
+			// only include properties needed client-side —
+			// exclude anything else attached to the user
+			// like access tokens etc
+			name: request.locals.user?.name,
+			email: request.locals.user?.email,
+			avatar: request.locals.user?.avatar
+		}
+	};
+}
+```
+
+> Объект `session` должен быть сериализуемым, то есть  не должен содержать вещей вроде функций или классов, только встроенные в JavaScript типы данных.

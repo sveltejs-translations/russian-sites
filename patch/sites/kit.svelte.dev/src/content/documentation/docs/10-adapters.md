@@ -7,10 +7,10 @@ title: Адаптеры
 Например, чтобы запустить приложение как простой Node-сервер, необходимо использовать адаптер `@sveltejs/adapter-node`:
 
 ```js
-// svelte.config.cjs
-const node = require('@sveltejs/adapter-node');
+// svelte.config.js
+import node from '@sveltejs/adapter-node';
 
-module.exports = {
+export default {
 	kit: {
 		adapter: node()
 	}
@@ -20,10 +20,10 @@ module.exports = {
 В таком случае, команда [`svelte-kit build`](#svelte-kit-cli-svelte-kit-build) сгенерирует приложение Node внутри папки `build`, которое можно запустить автономно. Также адаптерам можно передать параметры , например настроить выходной каталог в `adapter-node`:
 
 ```diff
-// svelte.config.cjs
-const node = require('@sveltejs/adapter-node');
+// svelte.config.js
+import node from '@sveltejs/adapter-node';
 
-module.exports = {
+export default {
 	kit: {
 -		adapter: node()
 +		adapter: node({ out: 'my-output-directory' })

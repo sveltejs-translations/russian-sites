@@ -2,11 +2,11 @@
 title: Конфигурация
 ---
 
-Конфигурация проекта находится в файле `svelte.config.cjs`. Все значения не обязательны. Полный список параметров со значениями по умолчанию показан здесь:
+Конфигурация проекта находится в файле `svelte.config.js`. Все значения не обязательны. Полный список параметров со значениями по умолчанию показан здесь:
 
 ```js
 /** @type {import('@sveltejs/kit').Config} */
-module.exports = {
+const config = {
 	// параметры для svelte.compile (https://svelte.dev/docs#svelte_compile)
 	compilerOptions: null,
 
@@ -48,6 +48,8 @@ module.exports = {
 	// параметры для svelte.preprocess (https://svelte.dev/docs#svelte_preprocess)
 	preprocess: null
 };
+
+export default config;
 ```
 
 ### adapter
@@ -96,8 +98,8 @@ Permissions-Policy: Interest-cohort = ()
 Если ваше приложение находится за обратным прокси-сервером (например, используются балансировщики нагрузки или CDN), тогда заголовок `Host` не будет верным. В таких случаях реальный хост указывается в заголовке [`X-Forwarded-Host`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host) и, если в приложении вы хотите иметь доступ к `page.host`, то необходимо указать в настройках нужный заголовок:
 
 ```js
-// svelte.config.cjs
-module.exports = {
+// svelte.config.js
+export default {
 	kit: {
 		hostHeader: 'X-Forwarded-Host'
 	}

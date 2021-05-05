@@ -6,7 +6,7 @@ title: Файлы проекта
 
 ### Конфигурация
 
-Замените `webpack.config.js` или `rollup.config.js` на `svelte.config.cjs`, как описано в [документации](/docs#konfiguracziya). Опции препроцессора переместите в `config.preprocess`.
+Замените `webpack.config.js` или `rollup.config.js` на `svelte.config.js`, как описано в [документации](/docs#konfiguracziya). Опции препроцессора переместите в `config.preprocess`.
 
 Добавьте [адаптер](/docs#adaptery): 
 * `sapper build` ~ [adapter-node](https://github.com/sveltejs/kit/tree/master/packages/adapter-node);

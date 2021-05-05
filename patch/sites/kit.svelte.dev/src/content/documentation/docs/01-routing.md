@@ -57,7 +57,7 @@ type Request<Context = any> = {
 	query: URLSearchParams;
 	rawBody: string | ArrayBuffer;
  	body: string | ArrayBuffer | ReadOnlyFormData | any;
-	context: Context; // см. getContext ниже
+	locals: Record<string, any>; // см. ниже
 };
 
 type Response = {
