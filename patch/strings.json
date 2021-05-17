@@ -76,7 +76,7 @@
         "https://ru.svelte.dev"
     },
 
-    "sites/kit.svelte.dev/src/routes/$layout.svelte":{
+    "sites/kit.svelte.dev/src/routes/__layout.svelte":{
         ">Docs<":
         ">Документация<",
 
@@ -92,7 +92,7 @@
         "Discord Chat":
         "Канал в Telegram"
     },
-    "sites/kit.svelte.dev/src/routes/$error.svelte":{
+    "sites/kit.svelte.dev/src/routes/__error.svelte":{
 
         "Yikes!":
         "Бдыщ!",
