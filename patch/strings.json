@@ -7,7 +7,7 @@
         "UNICODE =  false":
         "UNICODE =  true"
     },
-    "sites/kit.svelte.dev/svelte.config.cjs":{
+    "sites/kit.svelte.dev/svelte.config.js":{
         "adapter-netlify":
         "adapter-node"
     },
