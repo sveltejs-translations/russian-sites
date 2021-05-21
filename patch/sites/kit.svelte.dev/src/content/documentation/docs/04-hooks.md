@@ -26,7 +26,7 @@ type Request<Locals = Record<string, any>> = {
 	query: URLSearchParams;
 	rawBody: string | Uint8Array;
  	body: ParameterizedBody<Body>;
- 	locals: Locals; // определяется в фукциях хуков
+ 	locals: Locals; // устанавливается в хуке handle
 };
 
 type Response = {
