@@ -15,6 +15,8 @@ title: Хуки
 Чтобы передетаь какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объекту `request` поле `locals`, как показано ниже:
 
 ```ts
+type Headers = Record<string, string>;
+
 type Request<Locals = Record<string, any>> = {
 	method: string;
 	host: string;
@@ -23,19 +25,19 @@ type Request<Locals = Record<string, any>> = {
 	params: Record<string, string>;
 	query: URLSearchParams;
 	rawBody: string | Uint8Array;
- 	body: string | Uint8Array | ReadOnlyFormData | JSONValue;
-	locals: Locals;
+ 	body: ParameterizedBody<Body>;
+ 	locals: Locals; // определяется в фукциях хуков
 };
 
 type Response = {
-	status?: number;
-	headers?: Headers;
-	body?: any;
+	status: number;
+ 	headers: Headers;
+ 	body?: string | Uint8Array;
 };
 
-type Handle<Locals = Record<string, any>> = ({
-	request: Request<Locals>,
-	render: (request: Request<Locals>) => Promise<Response>
+type Handle<Locals = Record<string, any>> = (input: {
+ 	request: Request<Locals>;
+ 	render: (request: Request<Locals>) => Response | Promise<Response>;
 }) => Response | Promise<Response>;
 ```
 

@@ -51,27 +51,29 @@ title: Маршруты
 Эндпоинты — это модули, написанные в файлах `.js` (или `.ts`), которые экспортируют функции, соответствующие HTTP методам. Например, наша гипотетическая страница блога `/blog/cool-article`, может запрашивать данные из `/blog/cool-article.json`, который может быть представлен эндпоинтом `src/routes/blog/[slug].json.js`:
 
 ```ts
-type Request<Context = any> = {
+type Headers = Record<string, string>;
+
+type Request<Locals = Record<string, any>, Body = unknown> = {
+	method: string;
 	host: string;
-	method: 'GET';
-	headers: Record<string, string>;
+	headers: Headers;
 	path: string;
-	params: Record<string, string | string[]>;
+	params: Record<string, string>;
 	query: URLSearchParams;
 	rawBody: string | Uint8Array;
- 	body: string | Uint8Array | JSONValue;
-	locals: Record<string, any>; // см. ниже
+	body: ParameterizedBody<Body>;
+	locals: Locals; // определяется в фукциях хуков
 };
 
-type Response = {
+type EndpointOutput = {
 	status?: number;
-	headers?: Record<string, string>;
-	body?: any;
+	headers?: Headers;
+	body?: string | Uint8Array | JSONValue;
 };
 
-type RequestHandler<Context = any> = {
-	(request: Request<Context>) => Response | Promise<Response>;
-}
+type RequestHandler<Locals = Record<string, any>> = (
+ 	request: Request<Locals>
+) => void | EndpointOutput | Promise<EndpointOutput>;
 ```
 
 ```js
