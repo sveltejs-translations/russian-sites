@@ -8,9 +8,9 @@ title: Хуки
 
 ### handle
 
-Эта функция запускается при каждом запросе и задаёт структуру ответа от сервера. Она получает объект `request` и метод` render`, который вызывает стандартную отрисовку ответа от SvelteKit. Функция `handle` позволяет модифицировать заголовки и тело ответа или совсем не использовать SvelteKit для обработки запроса(например, для программной реализации своих эндпоинтов).
+Эта функция запускается при каждом запросе страницы или эндпоинта и задаёт структуру ответа. Она получает объект `request` и функцию `resolve`, которая обращается к роутеру SvelteKit и генерирует соответствующий ответ. Функция `handle` позволяет модифицировать заголовки и тело ответа или совсем не использовать SvelteKit для обработки запроса(например, для программной реализации своих эндпоинтов).
 
-Если функция не задана будет использоваться её вариант по умолчанию `({ request, render }) => render(request)`.
+Если функция не задана будет использоваться её вариант по умолчанию `({ request, resolve }) => resolve(request)`.
 
 Чтобы передетаь какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объекту `request` поле `locals`, как показано ниже:
 
@@ -37,7 +37,7 @@ type Response = {
 
 type Handle<Locals = Record<string, any>> = (input: {
  	request: Request<Locals>;
- 	render: (request: Request<Locals>) => Response | Promise<Response>;
+ 	resolve: (request: Request<Locals>) => Response | Promise<Response>;
 }) => Response | Promise<Response>;
 ```
 
@@ -46,7 +46,7 @@ type Handle<Locals = Record<string, any>> = (input: {
 export async function handle({ request, render }) {
 	request.locals.user = await getUserInformation(request.headers.cookie);
 
-	const response = await render(request);
+	const response = await resolve(request);
 
 	return {
 		...response,
