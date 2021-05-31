@@ -26,6 +26,9 @@ jobs:
       - name: Installing deps and getting original resources
         run: npm install
 
+      - name: Install updated SveletKit
+        run: cd __BUILD/sites/kit.svelte.dev && npx pnpm i -D @sveltejs/kit@next @sveltejs/adapter-node@next
+
       - name: Build translated site
         run: npm run build:kit
 
