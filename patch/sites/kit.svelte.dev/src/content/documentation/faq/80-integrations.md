@@ -43,10 +43,10 @@ import { browser } from '$app/env';
 let lib;
 
 if (browser) {
- 		onMount(async () => {
- 			lib = (await import('some-browser-only-library')).default;
- 		});
- 	}
+  onMount(async () => {
+    lib = (await import('some-browser-only-library')).default;
+  });
+}
 </script>
 ```
 
