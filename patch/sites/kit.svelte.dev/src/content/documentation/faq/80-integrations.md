@@ -6,18 +6,11 @@ question: Как использовать X вместе со SvelteKit?
 
 Посмотрите репозиторий [sveltejs/integrations](https://github.com/sveltejs/integrations#sveltekit), чтобы найти примеры интеграции со множеством популярных библиотек типа Tailwind, PostCSS, Firebase, GraphQL, mdsvex и т.д.
 
-<!-- ### Как использовать Babel, CoffeeScript, Less, PostCSS / SugarSS, Pug, scss / sass, Stylus, TypeScript, `global` стили или заменить? -->
-
 
 ### Как использовать `svelte-preprocess`?
 
-<!-- SvelteKit предоставляет [svelte-preprocess](https://github.com/sveltejs/svelte-preprocess) по умолчанию . Для многих из этих инструментов вам нужно только установить соответствующую библиотеку, например `npm install -D sass` или `npm install -D less`. Смотрите [svelte-preprocess](https://github.com/sveltejs/svelte-preprocess) для получения полной информации. -->
-
-<!-- Добавление [svelte-preprocess](https://github.com/sveltejs/svelte-preprocess) в [`svelte.config.cjs`](/docs#конфигурация) — это первый шаг. Для многих инструментов, перечисленных выше, нужно только установить соответствующую библиотеку, такую ​​как `npm install -D sass` или `npm install -D less`. Смотрите подробную информацию в документации по svelte-preprocess. -->
-
 `svelte-preprocess` обеспечивает поддержку Babel, CoffeeScript, Less, PostCSS/SugarSS, Pug, scss/sass, Stylus, TypeScript, стилей `global` и replace. Добавление [svelte-preprocess](https://github.com/sveltejs/svelte-preprocess) в ваш [`svelte.config.js`](/docs#konfiguracziya) - это первый шаг. Он предоставляется шаблоном, если вы используете TypeScript. Пользователям JavaScript нужно будет добавить его. Для многих инструментов, перечисленных выше, вам потребуется только установить соответствующую библиотеку, такую ​​как `npm install -D sass` или` npm install -D less`. См. Документацию [svelte-preprocess](https://github.com/sveltejs/svelte-preprocess) для получения полной информации.
 
-<!-- Также смотрите настроки этих и подобных библиотек в [примерах выше](#как-использовать-x-вместе-со-sveltekit-как-настроить-библиотеку-x). -->
 Также см. [sveltejs/integration](https://github.com/sveltejs/integrations#sveltekit), где приведены примеры настройки подобных библиотек.
 
 
@@ -40,34 +33,26 @@ if (browser) {
 }
 ```
 
-Также можно запустить код в `onMount` если хотите запустить его после того, как компонент был впервые отрисован в DOM:
+Также можно запустить код в `onMount` если хотите запустить его после того, как компонент был впервые отрисован в DOM. Но и в этом случае лучше включить проверку `browser`, как показано ниже, потому что Vite может попытаться оптимизировать зависимость и потерпеть неудачу. [Мы надеемся сделать это ненужным в будущем](https://github.com/sveltejs/svelte/issues/6372).
 
 ```html
 <script>
 import { onMount } from 'svelte';
-// import { browser } from '$app/env';
+import { browser } from '$app/env';
 
-let awkward;
+let lib;
 
-onMount(async () => {
-  // if (browser) {
-  //   const module = await import('some-browser-only-library');
-  //   awkward = module.default;
-  // }
-  const module = await import('some-browser-only-library');
-  awkward = module.default;
-});
+if (browser) {
+ 		onMount(async () => {
+ 			lib = (await import('some-browser-only-library')).default;
+ 		});
+ 	}
 </script>
 ```
 
 ### Как настроить базу данных?
 
 Поместите код запросов к базе данных в [эндпоинты](/docs#marshruty-endpointy) - не обращайтесь к БД в файлах .svelte. Вы можете создать файл `db.js` или аналогичный, который будет устанавливать соединение с БД и предоставлять к ней доступ всему приложению. Импортируйте в файл `hooks.js` метод устанавливающий соединение с базой и любой другой код, который должен выполняться единоразово при старте приложения, а в эндпоинты импортируйте функции для выполнения запросов в БД.
-
-
-<!-- ### Как использовать Axios?
-
-Скорее всего он вам не нужен. Обычно мы рекомендуем использовать `fetch`. При необходимости, лучше использовать не Axios, а его полную замену написанную на ES модулях – `redaxios`, [пока в Axios не будет поддержки ES модулей](https://github.com/axios/axios/issues/1879). В крайнем случае, при желании использовать сам Axios, попробуйте поместить его в `optimizeDeps.include`. -->
 
 
 ### Поддерживается ли Yarn 2?
