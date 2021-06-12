@@ -32,9 +32,6 @@ jobs:
       - name: Copy Dockerfile to build dir
         run: cp docker/Dockerfile __BUILD/sites/kit.svelte.dev/build/
 
-      - name: Install deps for build
-        run: cd __BUILD/sites/kit.svelte.dev/build && npm install @sveltejs/kit@next svelte
-
       - name: Packing to archive
         run: cd __BUILD/sites/kit.svelte.dev/build && tar -czvf files.tar.gz ./*
 
