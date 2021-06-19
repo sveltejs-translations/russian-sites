@@ -12,7 +12,7 @@ title: package.json
 
 ### devDependencies
 
-Удалите `sapper` из `devDependencies` и замените его на `@sveltejs/kit`, `vite` и выбранный вами [адаптер](/docs#adaptery) (на этапе [конфигурации](#fajly-proekta-konfiguracziya)).
+Удалите `sapper` из `devDependencies` и замените его на `@sveltejs/kit` и выбранный вами [адаптер](/docs#adaptery) (на этапе [конфигурации](#fajly-proekta-konfiguracziya)).
 
 ### scripts
 
