@@ -36,3 +36,7 @@ npx svelte-kit dev
 - `-o`/`--open`
 - `-h`/`--host` (обратите внимание на предостережение безопасности [выше](#svelte-kit-cli-svelte-kit-dev))
 - `-H`/`--https`
+
+### svelte-kit package
+
+Для авторов пакетов см. [Создание пакетов](#sozdanie-paketov).
