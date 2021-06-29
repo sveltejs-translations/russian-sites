@@ -87,3 +87,28 @@ export function getSession(request) {
 ```
 
 > Объект `session` должен быть сериализуемым, то есть  не должен содержать вещей вроде функций или классов, только встроенные в JavaScript типы данных.
+
+
+### serverFetch
+
+Эта функция позволяет изменять (или заменять) запрос `fetch` для **внешнего ресурса** внутри функции `load`, которая выполняется на сервере (или во время предварительной отрисовки).
+
+Например, ваша функция `load` может делать запрос на публичный URL-адрес, такой как `https://api.yourapp.com`, когда пользователь выполняет навигацию на стороне клиента на соответствующую страницу, но во время SSR может иметь смысл напрямую связаться с API (обходя любые прокси и балансировщики нагрузки, находящие между ним и публичным интернетом).
+
+```ts
+ type ServerFetch = (req: Request) => Promise<Response>;
+```
+
+```js
+/** @type {import('@sveltejs/kit').ServerFetch} */
+export async function serverFetch(request) {
+	if (request.url.startsWith('https://api.yourapp.com/')) {
+	// клонировать исходный запрос, но изменить URL-адрес
+	request = new Request(
+		request.url.replace('https://api.yourapp.com/', 'http://localhost:9999/'),
+		request
+	);
+}
+	return fetch(request);
+}
+```
