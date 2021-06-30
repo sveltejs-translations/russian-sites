@@ -35,7 +35,7 @@ const { preloading, page, session } = stores();
 
 Хранилища `page` и `session` всё ещё существуют; `preloading` был заменен на `navigating` который содержит свойства `from` и `to`.
 
-В SvelteKit вы получаете к ним доступ по-другому. `stores` теперь называется `getStores`, но в большинстве случаев в этом нет необходимости, поскольку вы можете импортировать `navigating`, `page` и `session` прямо из [`$app/stores`](/docs#moduli-app-stores).
+В SvelteKit вы получаете к ним доступ по-другому. `stores` теперь называется `getStores`, но в большинстве случаев в этом нет необходимости, поскольку вы можете импортировать `navigating`, `page` и `session` прямо из [`$app/stores`](/docs#moduli-$app-stores).
 
 ### Атрибуты ссылок
 
