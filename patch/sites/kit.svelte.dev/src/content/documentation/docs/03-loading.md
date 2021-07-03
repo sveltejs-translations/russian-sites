@@ -7,24 +7,31 @@ title: Загрузка данных
 Наш пример страницы блога может содержать функцию `load`, как показано ниже. Обратите внимание на атрибут `context="module"` — он необходим, поскольку эта функция запускается до того как компонент будет отрисован:
 
 ```ts
-type LoadInput = {
+type LoadInput<
+ 	PageParams extends Record<string, string> = Record<string, string>,
+ 	Context extends Record<string, any> = Record<string, any>,
+ 	Session = any
+ > = {
 	page: {
 		host: string;
 		path: string;
-		params: Record<string, string>;
+		params: PageParams;
 		query: URLSearchParams;
 	};
 	fetch: (info: RequestInfo, init?: RequestInit) => Promise<Response>;
-	session: any;
-	context: Record<string, any>;
+	session: Session;
+ 	context: Context;
 };
 
-type LoadOutput = {
+type LoadOutput<
+ 	Props extends Record<string, any> = Record<string, any>,
+ 	Context extends Record<string, any> = Record<string, any>
+ > = {
 	status?: number;
 	error?: string | Error;
 	redirect?: string;
-	props?: Record<string, any>;
-	context?: Record<string, any>;
+	props?: Props;
+ 	context?: Context;
 	maxage?: number;
 };
 ```
