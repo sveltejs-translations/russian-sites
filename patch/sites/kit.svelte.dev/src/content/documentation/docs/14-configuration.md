@@ -25,6 +25,9 @@ const config = {
 			serviceWorker: 'src/service-worker',
 			template: 'src/app.html'
 		},
+		serviceWorker: {
+ 			exclude: []
+ 		},
 		floc: false,
 		host: null,
 		hostHeader: null,
@@ -86,6 +89,13 @@ export default config;
 - `serviceWorker` — точка входа [сервис-воркера](#servis-vorkery)
 - `hooks` — путь к файлу хуков (см. [Хуки](#huki))
 - `template` — расположение шаблона для HTML-ответов сервера
+
+
+### serviceWorker
+
+Объект, содержащий ноль или более из следующих значений:
+
+- `exclude` - массив шаблонов glob относительно папки `files.assets`. Файлы, соответствующие любому из них, не будут доступны в `$service-worker.files`, например, если `files.assets` имеет значение `static`, то ['og-tags-images/**/*'] будет соответствовать всем файлам в папке `static/og-tags-images`.
 
 
 ### floc

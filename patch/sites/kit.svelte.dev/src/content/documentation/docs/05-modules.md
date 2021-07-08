@@ -69,5 +69,5 @@ import { build, files, timestamp } from '$service-worker';
 ```
 
 - `build` – массив строк URL путей до файлов сгенерированных Vite, используется для кеширования при помощи функции `cache.addAll(build)`
-- `files` – массив строк URL путей до файлов в директории `static`, или иной директории указанной в [`config.kit.files.assets`](#konfiguracziya)
+- `files` – массив строк URL путей до файлов в директории `static`, или иной директории указанной в [`config.kit.files.assets`](#konfiguracziya). Вы можете исключить определенные файлы из каталога `static` с помощью [`config.kit.serviceWorker.exclude`](#konfiguracziya)
 - `timestamp` – результат вызова функции `Date.now()` во время сборки. Полезно для генерации уникальных имён для кешей внутри сервис-воркера, что позволит инвалидировать устаревшие кеши у клиентов при запуске новой версии приложения.
