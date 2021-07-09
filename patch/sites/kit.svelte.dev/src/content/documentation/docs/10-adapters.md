@@ -38,9 +38,9 @@ export default {
 - [`adapter-netlify`](https://github.com/sveltejs/kit/tree/master/packages/adapter-netlify) — для [Netlify](https://netlify.com)
 - [`adapter-vercel`](https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel) — для [Vercel](https://vercel.com)
 
-...и другие:
+...и традиционные платформы:
 
 - [`adapter-node`](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) — для создания автономных приложений Node
 - [`adapter-static`](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) — для пререндера приложения и получения статического сайта
 
-> API адаптеров всё ещё находится в разработке и, вероятно, изменится до версии 1.0.
+А также [адаптеры, предоставленные сообществом](https://github.com/sveltejs/integrations#sveltekit-adapters). Вы также можете [написать свой собственный адаптер](#napisanie-adaptera).

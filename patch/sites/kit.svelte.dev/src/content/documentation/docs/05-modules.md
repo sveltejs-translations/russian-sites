@@ -7,12 +7,13 @@ title: Модули
 ### $app/env
 
 ```js
-import { amp, browser, dev, prerendering } from '$app/env';
+import { amp, browser, dev, mode, prerendering } from '$app/env';
 ```
 
 - `amp` равен либо `true`, либо `false` в зависимости от соответствующего значения в [конфигурации проекта](#konfiguracziya)
 - `browser` будет равен `true` или `false` если приложение запущено соответственно в браузере или на сервере
 - `dev` равен `true` в режиме разработки, `false` в рабочем режиме
+- `mode` - это [Vite mode](https://vitejs.dev/guide/env-and-mode.html#modes), по-умолчанию `development` в режиме разработки или `production` во время сборки, если иное не настроено в `config.kit.vite.mode`.
 - `prerendering` равен `true` во время [перерендера](#ssr-i-javascript-prerender), иначе `false`
 
 ### $app/navigation
