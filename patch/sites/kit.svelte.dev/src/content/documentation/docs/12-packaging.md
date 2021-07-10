@@ -11,8 +11,8 @@ title: Создание пакетов
 Запуск команды `svelte-kit package` сгенерирует пакет в новой папке `package` (которую можно [настроить](#konfiguracziya-package)), содержащий следующие файлы:
 
 - Все файлы из папки `src/lib`, если вы не [укажете](#konfiguracziya-package) свои параметры `include`/`exclude`. Компоненты Svelte будут предварительно обработаны, файлы TypeScript будут преобразованы в JavaScript.
-- Определения типов (файлы`d.ts`), которые генерируются для файлов Svelte, JavaScript и TypeScript. Для этого вам нужно установить `typescript >= 4.0.0` и `svelte2tsx >= 0.4.1`. Определения типов размещаются рядом с их реализацией, рукописные файлы `d.ts` копируются как есть.
-- Файл `package.json`, в который будут скопированы поля `name`, `version`, `description`, `keywords`, `homepage`, `bugs`, `license`, `author`, `contributors`, `funding`, `repository`, `dependencies`, `private` и `publishConfig` из корня проекта, а также добавлены поля `"type": "module"` и `"exports"`.
+- Определения типов (файлы`d.ts`), которые генерируются для файлов Svelte, JavaScript и TypeScript. Для этого вам нужно установить `typescript >= 4.0.0` и `svelte2tsx >= 0.4.1`. Определения типов размещаются рядом с их реализацией, рукописные файлы `d.ts` копируются как есть. Вы можете [отключить генерацию](#konfiguracziya-package), но мы настоятельно рекомендуем не делать этого.
+- Файл `package.json`, в который будут скопированы поля `name`, `version`, `description`, `keywords`, `homepage`, `bugs`, `license`, `author`, `contributors`, `funding`, `repository`, `dependencies`, `private`, `files` и `publishConfig` из корня проекта, а также добавлены поля `"type": "module"` и `"exports"`.
 
 Поле `"exports"` содержит файлы, которые предоставляет модуль. По умолчанию сюда попадут все файлы из папки`src/lib`, только если их имя(или имя папки, в которых они содержатся) не начинаются с символа нижнего подчёркивания. Это поведение можно [изменить](#konfiguracziya-package). Если имеются файлы `src/lib/index.js` или `src/lib/index.svelte`, то они станут  корнем пакета.
 
@@ -30,7 +30,7 @@ import Foo from 'your-library/Foo.svelte';
 
 Для публикации полученного пакета выполните команду:
 
-```
+```sh
 npm publish package
 ```
 Приведенный выше `package` относится к сгенерированному имени каталога, измените его соответствующим образом, если вы настраиваете собственный [`package.dir`](#konfiguracziya-package). Если у вас возникли проблемы с публикацией пакета, который вам не принадлежит, добавьте в конце косую черту (например, `package/`).

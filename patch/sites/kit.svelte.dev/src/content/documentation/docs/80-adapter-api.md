@@ -13,8 +13,10 @@ title: Написание адаптера
 export default function (options) {
 /** @type {import('@sveltejs/kit').Adapter} */
     return {
-        name: '',
-        async adapt({ utils, config }) {}
+        name: 'adapter-package-name',
+        async adapt({ utils, config }) {
+          // adapter implementation
+        }
     };
 }
 ```
