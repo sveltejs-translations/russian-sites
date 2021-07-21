@@ -12,9 +12,9 @@ title: Хуки
 
 Если функция не задана будет использоваться её вариант по умолчанию `({ request, resolve }) => resolve(request)`.
 
-Чтобы передетаь какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объекту `request` поле `locals`, как показано ниже:
-
 ```ts
+// handle TypeScript type definitions
+
 type Headers = Record<string, string>;
 
 type Request<Locals = Record<string, any>> = {
@@ -40,6 +40,7 @@ type Handle<Locals = Record<string, any>> = (input: {
  	resolve: (request: Request<Locals>) => Response | Promise<Response>;
 }) => Response | Promise<Response>;
 ```
+Чтобы передетаь какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объекту `request` поле `locals`, как показано ниже:
 
 ```js
 /** @type {import('@sveltejs/kit').Handle} */
@@ -65,6 +66,8 @@ export async function handle({ request, render }) {
 Если функция не задана, объект сессии будет равен `{}`.
 
 ```ts
+// getSession TypeScript type definition
+
 type GetSession<Locals = Record<string, any>, Session = any> = {
 	(request: Request<Locals>): Session | Promise<Session>;
 };
@@ -73,15 +76,15 @@ type GetSession<Locals = Record<string, any>, Session = any> = {
 ```js
 /** @type {import('@sveltejs/kit').GetSession} */
 export function getSession(request) {
-	return {
+	return request.locals.user ? {
 		user: {
 			// only include properties needed client-side —
 			// exclude anything else attached to the user
 			// like access tokens etc
-			name: request.locals.user?.name,
-			email: request.locals.user?.email,
-			avatar: request.locals.user?.avatar
-		}
+			name: request.locals.user.name,
+			email: request.locals.user.email,
+			avatar: request.locals.user.avatar
+		} : {};
 	};
 }
 ```

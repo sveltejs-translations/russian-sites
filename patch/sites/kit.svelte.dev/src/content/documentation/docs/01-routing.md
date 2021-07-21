@@ -48,9 +48,11 @@ title: Маршруты
 
 ### Эндпоинты
 
-Эндпоинты — это модули, написанные в файлах `.js` (или `.ts`), которые экспортируют функции, соответствующие HTTP методам. Например, наша гипотетическая страница блога `/blog/cool-article`, может запрашивать данные из `/blog/cool-article.json`, который может быть представлен эндпоинтом `src/routes/blog/[slug].json.js`:
+Эндпоинты — это модули, написанные в файлах `.js` (или `.ts`), которые экспортируют функции, соответствующие HTTP методам.
 
 ```ts
+// Endpoint TypeScript type definitions
+
 type Headers = Record<string, string>;
 type DefaultBody = JSONValue | Uint8Array;
 
@@ -80,6 +82,7 @@ type RequestHandler<
  	request: Request<Locals, Input>
  ) => void | EndpointOutput<Output> | Promise<void | EndpointOutput<Output>>;
 ```
+Например, наша гипотетическая страница блога `/blog/cool-article`, может запрашивать данные из `/blog/cool-article.json`, который может быть представлен эндпоинтом `src/routes/blog/[slug].json.js`:
 
 ```js
 import db from '$lib/database';
