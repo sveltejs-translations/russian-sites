@@ -28,7 +28,11 @@ const config = {
 		floc: false,
 		host: null,
 		hostHeader: null,
-		hydrate: true,
+		// гидрация, если не отключена на странице
+ 		hydrate: async ({ page }) => {
+ 			const leaf = await page;
+ 			return 'hydrate' in leaf ? !!leaf.hydrate : true;
+ 		},
 		package: {
  			dir: 'package',
  			exports: {
@@ -47,15 +51,24 @@ const config = {
 		},
 		prerender: {
 			crawl: true,
-			enabled: true,
-			force: false,
+			// нет пререндера, если не включен на странице
+ 			enabled: expect_page_scriptable(async ({ page }) => !!(await page).prerender),
+			onError: 'fail',
 			pages: ['*']
 		},
-		router: true,
+		// Маршрутизация, если не отключено на странице
+ 		router: async ({ page }) => {
+ 			const leaf = await page;
+ 			return 'router' in leaf ? !!leaf.router : true;
+ 		},
 		serviceWorker: {
  			exclude: []
  		},
-		ssr: true,
+		// делать SSR, если не отключено на странице
+ 		ssr: async ({ page }) => {
+ 			const leaf = await page;
+ 			return 'ssr' in leaf ? !!leaf.ssr : true;
+ 		},
 		target: null,
 		trailingSlash: 'never',
 		vite: () => ({})
@@ -153,7 +166,30 @@ export default {
 
 - `crawl` — определяет, должен ли SvelteKit находить страницы для предварительной отрисовки, переходя по ссылкам с исходных страниц
 - `enabled` — установите в `false`, чтобы полностью отключить пререндер
-- `force` — если `true`, страница, которая не может быть отрисована, не остановит пререндер всего проекта
+- `onError`
+
+   - `'fail'` — (по умолчанию) прерывает сборку при обнаружении ошибки маршрутизации при переходе по ссылке
+   - `'continue'` — позволяет продолжить сборку, несмотря на ошибки маршрутизации
+   - `function` — пользовательский обработчик ошибок, позволяющий регистрировать, `throw` и ошибки сборки или предпринимать другие действия по вашему выбору на основе деталей обхода содержимого
+
+     ```ts
+     /** @type {import('@sveltejs/kit').PrerenderErrorHandler} */
+     const handleError = ({ status, path, referrer, referenceType }) => {
+     	if (path.startsWith('/blog')) throw new Error('Missing a blog page!');
+     	console.warn(`${status} ${path}${referrer ? ` (${referenceType} from ${referrer})` : ''}`);
+     };
+
+     export default {
+     	kit: {
+     		adapter: static(),
+     		target: '#svelte',
+     		prerender: {
+     			onError: handleError
+     		}
+     	}
+     };
+     ```
+
 - `pages` — массив страниц для предварительной отрисовки или начала сканирования (при `crawl: true`). Строка `*` включает все нединамические маршруты (т.е. страницы без `[параметров]`)
 
 
