@@ -26,6 +26,7 @@ export default function (options) {
 В рамках метода `adapt` есть ряд вещей, которые должен сделать адаптер:
 
 - Очистить каталог сборки
+- Вызовите `utils.update_ignores`, чтобы проигнорировать выходные данные сборки в существующих файлах `.gitignore` в месте расположения `svelte.config.js`
 - Вывести код, который:
   - Вызовет `init`
   - Преобразует запросы платформы в [SvelteKit request](#huki-handle), вызовет `render` и преобразует ответ [SvelteKit response](#huki-handle) для платформы

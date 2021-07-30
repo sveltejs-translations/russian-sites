@@ -31,6 +31,15 @@ export default {
 };
 ```
 
+Некоторые адаптеры могут изменить `.gitignore` вашего проекта, чтобы включить их выходные данные сборки. Если вы не хотите, чтобы эти шаблоны были включены, вы можете закомментировать их: 
+
+ ```diff
+ .svelte-kit
+ .env
+
+ + # build
+ ```
+
 Для бессерверных платформ существует множество официальных адаптеров...
 
 - [`adapter-begin`](https://github.com/sveltejs/kit/tree/master/packages/adapter-begin) — для [Begin](https://begin.com)
