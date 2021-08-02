@@ -31,8 +31,6 @@ export default {
 };
 ```
 
-# Сборка
-
 Для бессерверных платформ существует множество официальных адаптеров...
 
 - [`adapter-begin`](https://github.com/sveltejs/kit/tree/master/packages/adapter-begin) — для [Begin](https://begin.com)
