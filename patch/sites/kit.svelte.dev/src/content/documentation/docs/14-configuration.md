@@ -28,11 +28,7 @@ const config = {
 		floc: false,
 		host: null,
 		hostHeader: null,
-		// гидрация, если не отключена на странице
- 		hydrate: async ({ page }) => {
- 			const leaf = await page;
- 			return 'hydrate' in leaf ? !!leaf.hydrate : true;
- 		},
+		hydrate: true,
 		package: {
  			dir: 'package',
  			exports: {
@@ -51,24 +47,15 @@ const config = {
 		},
 		prerender: {
 			crawl: true,
-			// нет пререндера, если не включен на странице
- 			enabled: expect_page_scriptable(async ({ page }) => !!(await page).prerender),
+			enabled: true,
 			onError: 'fail',
 			pages: ['*']
 		},
-		// Маршрутизация, если не отключено на странице
- 		router: async ({ page }) => {
- 			const leaf = await page;
- 			return 'router' in leaf ? !!leaf.router : true;
- 		},
+		router: true,
 		serviceWorker: {
  			exclude: []
  		},
-		// делать SSR, если не отключено на странице
- 		ssr: async ({ page }) => {
- 			const leaf = await page;
- 			return 'ssr' in leaf ? !!leaf.ssr : true;
- 		},
+		ssr: true,
 		target: null,
 		trailingSlash: 'never',
 		vite: () => ({})
