@@ -2,7 +2,7 @@
 title: Хуки
 ---
 
-Необязательный файл `src/hooks.js` (или `src/hooks.ts`, или `src/hooks/index.js`) может экспортировать две функции, которые будут запускаться на сервере — **handle** и **getSession**.
+Необязательный файл `src/hooks.js` (или `src/hooks.ts`, или `src/hooks/index.js`) может экспортировать три функции, которые будут запускаться на сервере — **handle**,  **getSession** и **serverFetch**.
 
 > Расположение этого файла может быть [настроено](#konfiguracziya-files) в опции `config.kit.files.hooks`
 
