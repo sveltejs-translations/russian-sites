@@ -17,7 +17,7 @@ export default {
 };
 ```
 
-В таком случае, команда [`svelte-kit build`](#svelte-kit-cli-svelte-kit-build) сгенерирует приложение Node внутри папки `.svelte-kit/node/build`, которое можно запустить автономно. Также адаптерам можно передать параметры , например настроить выходной каталог в `adapter-node`:
+В таком случае, команда [`svelte-kit build`](#svelte-kit-cli-svelte-kit-build) сгенерирует приложение Node внутри папки `build`, которое можно запустить автономно. Также адаптерам можно передать параметры , например настроить выходной каталог в `adapter-node`:
 
 ```diff
 // svelte.config.js
