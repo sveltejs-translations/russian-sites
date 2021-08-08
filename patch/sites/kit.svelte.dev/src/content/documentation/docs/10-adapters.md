@@ -43,4 +43,4 @@ export default {
 - [`adapter-node`](https://github.com/sveltejs/kit/tree/master/packages/adapter-node) — для создания автономных приложений Node
 - [`adapter-static`](https://github.com/sveltejs/kit/tree/master/packages/adapter-static) — для пререндера приложения и получения статического сайта
 
-А также [адаптеры, предоставленные сообществом](https://github.com/sveltejs/integrations#sveltekit-adapters). Вы также можете [написать свой собственный адаптер](#napisanie-adaptera).
+А также [адаптеры, предоставленные сообществом](https://sveltesociety.dev/components#category-SvelteKit%20Adapters). Вы также можете [написать свой собственный адаптер](#napisanie-adaptera).
