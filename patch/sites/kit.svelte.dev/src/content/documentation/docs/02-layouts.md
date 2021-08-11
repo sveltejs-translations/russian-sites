@@ -17,9 +17,9 @@ title: Макеты
 ```html
 <!-- src/routes/__layout.svelte -->
 <nav>
-	<a href=".">Главная</a>
-	<a href="about">О сайте</a>
-	<a href="settings">Настройки</a>
+	<a href="/">Главная</a>
+	<a href="/about">О сайте</a>
+	<a href="/settings">Настройки</a>
 </nav>
 
 <slot></slot>
