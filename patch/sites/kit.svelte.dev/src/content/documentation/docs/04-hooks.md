@@ -8,7 +8,7 @@ title: Хуки
 
 ### handle
 
-Эта функция запускается на каждый рендеринг страницы или эндпоинта и задаёт структуру ответа. Она получает объект `request` и функцию `resolve`, которая обращается к роутеру SvelteKit и генерирует соответствующий ответ. Функция `handle` позволяет модифицировать заголовки и тело ответа или совсем не использовать SvelteKit для обработки запроса(например, для программной реализации своих эндпоинтов).
+Эта функция запускается на каждый запрос страницы или эндпоинта и задаёт структуру ответа. Она получает объект `request` и функцию `resolve`, которая обращается к роутеру SvelteKit и генерирует соответствующий ответ. Функция `handle` позволяет модифицировать заголовки и тело ответа или совсем не использовать SvelteKit для обработки запроса(например, для программной реализации своих эндпоинтов).
 
 Если функция не задана будет использоваться её вариант по умолчанию `({ request, resolve }) => resolve(request)`.
 
@@ -59,7 +59,30 @@ export async function handle({ request, render }) {
 }
 ```
 
-> `handle` запускается при отрисовке страницы. Если страница предварительно отрисована, `handle` не будет запущен снова, когда пользователь запросит страницу. Если нужно запустить некоторые функции по каждому запросу, см. документацию для вашего [адаптера](#adaptery).
+
+### handleError
+
+Если во время рендеринга возникает ошибка, эта функция будет вызвана с параметрами `error` и `request`, который ее вызвал. Это позволяет отправлять данные в службу отслеживания ошибок или настраивать форматирование перед печатью ошибки в консоли.
+
+Если, во время разработки, возникает синтаксическая ошибка в коде Svelte, будет добавлен параметр `frame`, выделяющий местоположение ошибки.
+
+Если не реализовано, SvelteKit зарегистрирует ошибку с форматированием по умолчанию.
+
+```ts
+type HandleError = HandleError<Locals = Record<string, any>> {
+	(input: { error: Error & { frame?: string }; request: ServerRequest<Locals> }): void;
+}
+```
+
+```js
+/** @type {import('@sveltejs/kit').HandleError} */
+export async function handleError({ error, request }) {
+	// example integration with https://sentry.io/
+	Sentry.captureException(error, { request });
+}
+```
+
+> `handleError` вызывается только в случае непойманного исключения. Он не вызывается, когда страницы и эндпоинты явно отвечают кодами состояния 4xx и 5xx.
 
 
 ### getSession
@@ -79,20 +102,22 @@ type GetSession<Locals = Record<string, any>, Session = any> = {
 ```js
 /** @type {import('@sveltejs/kit').GetSession} */
 export function getSession(request) {
-	return request.locals.user ? {
-		user: {
-			// only include properties needed client-side —
-			// exclude anything else attached to the user
-			// like access tokens etc
-			name: request.locals.user.name,
-			email: request.locals.user.email,
-			avatar: request.locals.user.avatar
-		} 
-	} : {};
+	return request.locals.user
+ 		? {
+			user: {
+				// only include properties needed client-side —
+				// exclude anything else attached to the user
+				// like access tokens etc
+				name: request.locals.user.name,
+				email: request.locals.user.email,
+				avatar: request.locals.user.avatar
+			}
+ 		  }
+ 		: {};
 }
 ```
 
-> Объект `session` должен быть сериализуемым, то есть  не должен содержать вещей вроде функций или классов, только встроенные в JavaScript типы данных.
+> Объект `session` должен быть сериализуемым, то есть не должен содержать вещей вроде функций или классов, только встроенные в JavaScript типы данных.
 
 
 ### serverFetch
