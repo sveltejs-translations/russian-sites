@@ -40,7 +40,7 @@ type Handle<Locals = Record<string, any>> = (input: {
  	resolve: (request: Request<Locals>) => Response | Promise<Response>;
 }) => Response | Promise<Response>;
 ```
-Чтобы передетаь какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объекту `request` поле `locals`, как показано ниже:
+Чтобы передать какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объекту `request` поле `locals`, как показано ниже:
 
 ```js
 /** @type {import('@sveltejs/kit').Handle} */
