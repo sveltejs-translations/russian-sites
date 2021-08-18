@@ -1,4 +1,8 @@
 {
+    "sites/kit.svelte.dev/src/_env.ts":{
+        "process.env.API_BASE":
+        "'./api'"
+    },
     "sites/kit.svelte.dev/src/lib/generate_docs.js":{
         "[^a-z0-9-]":
         "[^a-zа-я0-9-]"

@@ -14,7 +14,7 @@ const DOCS = ['docs','faq','migrating'];
   const apiSrv = await runApiServer();
   for(let doc of DOCS){
       const content = await wget(API_URL+'/'+doc+'?content');
-      await fs.writeFile(path.join(DIR_KIT,doc+'.json.js'),getEndpointSource(content));
+      await fs.writeFile(path.join(DIR_KIT,doc+'.js'),getEndpointSource(content));
   }
   apiSrv.stop();
 })();
