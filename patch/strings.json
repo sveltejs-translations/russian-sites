@@ -125,6 +125,9 @@
         "https://api.svelte.dev/docs/kit/docs?content":
         "/api/docs/kit/docs.json",
 
+        "Documentation":
+        "Документация",
+
         "Docs • SvelteKit":
         "Документация • SvelteKit",
 
@@ -158,6 +161,9 @@
 
         "https://api.svelte.dev/docs/kit/migrating?content":
         "/api/docs/kit/migrating.json",
+
+        "Migration":
+        "Миграция",
 
         "Migration • SvelteKit":
         "Руководство по миграции • SvelteKit",
