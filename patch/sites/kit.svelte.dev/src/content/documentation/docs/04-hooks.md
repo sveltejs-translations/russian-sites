@@ -2,13 +2,15 @@
 title: Хуки
 ---
 
-Необязательный файл `src/hooks.js` (или `src/hooks.ts`, или `src/hooks/index.js`) может экспортировать три функции, которые будут запускаться на сервере — **handle**,  **getSession** и **serverFetch**.
+Необязательный файл `src/hooks.js` (или `src/hooks.ts`, или `src/hooks/index.js`) может экспортировать четыре функции, которые будут запускаться на сервере — **handle**, **handleError**, **getSession** и **externalFetch**.
 
 > Расположение этого файла может быть [настроено](#konfiguracziya-files) в опции `config.kit.files.hooks`
 
 ### handle
 
-Эта функция запускается на каждый запрос страницы или эндпоинта и задаёт структуру ответа. Она получает объект `request` и функцию `resolve`, которая обращается к роутеру SvelteKit и генерирует соответствующий ответ. Функция `handle` позволяет модифицировать заголовки и тело ответа или совсем не использовать SvelteKit для обработки запроса(например, для программной реализации своих эндпоинтов).
+Эта функция запускается каждый раз, когда SvelteKit получает запрос - независимо от того, происходит ли это во время работы приложения или во время [пререндеринга](#ssr-and-javascript-prerender) - и определяет ответ. Он получает объект `request` и функцию с именем `resolve`, которая вызывает маршрутизатор SvelteKit и генерирует ответ (отображение страницы или вызов эндпоинта) соответственно. Это позволяет изменять заголовки или тела ответов или полностью обойти SvelteKit (например, для программной реализации эндпоинтов).
+
+> Запросы на статические активы, которые включают страницы, которые уже были предварительно отрендерены, _не_ обрабатываются SvelteKit.
 
 Если функция не задана будет использоваться её вариант по умолчанию `({ request, resolve }) => resolve(request)`.
 
@@ -24,7 +26,7 @@ type Request<Locals = Record<string, any>> = {
 	path: string;
 	params: Record<string, string>;
 	query: URLSearchParams;
-	rawBody: string | Uint8Array;
+	rawBody: Uint8Array;
  	body: ParameterizedBody<Body>;
  	locals: Locals; // устанавливается в хуке handle
 };
@@ -120,19 +122,19 @@ export function getSession(request) {
 > Объект `session` должен быть сериализуемым, то есть не должен содержать вещей вроде функций или классов, только встроенные в JavaScript типы данных.
 
 
-### serverFetch
+### externalFetch
 
 Эта функция позволяет изменять (или заменять) запрос `fetch` для **внешнего ресурса** внутри функции `load`, которая выполняется на сервере (или во время предварительной отрисовки).
 
 Например, ваша функция `load` может делать запрос на публичный URL-адрес, такой как `https://api.yourapp.com`, когда пользователь выполняет навигацию на стороне клиента на соответствующую страницу, но во время SSR может иметь смысл напрямую связаться с API (обходя любые прокси и балансировщики нагрузки, находящие между ним и публичным интернетом).
 
 ```ts
- type ServerFetch = (req: Request) => Promise<Response>;
+ type ExternalFetch = (req: Request) => Promise<Response>;
 ```
 
 ```js
-/** @type {import('@sveltejs/kit').ServerFetch} */
-export async function serverFetch(request) {
+/** @type {import('@sveltejs/kit').ExternalFetch} */
+export async function externalFetch(request) {
 	if (request.url.startsWith('https://api.yourapp.com/')) {
 	// клонировать исходный запрос, но изменить URL-адрес
 	request = new Request(

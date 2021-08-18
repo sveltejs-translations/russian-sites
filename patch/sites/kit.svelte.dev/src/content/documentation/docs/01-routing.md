@@ -63,7 +63,7 @@ type Request<Locals = Record<string, any>, Body = unknown> = {
 	path: string;
 	params: Record<string, string>;
 	query: URLSearchParams;
-	rawBody: string | Uint8Array;
+	rawBody: Uint8Array;
 	body: ParameterizedBody<Body>;
 	locals: Locals; // устанавливается в хуке handle
 };
