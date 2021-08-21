@@ -69,6 +69,35 @@ onMount(() => {
 Поместите код запросов к базе данных в [эндпоинты](/docs#marshruty-endpointy) - не обращайтесь к БД в файлах .svelte. Вы можете создать файл `db.js` или аналогичный, который будет устанавливать соединение с БД и предоставлять к ней доступ всему приложению. Импортируйте в файл `hooks.js` метод устанавливающий соединение с базой и любой другой код, который должен выполняться единоразово при старте приложения, а в эндпоинты импортируйте функции для выполнения запросов в БД.
 
 
+### Как использовать промежуточное программное обеспечение?
+
+В разработке вы можете добавить промежуточное программное обеспечение с помощью плагина Vite. Например:
+
+```js
+const myPlugin = {
+  name: 'log-request-middleware',
+  configureServer(server) {
+    server.middlewares.use((req, res, next) => {
+      console.log(`Got request ${req.url}`);
+      next();
+    })
+  }
+}
+
+/** @type {import('@sveltejs/kit').Config} */
+const config = {
+kit: {
+  target: '#svelte',
+  vite: {
+    plugins: [ myPlugin ]
+  }
+}
+};
+
+export default config;
+```
+
+
 ### Поддерживается ли Yarn 2?
 
 Вроде того. Функция Plug'n'Play (или 'pnp') сломана – она резолвит Node-модули нестандартным способом и [пока не работает с нативными JavaScript модулями](https://github.com/yarnpkg/berry/issues/638), которым является SvelteKit и [непрерывно растущее число других пакетов](https://blog.sindresorhus.com/get-ready-for-esm-aa53530b3f77). Вы можете настроить `nodeLinker: 'node-modules'` в вашем файле [`.yarnrc.yml`](https://yarnpkg.com/configuration/yarnrc#nodeLinker) для отключения pnp, но возможно проще просто  использовать  npm или [pnpm](https://pnpm.io/), который так же быстр и эффективен, но лучше решает проблемы совместимости модулей.
