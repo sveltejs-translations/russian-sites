@@ -12,4 +12,8 @@ question: Как мне хэшировать имена статических �
 <img src={imageSrc} />
 ```
 
-Существует [открытый запрос в `vite-plugin-svelte`, чтобы помочь сделать это автоматически](https://github.com/sveltejs/vite-plugin-svelte/issues/114).
+Если вы предпочитаете импортировать в разметку, попробуйте [svelte-preprocess-import-assets](https://github.com/bluwy/svelte-preprocess-import-assets), и тогда можно будет делать так:
+
+```html
+  <img src="$lib/assets/image.png" />
+```
