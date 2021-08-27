@@ -9,7 +9,7 @@
     "postinstall": "npm run download && npm run apply && npm run setup",
     "update": "npm run download && npm run apply && npm run setup",
     "dev:kit": "node scripts/dev --kit",
-    "build:kit": "npm run apply && npm run fetch:kit && cd __BUILD/sites/kit.svelte.dev && npm i -D @sveltejs/adapter-node@next && npm run build  --ignore-scripts && mkdir -p build/src && cp -r src/content build/src/ && echo '{\"type\": \"module\"}' > build/package.json",
+    "build:kit": "npm run apply && npm run fetch:kit && cd __BUILD/sites/kit.svelte.dev && npx pnpm i -D @sveltejs/adapter-node@next && npm run build  --ignore-scripts && mkdir -p build/src && cp -r src/content build/src/ && echo '{\"type\": \"module\"}' > build/package.json",
     "start:kit": "cd __BUILD/sites/kit.svelte.dev/build && node index",
     "copy:kit": "node scripts/copy --kit",
     "fetch:kit": "node scripts/fetch_documentation.js"

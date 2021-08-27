@@ -8,6 +8,7 @@ on:
       - 'patch/strings.json'
       - 'patch/packages/**'
       - 'patch/sites/kit.svelte.dev/**'
+      - 'package.json'
 
 jobs:
   deploy:
