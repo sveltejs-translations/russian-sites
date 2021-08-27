@@ -17,30 +17,47 @@ title: Хуки
 ```ts
 // handle TypeScript type definitions
 
-type Headers = Record<string, string>;
+export type RequestHeaders = Record<string, string>;
 
-type Request<Locals = Record<string, any>> = {
+ /** Only value that can be an array is set-cookie. For everything else we assume string value */
+export type ResponseHeaders = Record<string, string | string[]>;
+
+export type RawBody = null | Uint8Array;
+
+export interface IncomingRequest {
 	method: string;
 	host: string;
-	headers: Headers;
 	path: string;
-	params: Record<string, string>;
 	query: URLSearchParams;
-	rawBody: Uint8Array;
- 	body: ParameterizedBody<Body>;
- 	locals: Locals; // устанавливается в хуке handle
+ 	headers: RequestHeaders;
+ 	rawBody: RawBody;
 };
 
-type Response = {
+export type ParameterizedBody<Body = unknown> = Body extends FormData
+ 	? ReadOnlyFormData
+ 	: (string | RawBody | ReadOnlyFormData) & Body;
+
+export interface ServerRequest<Locals = Record<string, any>, Body = unknown>
+ 	extends IncomingRequest {
+		params: Record<string, string>;
+		body: ParameterizedBody<Body>;
+		locals: Locals;
+	}
+
+export type StrictBody = string | Uint8Array;
+
+export interface ServerResponse {
 	status: number;
- 	headers: Headers;
- 	body?: string | Uint8Array;
-};
+	headers: ResponseHeaders;
+ 	body?: StrictBody;
+ }
 
-type Handle<Locals = Record<string, any>> = (input: {
- 	request: Request<Locals>;
- 	resolve: (request: Request<Locals>) => Response | Promise<Response>;
-}) => Response | Promise<Response>;
+export interface Handle<Locals = Record<string, any>> {
+ 	(input: {
+ 		request: ServerRequest<Locals>;
+ 		resolve(request: ServerRequest<Locals>): MaybePromise<ServerResponse>;
+ 	}): MaybePromise<ServerResponse>;
+}
 ```
 Чтобы передать какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объекту `request` поле `locals`, как показано ниже:
 
@@ -71,7 +88,7 @@ export async function handle({ request, render }) {
 Если не реализовано, SvelteKit зарегистрирует ошибку с форматированием по умолчанию.
 
 ```ts
-type HandleError = HandleError<Locals = Record<string, any>> {
+export interface HandleError<Locals = Record<string, any>> {
 	(input: { error: Error & { frame?: string }; request: ServerRequest<Locals> }): void;
 }
 ```
@@ -96,9 +113,9 @@ export async function handleError({ error, request }) {
 ```ts
 // getSession TypeScript type definition
 
-type GetSession<Locals = Record<string, any>, Session = any> = {
-	(request: Request<Locals>): Session | Promise<Session>;
-};
+export interface GetSession<Locals = Record<string, any>, Session = any> {
+ 	(request: ServerRequest<Locals>): MaybePromise<Session>;
+ }
 ```
 
 ```js
@@ -129,7 +146,9 @@ export function getSession(request) {
 Например, ваша функция `load` может делать запрос на публичный URL-адрес, такой как `https://api.yourapp.com`, когда пользователь выполняет навигацию на стороне клиента на соответствующую страницу, но во время SSR может иметь смысл напрямую связаться с API (обходя любые прокси и балансировщики нагрузки, находящие между ним и публичным интернетом).
 
 ```ts
- type ExternalFetch = (req: Request) => Promise<Response>;
+export interface ExternalFetch {
+	(req: Request): Promise<Response>;
+}
 ```
 
 ```js
