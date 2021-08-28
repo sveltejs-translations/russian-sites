@@ -15,12 +15,13 @@ title: Хуки
 Если функция не задана будет использоваться её вариант по умолчанию `({ request, resolve }) => resolve(request)`.
 
 ```ts
-// handle TypeScript type definitions
+// Declaration types for Hooks
+// * declarations that are not exported are for internal use
 
-export type RequestHeaders = Record<string, string>;
-
- /** Only value that can be an array is set-cookie. For everything else we assume string value */
-export type ResponseHeaders = Record<string, string | string[]>;
+// type of string[] is only for set-cookie
+// everything else must be a type of string
+type ResponseHeaders = Record<string, string | string[]>;
+type RequestHeaders = Record<string, string>;
 
 export type RawBody = null | Uint8Array;
 
@@ -33,30 +34,31 @@ export interface IncomingRequest {
  	rawBody: RawBody;
 };
 
-export type ParameterizedBody<Body = unknown> = Body extends FormData
+type ParameterizedBody<Body = unknown> = Body extends FormData
  	? ReadOnlyFormData
  	: (string | RawBody | ReadOnlyFormData) & Body;
 
+// ServerRequest is exported as Request
 export interface ServerRequest<Locals = Record<string, any>, Body = unknown>
  	extends IncomingRequest {
 		params: Record<string, string>;
 		body: ParameterizedBody<Body>;
-		locals: Locals;
+		locals: Locals; // устанавливается в хуке handle
 	}
 
-export type StrictBody = string | Uint8Array;
-
+type StrictBody = string | Uint8Array;
+// ServerResponse is exported as Response
 export interface ServerResponse {
 	status: number;
 	headers: ResponseHeaders;
  	body?: StrictBody;
- }
+}
 
 export interface Handle<Locals = Record<string, any>> {
  	(input: {
  		request: ServerRequest<Locals>;
- 		resolve(request: ServerRequest<Locals>): MaybePromise<ServerResponse>;
- 	}): MaybePromise<ServerResponse>;
+ 		resolve(request: ServerRequest<Locals>): ServerResponse | Promise<ServerResponse>;
+ 	}): ServerResponse | Promise<ServerResponse>;
 }
 ```
 Чтобы передать какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объекту `request` поле `locals`, как показано ниже:
@@ -88,6 +90,8 @@ export async function handle({ request, render }) {
 Если не реализовано, SvelteKit зарегистрирует ошибку с форматированием по умолчанию.
 
 ```ts
+// Declaration types for handleError hook
+
 export interface HandleError<Locals = Record<string, any>> {
 	(input: { error: Error & { frame?: string }; request: ServerRequest<Locals> }): void;
 }
@@ -111,11 +115,11 @@ export async function handleError({ error, request }) {
 Если функция не задана, объект сессии будет равен `{}`.
 
 ```ts
-// getSession TypeScript type definition
+// Declaration types for getSession hook
 
 export interface GetSession<Locals = Record<string, any>, Session = any> {
- 	(request: ServerRequest<Locals>): MaybePromise<Session>;
- }
+ 	(request: ServerRequest<Locals>): Session | Promise<Session>;
+}
 ```
 
 ```js
@@ -146,6 +150,8 @@ export function getSession(request) {
 Например, ваша функция `load` может делать запрос на публичный URL-адрес, такой как `https://api.yourapp.com`, когда пользователь выполняет навигацию на стороне клиента на соответствующую страницу, но во время SSR может иметь смысл напрямую связаться с API (обходя любые прокси и балансировщики нагрузки, находящие между ним и публичным интернетом).
 
 ```ts
+// Declaration types for externalFetch hook
+
 export interface ExternalFetch {
 	(req: Request): Promise<Response>;
 }

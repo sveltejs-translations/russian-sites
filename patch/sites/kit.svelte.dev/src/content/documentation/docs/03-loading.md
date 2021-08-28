@@ -7,7 +7,7 @@ title: Загрузка данных
 ```ts
 // load TypeScript type definitions
 
-type LoadInput<
+export interface LoadInput<
  	PageParams extends Record<string, string> = Record<string, string>,
  	Context extends Record<string, any> = Record<string, any>,
  	Session = any
@@ -18,12 +18,12 @@ type LoadInput<
 		params: PageParams;
 		query: URLSearchParams;
 	};
-	fetch: (info: RequestInfo, init?: RequestInit) => Promise<Response>;
+	fetch(info: RequestInfo, init?: RequestInit): Promise<Response>;
 	session: Session;
  	context: Context;
 };
 
-type LoadOutput<
+export interface LoadOutput<
  	Props extends Record<string, any> = Record<string, any>,
  	Context extends Record<string, any> = Record<string, any>
  > = {
