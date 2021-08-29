@@ -11,7 +11,7 @@ export interface LoadInput<
  	PageParams extends Record<string, string> = Record<string, string>,
  	Context extends Record<string, any> = Record<string, any>,
  	Session = any
- > = {
+ > {
 	page: {
 		host: string;
 		path: string;
@@ -21,19 +21,19 @@ export interface LoadInput<
 	fetch(info: RequestInfo, init?: RequestInit): Promise<Response>;
 	session: Session;
  	context: Context;
-};
+}
 
 export interface LoadOutput<
  	Props extends Record<string, any> = Record<string, any>,
  	Context extends Record<string, any> = Record<string, any>
- > = {
+ > {
 	status?: number;
 	error?: string | Error;
 	redirect?: string;
 	props?: Props;
  	context?: Context;
 	maxage?: number;
-};
+}
 ```
 Наш пример страницы блога может содержать функцию `load`, как показано ниже:
 

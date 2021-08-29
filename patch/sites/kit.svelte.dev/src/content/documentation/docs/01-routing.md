@@ -91,9 +91,12 @@ export interface RequestHandler<
  	Locals = Record<string, any>,
  	Input = unknown,
  	Output extends DefaultBody = DefaultBody
- > = (
- 	request: ServerRequest<Locals, Input>
- ) => void | EndpointOutput<Output> | Promise<void | EndpointOutput<Output>>;
+> {
+ 	(request: ServerRequest<Locals, Input>):
+ 		| void
+ 		| EndpointOutput<Output>
+ 		| Promise<void | EndpointOutput<Output>>;
+}
 ```
 Например, наша гипотетическая страница блога `/blog/cool-article`, может запрашивать данные из `/blog/cool-article.json`, который может быть представлен эндпоинтом `src/routes/blog/[slug].json.js`:
 
