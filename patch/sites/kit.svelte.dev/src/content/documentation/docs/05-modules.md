@@ -80,3 +80,23 @@ import { build, files, timestamp } from '$service-worker';
 - `build` – массив строк URL путей до файлов сгенерированных Vite, используется для кеширования при помощи функции `cache.addAll(build)`
 - `files` – массив строк URL путей до файлов в директории `static`, или иной директории указанной в [`config.kit.files.assets`](#konfiguracziya). Вы можете исключить определенные файлы из каталога `static` с помощью [`config.kit.serviceWorker.exclude`](#konfiguracziya)
 - `timestamp` – результат вызова функции `Date.now()` во время сборки. Полезно для генерации уникальных имён для кешей внутри сервис-воркера, что позволит инвалидировать устаревшие кеши у клиентов при запуске новой версии приложения.
+
+
+### @sveltejs/kit/hooks
+
+Эти модули предоставляют хелпер-функцию для создания последовательности из нескольких вызовов в `handle`.
+
+```js
+import { sequence } from '@sveltejs/kit/hooks';
+
+async function first({ request, resolve }) {
+   console.log('first');
+   return await resolve(request);
+}
+async function second({ request, resolve }) {
+   console.log('second');
+   return await resolve(request);
+}
+
+export const handle = sequence(first, second);
+```
