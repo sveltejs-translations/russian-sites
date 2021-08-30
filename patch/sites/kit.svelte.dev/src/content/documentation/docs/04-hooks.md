@@ -80,7 +80,7 @@ export async function handle({ request, render }) {
 }
 ```
 
-Вы можете добавить несколько функций `handle` с [помощью хелпера `sequence`](#modules-@sveltejs/kit/hooks).
+Вы можете добавить несколько функций в `handle` с [помощью хелпера `sequence`](#moduli-@sveltejs/kit/hooks).
 
 ### handleError
 
