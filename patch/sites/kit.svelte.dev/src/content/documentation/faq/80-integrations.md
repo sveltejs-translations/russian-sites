@@ -97,6 +97,7 @@ kit: {
 export default config;
 ```
 
+См. документы [Vite `configureServer`](https://vitejs.dev/guide/api-plugin.html#configureserver) для получения более подробной информации.
 
 ### Поддерживается ли Yarn 2?
 
