@@ -84,7 +84,7 @@ import { build, files, timestamp } from '$service-worker';
 
 ### @sveltejs/kit/hooks
 
-Эти модули предоставляют хелпер-функцию для создания последовательности из нескольких вызовов в `handle`.
+Этот модуль предоставляют хелпер-функцию для создания последовательности из нескольких вызовов в `handle`.
 
 ```js
 import { sequence } from '@sveltejs/kit/hooks';
