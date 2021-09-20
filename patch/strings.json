@@ -11,6 +11,10 @@
         "UNICODE =  false":
         "UNICODE =  true"
     },
+    "sites/kit.svelte.dev/package.json":{
+        "adapter-netlify":
+        "adapter-node"
+    },
     "sites/kit.svelte.dev/svelte.config.js":{
         "adapter-netlify":
         "adapter-node"
