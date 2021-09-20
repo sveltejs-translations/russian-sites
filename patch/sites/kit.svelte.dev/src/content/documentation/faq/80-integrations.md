@@ -1,20 +1,41 @@
 ---
 question: Как использовать X вместе со SvelteKit?
 ---
+Убедитесь, что вы прочитали [раздел документации по интеграции](/docs#additional-resources-integrations). Если у вас все еще возникают проблемы, ниже перечислены решения распространенных проблем.
 
-### Как настроить библиотеку X?
+### Как настроить базу данных?
 
-Пожалуйста, ознакомьтесь с сайтом сообщества [sveltesociety.dev](https://sveltesociety.dev/templates) для примеров использования многих популярных библиотек, таких как Tailwind, PostCSS, Firebase, GraphQL, mdsvex и многое другое. Мы рекомендуем использовать [Svelte adders](https://sveltesociety.dev/templates#category-Svelte%20Add), которые позволяют запустить сценарий для автоматического добавления популярных технологий во вновь созданный проект SvelteKit.
-
-
-### Как использовать `svelte-preprocess`?
-
-`svelte-preprocess` обеспечивает поддержку Babel, CoffeeScript, Less, PostCSS/SugarSS, Pug, scss/sass, Stylus, TypeScript, стилей `global` и replace. Добавление [svelte-preprocess](https://github.com/sveltejs/svelte-preprocess) в ваш [`svelte.config.js`](/docs#konfiguracziya) - это первый шаг. Он предоставляется шаблоном, если вы используете TypeScript. Пользователям JavaScript нужно будет добавить его. Для многих инструментов, перечисленных выше, вам потребуется только установить соответствующую библиотеку, такую ​​как `npm install -D sass` или` npm install -D less`. См. Документацию [svelte-preprocess](https://github.com/sveltejs/svelte-preprocess) для получения полной информации.
+Поместите код для запроса к базе данных в [эндпоинт](/docs#marshruty-endpointy) - не запрашивайте базу данных в файлах .svelte. Можно создать `db.js` или аналогичный файл, который настраивает соединение и делает клиента доступным во всем приложении в виде синглтона. Можно выполнить любой одноразовый код настройки в `hooks.js` и импортировать хелпер базы данных в любой эндпоинт.
 
 
-### Как использовать Firebase?
+### Как использовать мидлвары?
 
-Используйте SDK v9, с модульным подходом SDK, который в настоящее время на стадии бета-тестирования. Старые версии очень трудно заставить работать, особенно с SSR, они очень сильно уыеличивают размер бандла клиента. Даже в версии 9 большинству пользователей необходимо установить `kit.ssr: false` до тех пор, пока не будут решены [vite#4425](https://github.com/vitejs/vite/issues/4425) и [firebase-js-sdk#4846](https://github.com
+`adapter-node` создает мидлвары, которые можно использовать с вашим собственным сервером для производственного режима. В dev вы можете добавить мидлвару в Vite с помощью плагина Vite. Например:
+
+```js
+ const myPlugin = {
+   name: 'log-request-middleware',
+   configureServer(server) {
+     server.middlewares.use((req, res, next) => {
+       console.log(`Got request ${req.url}`);
+       next();
+     })
+   }
+ }
+
+ /** @type {import('@sveltejs/kit').Config} */
+ const config = {
+ 	kit: {
+ 		target: '#svelte',
+ 		vite: {
+ 			plugins: [ myPlugin ]
+ 		}
+ 	}
+ };
+
+ export default config;
+ ```
+ См. документы [Vite `configureServer`](https://vitejs.dev/guide/api-plugin.html#configureserver) для получения более подробной информации, включая управление последовательностью.
 
 
 ### Как использовать клиентскую библиотеку, которая зависит от `document` или `window`?
@@ -30,7 +51,6 @@ if (browser) {
 // client-only code here
 }
 ```
-
 Вы также можете запустить код в `onMount`, если хотите запустить его после того, как компонент был впервые отображен в DOM:
 
 ```js
@@ -52,6 +72,7 @@ onMount(() => {
   method('hello world');
 });
 ```
+
 В противном случае, если библиотека имеет побочные эффекты и вы все равно предпочитаете использовать статический импорт, ознакомьтесь с [vite-plugin-iso-import](https://github.com/bluwy/vite-plugin-iso-import) для поддержки `?client` суффикс импорта. Импорт будет удален в сборках SSR. Однако обратите внимание, что вы потеряете возможность использовать VS Code Intellisense, если используете этот метод.
 
 ```js
@@ -63,41 +84,9 @@ onMount(() => {
 });
 ```
 
+### Как использовать Firebase?
 
-### Как настроить базу данных?
-
-Поместите код запросов к базе данных в [эндпоинты](/docs#marshruty-endpointy) - не обращайтесь к БД в файлах .svelte. Вы можете создать файл `db.js` или аналогичный, который будет устанавливать соединение с БД и предоставлять к ней доступ всему приложению. Импортируйте в файл `hooks.js` метод устанавливающий соединение с базой и любой другой код, который должен выполняться единоразово при старте приложения, а в эндпоинты импортируйте функции для выполнения запросов в БД.
-
-
-### Как использовать промежуточное программное обеспечение?
-
-`adapter-node` создает промежуточное программное обеспечение, которое может использоваться с вашим собственным сервером в производственном режиме. В dev вы можете добавить промежуточное программное обеспечение в Vite с помощью плагина Vite. Например:
-
-```js
-const myPlugin = {
-  name: 'log-request-middleware',
-  configureServer(server) {
-    server.middlewares.use((req, res, next) => {
-      console.log(`Got request ${req.url}`);
-      next();
-    })
-  }
-}
-
-/** @type {import('@sveltejs/kit').Config} */
-const config = {
-kit: {
-  target: '#svelte',
-  vite: {
-    plugins: [ myPlugin ]
-  }
-}
-};
-
-export default config;
-```
-
-См. документы [Vite `configureServer`](https://vitejs.dev/guide/api-plugin.html#configureserver) для получения более подробной информации.
+Используйте SDK v9, с модульным подходом SDK, который в настоящее время на стадии бета-тестирования. Старые версии очень трудно заставить работать, особенно с SSR, они очень сильно увеличивают размер бандла клиента. Даже в версии 9 большинству пользователей необходимо установить `kit.ssr: false` до тех пор, пока не будут решены [vite#4425](https://github.com/vitejs/vite/issues/4425) и [firebase-js-sdk#4846](https://github.com
 
 ### Поддерживается ли Yarn 2?
 
