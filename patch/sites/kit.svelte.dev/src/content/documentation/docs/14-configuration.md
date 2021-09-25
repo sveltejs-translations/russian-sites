@@ -31,14 +31,9 @@ const config = {
 		hydrate: true,
 		package: {
  			dir: 'package',
- 			exports: {
- 				include: ['**'],
- 				exclude: ['**/_*']
- 			},
- 			files: {
- 				include: ['**'],
- 				exclude: []
- 			},
+ 			// excludes all .d.ts and files starting with _ as the name
+ 			exports: (filepath) => !/^_|\/_|\.d\.ts$/.test(filepath),
+ 			files: () => true,
  			emitTypes: true
  		},
 		paths: {
@@ -53,7 +48,7 @@ const config = {
 		},
 		router: true,
 		serviceWorker: {
- 			exclude: []
+ 			files: (filepath) => !/\.DS_STORE/.test(filepath)
  		},
 		ssr: true,
 		target: null,
@@ -134,10 +129,28 @@ export default {
 Опции, связанные с [созданием пакетов](#sozdanie-paketov).
 
 - `dir` - выходной каталог
-- `exports` - содержит массив `includes` и `excludes`, который определяет, какие файлы пометить как экспортированные из поля `exports` `package.json`. Объединит существующие значения, если они доступны, со значениями из `package.json`, имеющими приоритет
-- `files` - содержит массив `includes` и `excludes`, который определяет, какие файлы обрабатывать и копировать при упаковке
 - `emitTypes` - по умолчанию `svelte-kit package` автоматически сгенерирует типы для вашего пакета в виде файлов `d.ts.`. Хотя генерация типов настраивается, мы считаем, что для качества экосистемы всегда надо генерировать типы. Пожалуйста, убедитесь, что у вас есть веская причина установливать значение `false` (например, если вместо этого вы хотите предоставить рукописные определения типов).
+- `exports` - функция типа `(filepath: string) => boolean`. Когда возвращает `true`, путь к файлу будет включён в поле `exports:` в `package.json`. Любые сущуствующие значения в исходном `package.json` будут объеденены с  `exports` полями в приоритете
+ - `files` - функция типа `(filepath: string) => boolean`. Когда возвращает  `true`, файлы будут обработаны и скопированы в папку опеределенную в `dir`
 
+ Для удобного сравнения `filepath`, можно использовать дополнительные библиотеки в полях `exports` и `files`:
+
+ ```js
+ // svelte.config.js
+ import mm from 'micromatch';
+
+ export default {
+ 	kit: {
+ 		package: {
+ 			exports: (filepath) => {
+ 				if (filepath.endsWith('.d.ts')) return false;
+ 				return mm.isMatch(filepath, ['!**/_*', '!**/internal/**'])
+ 			},
+ 			files: mm.matcher('!**/build.*')
+ 		}
+ 	}
+ };
+ ```
 
 ### paths
 
@@ -188,7 +201,7 @@ export default {
 
 Объект, содержащий ноль или более из следующих значений:
 
-- `exclude` - массив шаблонов glob относительно папки `files.assets`. Файлы, соответствующие любому из них, не будут доступны в `$service-worker.files`, например, если `files.assets` имеет значение `static`, то ['og-tags-images/**/*'] будет соответствовать всем файлам в папке `static/og-tags-images`.
+- `files` - функция типа `(filepath: string) => boolean`. Когда возвращает `true`, включенные файлы будут доступны в `$service-worker.files`, или исключены если `false`.
 
 
 ### ssr
