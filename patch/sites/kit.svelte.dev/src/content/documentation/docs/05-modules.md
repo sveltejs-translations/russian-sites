@@ -78,7 +78,7 @@ import { build, files, timestamp } from '$service-worker';
 ```
 
 - `build` – массив строк URL путей до файлов сгенерированных Vite, используется для кеширования при помощи функции `cache.addAll(build)`
-- `files` – функция типа `(filepath: string) => boolean`. Кошда возвращет `true`, файлы будут включены в service worker manifest
+- `files` - это массив строк URL, представляющих файлы в вашем каталоге `static` или любой другой каталог, указанный [`config.kit.files.assets`](#konfiguracziya). Вы можете настроить, какие файлы включаются из каталога `static`, используя [`config.kit.serviceWorker.files`](#konfiguracziya)
 - `timestamp` – результат вызова функции `Date.now()` во время сборки. Полезно для генерации уникальных имён для кешей внутри сервис-воркера, что позволит инвалидировать устаревшие кеши у клиентов при запуске новой версии приложения.
 
 
