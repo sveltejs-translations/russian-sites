@@ -8,6 +8,14 @@ title: Дополнительные ресурсы
 
 [Svelte FAQ](https://svelte.dev/faq) и [`vite-plugin-svelte` FAQ](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/faq.md) также могут быть полезны для вопросов, исходящих из этих библиотек.
 
+### Примеры
+
+Мы написали и опубликовали несколько различных сайтов на Sveltekit в качестве примеров:
+
+ - [Папка с примерами](https://github.com/sveltejs/kit/tree/master/examples) на GitHub включая клон HackerNews
+ - [sveltejs/realworld](https://github.com/sveltejs/realworld) пример блога
+ - [sveltejs/sites](https://github.com/sveltejs/sites) код этого сайта
+
 
 ### Интеграция
 
