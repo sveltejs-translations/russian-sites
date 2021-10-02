@@ -4,7 +4,7 @@ title: package.json
 
 ### type : "module"
 
-Добавьте `"type": "module"` в `package.json`
+Добавьте `"type": "module"` в `package.json`. Вы можете выполнить этот шаг отдельно от остальных в рамках инкрементной миграции, если вы используете Sapper 0.29.3 или новее.
 
 ### dependencies
 
