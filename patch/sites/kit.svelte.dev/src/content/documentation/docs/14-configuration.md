@@ -174,7 +174,10 @@ export default {
    - `function` — пользовательский обработчик ошибок, позволяющий регистрировать, `throw` и ошибки сборки или предпринимать другие действия по вашему выбору на основе деталей обхода содержимого
 
      ```ts
+	 import static from '@sveltejs/adapter-static';
+
      /** @type {import('@sveltejs/kit').PrerenderErrorHandler} */
+
      const handleError = ({ status, path, referrer, referenceType }) => {
      	if (path.startsWith('/blog')) throw new Error('Missing a blog page!');
      	console.warn(`${status} ${path}${referrer ? ` (${referenceType} from ${referrer})` : ''}`);
