@@ -8,11 +8,11 @@ title: Страницы и макеты
 
 ### Импорты
 
-Импорт `goto`, `prefetch` и `prefetchRoutes` из `@sapper/app` следует заменить идентичным импортом из [`$app/navigation`](/docs#moduli-app-navigation).
+Импорт `goto`, `prefetch` и `prefetchRoutes` из `@sapper/app` следует заменить идентичным импортом из [`$app/navigation`](/docs#moduli-$app-navigation).
 
 Импорт `stores` из `@sapper/app` следует тоже заменить — подробнее в разделе [Хранилища](#straniczy-i-makety-hranilishha).
 
-Любые файлы, которые вы ранее импортировали из каталогов в `src/node_modules` необходимо будет заменить на импорты из [`$lib`](/docs#moduli-lib).
+Любые файлы, которые вы ранее импортировали из каталогов в `src/node_modules` необходимо будет заменить на импорты из [`$lib`](/docs#moduli-$lib).
 
 ### Предварительная загрузка
 
