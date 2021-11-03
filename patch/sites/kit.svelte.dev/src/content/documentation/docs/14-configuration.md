@@ -56,6 +56,9 @@ const config = {
 		vite: () => ({})
 	},
 
+	// SvelteKit использует vite-plugin-svelte. Его варианты можно предоставить прямо здесь.
+	// Смотрите доступные варианты по адресу https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md
+
 	// параметры для svelte.preprocess (https://svelte.dev/docs#svelte_preprocess)
 	preprocess: null
 };
