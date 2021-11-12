@@ -39,9 +39,7 @@ export interface LoadOutput<
 
 ```html
 <script context="module">
-	/**
-	 * @type {import('@sveltejs/kit').Load}
-	 */
+	/** @type {import('@sveltejs/kit').Load} */
 	export async function load({ page, fetch, session, stuff }) {
 		const url = `/blog/${page.params.slug}.json`;
 		const res = await fetch(url);

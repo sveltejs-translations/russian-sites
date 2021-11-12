@@ -77,10 +77,26 @@ title: Макеты
 
 > SvelteKit предоставляет страницу ошибок по умолчанию `src/routes/__error.svelte`, но рекомендуется сделать свою.
 
+```ts
+// declaration type
+// * also see type for `LoadOutput` in the Loading section
+
+export interface ErrorLoadInput<
+	PageParams extends Record<string, string> = Record<string, string>,
+	Stuff extends Record<string, any> = Record<string, any>,
+	Session = any
+> extends LoadInput<PageParams, Stuff, Session> {
+	status?: number;
+	error?: Error;
+}
+```
+
+
 Если в компоненте`__error.svelte` есть функция [`load`](#zagruzka-dannyh), она будет вызываться со свойствами `error` и `status`:
 
 ```html
 <script context="module">
+	/** @type {import('@sveltejs/kit').ErrorLoad} */
 	export function load({ error, status }) {
 		return {
 			props: {

@@ -7,9 +7,7 @@ title: Написание адаптера
 Пакеты адаптеров должны реализовывать следующий API, который создает `Адаптер`:
 
 ```js
-/**
-* @param {AdapterSpecificOptions} options
-*/
+/** @param {AdapterSpecificOptions} options */
 export default function (options) {
 /** @type {import('@sveltejs/kit').Adapter} */
     return {
