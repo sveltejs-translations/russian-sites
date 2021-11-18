@@ -86,7 +86,7 @@ onMount(() => {
 
 ### Как использовать Firebase?
 
-Используйте SDK v9, с модульным подходом SDK, который в настоящее время на стадии бета-тестирования. Старые версии очень трудно заставить работать, особенно с SSR, они очень сильно увеличивают размер бандла клиента. Даже в версии 9 большинству пользователей необходимо установить `kit.ssr: false` до тех пор, пока не будут решены [vite#4425](https://github.com/vitejs/vite/issues/4425) и [firebase-js-sdk#4846](https://github.com
+Пожалуйста, используйте Firebase SDK v9. Nакже нужно добавить зависимости Firebase в `ssr.external` ([пример](https://github.com/benmccann/sveltekit-firebase/blob/9e3097fd859e4f81e4775885ecb584561f098fd3/svelte.config
 
 ### Поддерживается ли Yarn 2?
 
