@@ -33,7 +33,7 @@ export default {
 
 Для бессерверных платформ существует множество официальных адаптеров...
 
-- [`adapter-begin`](https://github.com/sveltejs/kit/tree/master/packages/adapter-begin) — для [Begin](https://begin.com)
+- [`adapter-cloudflare`](https://github.com/sveltejs/kit/tree/master/packages/adapter-cloudflare) — для [Cloudflare Pages](https://developers.cloudflare.com/pages/)
 - [`adapter-cloudflare-workers`](https://github.com/sveltejs/kit/tree/master/packages/adapter-cloudflare-workers) — для [Cloudflare Workers](https://developers.cloudflare.com/workers/)
 - [`adapter-netlify`](https://github.com/sveltejs/kit/tree/master/packages/adapter-netlify) — для [Netlify](https://netlify.com)
 - [`adapter-vercel`](https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel) — для [Vercel](https://vercel.com)
