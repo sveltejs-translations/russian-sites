@@ -16,7 +16,7 @@ SvelteKit - это фреймворк для создания высокопро
 
 Создание приложения со всеми современными передовыми практиками дьявольски сложно. Эти практики включают в себя [оптимизацию сборки](https://vitejs.dev/guide/features.html#build-optimizations), так что вы загружаете только минимальный необходимый код; [офлайн поддержка](#servis-vorkery); [предварительная выборка](#atributy-ssylok-sveltekit-prefetch) страницы до того, как пользователь инициирует навигацию; и [настраиваемый рендеринг](#ssr-i-javascript), который позволяет генерировать HTML [на сервере](#ssr-i-javascript-ssr) или [в браузере](#ssr-i-javascript-router) во время выполнения или [во время сборки](#ssr-i-javascript-prerender). SvelteKit делает все скучное за вас, чтобы вы могли продолжать творческую часть.
 
-Он использует [Vite](https://vitejs.dev/) со [Svelte plugin](https://github.com/sveltejs/vite-plugin-svelte), чтобы обеспечить молниеносную и многофункционную разработку, где изменения в вашем коде немедленно отражаются в браузере.
+Он использует [Vite](https://vitejs.dev/) со [Svelte plugin](https://github.com/sveltejs/vite-plugin-svelte), чтобы обеспечить молниеносную и многофункциональную разработку с [горячей заменой модулей (HMR)](https://github.com/sveltejs/vite-plugin-svelte/blob/main/docs/config.md#hot), где изменения вашего кода мгновенно отражаются в браузере.
 
 Чтобы понять это руководство, знать Svelte не обязательно, но желательно. Если коротко, Svelte — это фреймворк, который компилирует ваши компоненты в высокооптимизированный ванильный JavaScript. Прочтите [вводную статью в блоге Svelte](https://ru.svelte.dev/blog/svelte-3-rethinking-reactivity) и [учебник Svelte](https://ru.svelte.dev/tutorial), чтобы узнать о нём побольше.
 
@@ -40,3 +40,8 @@ npm run dev
 - Вы создаёте новые страницы путём добавления компонентов в директорию `src/routes` вашего проекта. Они будут рендериться на сервере, так что время первой загрузки приложения для пользователя будет максимально быстрым, а уже затем клиентское приложение возьмёт управление на себя.
 
 Попробуйте отредактировать файлы, чтобы понять, как все работает - вам, возможно, не придется беспокоиться о прочтении остальной части этого руководства! Мы рекомендуем использовать [Visual Studio Code (он же VS Code)](https://code.visualstudio.com/download) с [расширением Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode), но [поддержка также существует для многих других редакторов](https://sveltesociety.dev/tools#editor-support).
+Попробуйте отредактировать файлы, чтобы понять, как все работает - вам, возможно, не придется беспокоиться о прочтении остальной части этого руководства!
+
+#### Настройка редактора
+
+Мы рекомендуем использовать [Visual Studio Code (он же VS Code)](https://code.visualstudio.com/download) с [расширением Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode), но [поддержка также существует для многих других редакторов](https://sveltesociety.dev/tools#editor-support).
