@@ -10,22 +10,16 @@ title: Адаптеры
 
 ### Поддерживаемые платформы
 
-Следующие платформы официально поддерживаются и не требуют дополнительной настройки:
+SvelteKit предлагает ряд официально поддерживаемых адаптеров.
+
+Следующие платформы не требуют дополнительной настройки:
 
 - [Cloudflare Pages](https://developers.cloudflare.com/pages/) через [`adapter-cloudflare`](https://github.com/sveltejs/kit/tree/master/packages/adapter-cloudflare)
 - [Netlify] (https://netlify.com) через [`adapter-netlify`](https://github.com/sveltejs/kit/tree/master/packages/adapter-netlify)
 - [Vercel](https://vercel.com) через [`adapter-vercel`](https://github.com/sveltejs/kit/tree/master/packages/adapter-vercel)
 
-### Установка пользовательских адаптеров
 
-Для других платформ существуют дополнительные [адаптеры, предоставляемые сообществом] (https://sveltesociety.dev/components#adapters). После установки соответствующего адаптера с помощью менеджера пакетов обновите `svelte.config.js`:
-
-```diff
--import adapter from '@sveltejs/adapter-auto';
-+import adapter from 'svelte-adapter-[x]';
-```
-
-### Создание приложения Node
+#### Node.js
 
 Чтобы создать простой Node-сервер, установите пакет `@sveltejs/adapter-node@next` и обновите `svelte.config.js`:
 
@@ -49,7 +43,7 @@ export default {
 };
 ```
 
-### Создание статического сайта
+#### Статические сайты
 
 Большинство адаптеров будут генерировать статический HTML для любых [предварительно отрисуемых](#ssr-i-javascript-prerender) страниц вашего сайта. В некоторых случаях все ваше приложение может быть предварительно рендеринговым, и в этом случае вы можете использовать `@sveltejs/adapter-static@next` для генерации статического HTML для _всех_ ваших страниц. Полностью статический сайт может быть размещен на самых разных платформах, включая статические хосты, такие как [GitHub Pages](https://pages.github.com/).
 
@@ -61,7 +55,18 @@ export default {
 
 Вы также можете использовать `adapter-static` для создания одностраничных приложений (SPA), указав [откатную страницу] (https://github.com/sveltejs/kit/tree/master/packages/adapter-static#spa-mode).
 
-### Написание пользовательских адаптеров
+
+### Адаптеры сообщества
+
+Для других платформ существуют дополнительные [адаптеры, предоставляемые сообществом](https://sveltesociety.dev/components#adapters). После установки соответствующего адаптера с помощью менеджера пакетов обновите `svelte.config.js`:
+
+```diff
+-import adapter from '@sveltejs/adapter-auto';
++import adapter from 'svelte-adapter-[x]';
+```
+
+
+### Написание своего адаптеров
 
 Мы рекомендуем [брать за основу адаптер](https://github.com/sveltejs/kit/tree/master/packages) на платформу, похожую на вашу, и скопировать его в качестве отправной точки.
 
