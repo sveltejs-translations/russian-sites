@@ -26,8 +26,11 @@ const config = {
 			template: 'src/app.html'
 		},
 		floc: false,
+		headers: {
+ 			host: null,
+ 			protocol: null
+ 		},
 		host: null,
-		hostHeader: null,
 		hydrate: true,
 		package: {
  			dir: 'package',
@@ -47,6 +50,7 @@ const config = {
 			entries: ['*'],
  			onError: 'fail'
 		},
+		protocol: null,
 		router: true,
 		serviceWorker: {
 			register: true,
@@ -105,24 +109,29 @@ Permissions-Policy: Interest-cohort = ()
 > Это может применяться только при серверном рендеринге — заголовки для предварительно отрисованных страниц (например, созданных с помощью [adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static)) определяются платформой хостинга.
 
 
-### host
+### headers
 
-Строка, которая переопределяет заголовок `Host` при формировании значения `page.host`
+Свойство [`page.origin`] происходит от протокола запроса (обычно `https`) и хоста, который по умолчанию берется из заголовка `Host`.
 
-### hostHeader
-
-Если ваше приложение находится за обратным прокси-сервером (например, используются балансировщики нагрузки или CDN), тогда заголовок `Host` не будет верным. В таких случаях реальный хост указывается в заголовке [`X-Forwarded-Host`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host) и, если в приложении вы хотите иметь доступ к `page.host`, то необходимо указать в настройках нужный заголовок:
+Если ваше приложение находится за обратным прокси-сервером (например, используются балансировщики нагрузки или CDN), то заголовок `Host`не будет верным. В большинстве случаев базовый протокол и хост доступны через заголовки [`X-Forwarded-Host`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host) и [`X-Forwarded-Proto`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto), которые можно указать в конфигурации:
 
 ```js
 // svelte.config.js
 export default {
 	kit: {
-		hostHeader: 'X-Forwarded-Host'
+		headers: {
+ 			host: 'X-Forwarded-Host',
+ 			protocol: 'X-Forwarded-Proto'
+ 		}
 	}
 };
 ```
 
 **Это следует делать только в том случае, если вы доверяете обратному прокси-серверу,** – вот почему этот параметр не указан по умолчанию.
+
+### host
+
+Значение, которое переопределяет значение, производное от [`config.kit.headers.host`](#configuration-headers-host).
 
 ### hydrate
 
@@ -200,6 +209,9 @@ export default {
      };
      ```
 
+### protocol
+
+Предполагается, что протоколом является `'https'` (если вы не разрабатываете локально без флага `--https`), если не установлен [`config.kit.headers.protocol`](#configuration-headers-protocol). При необходимости вы можете переопределить его здесь.
 
 ### router
 

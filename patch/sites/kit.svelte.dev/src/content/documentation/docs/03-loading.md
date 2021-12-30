@@ -13,7 +13,7 @@ export interface LoadInput<
  	Session = any
  > {
 	page: {
-		host: string;
+		origin: string;
 		path: string;
 		params: PageParams;
 		query: URLSearchParams;
@@ -88,11 +88,11 @@ SvelteKit `load` получает реализацию `fetch`, которая �
 
 #### page
 
-`page` является объектом `{ host, path, params, query }` где `host` и`path` — это соответственно часть хоста и путь из URL, `params` вычисляется из `path` и имени файла страницы, и `query` – экземпляр объекта [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams). Мутация `page` не обновляет текущий URL-адрес; вместо этого вы должны перемещаться с помощью [`goto`](#modules-$app-navigation).
+`page` является объектом `{ origin, path, params, query }` где `origin` и`path` — это соответственно часть хоста и путь из URL, `params` вычисляется из `path` и имени файла страницы, и `query` – экземпляр объекта [`URLSearchParams`](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams). Мутация `page` не обновляет текущий URL-адрес; вместо этого вы должны перемещаться с помощью [`goto`](#modules-$app-navigation).
 
 Таким образом для примера выше `src/routes/blog/[slug].svelte` и для запрошенного URL `https://example.com/blog/some-post?foo=bar&baz&bizz=a&bizz=b`, следующее будет верным:
 
-- `page.host === 'example.com'`
+- `page.origin === 'https://example.com'`
 - `page.path === '/blog/some-post'`
 - `page.params.slug === 'some-post'`
 - `page.query.get('foo') === 'bar'`
