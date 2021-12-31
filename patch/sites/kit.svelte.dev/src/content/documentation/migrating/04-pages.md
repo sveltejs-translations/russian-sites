@@ -33,7 +33,7 @@ import { stores } from '@sapper/app';
 const { preloading, page, session } = stores();
 ```
 
-Хранилища `page` и `session` всё ещё существуют; `preloading` был заменен на `navigating` который содержит свойства `from` и `to`.
+Хранилища `page` и `session` всё ещё существуют; `preloading` был заменен на `navigating` который содержит свойства `from` и `to`. `page` теперь имеет свойства `url` и `params`, но не имеет `path` или `query`.
 
 В SvelteKit вы получаете к ним доступ по-другому. `stores` теперь называется `getStores`, но в большинстве случаев в этом нет необходимости, поскольку вы можете импортировать `navigating`, `page` и `session` прямо из [`$app/stores`](/docs#moduli-$app-stores).
 

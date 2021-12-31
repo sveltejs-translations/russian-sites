@@ -60,24 +60,19 @@ type ResponseHeaders = Record<string, string | string[]>;
 type RequestHeaders = Record<string, string>;
 
 export type RawBody = null | Uint8Array;
-export interface IncomingRequest {
-	method: string;
-	path: string;
-	query: URLSearchParams;
-	headers: RequestHeaders;
- 	rawBody: RawBody;
-};
 
 type ParameterizedBody<Body = unknown> = Body extends FormData
  	? ReadOnlyFormData
  	: (string | RawBody | ReadOnlyFormData) & Body;
- // ServerRequest is exported as Request
- export interface ServerRequest<Locals = Record<string, any>, Body = unknown>
- 	extends IncomingRequest {
-	origin: string;
+
+ export interface Request<Locals = Record<string, any>, Body = unknown> {
+ 	url: URL;
+ 	method: string;
+ 	headers: RequestHeaders;
+ 	rawBody: RawBody;
  	params: Record<string, string>;
  	body: ParameterizedBody<Body>;
- 	locals: Locals; // устанавливается в хуке handle
+ 	locals: Locals;
 }
 
 type DefaultBody = JSONResponse | Uint8Array;
@@ -92,7 +87,7 @@ export interface RequestHandler<
  	Input = unknown,
  	Output extends DefaultBody = DefaultBody
 > {
- 	(request: ServerRequest<Locals, Input>):
+ 	(request: Request<Locals, Input>):
  		| void
  		| EndpointOutput<Output>
  		| Promise<void | EndpointOutput<Output>>;

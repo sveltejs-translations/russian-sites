@@ -111,7 +111,7 @@ Permissions-Policy: Interest-cohort = ()
 
 ### headers
 
-Свойство [`page.origin`] происходит от протокола запроса (обычно `https`) и хоста, который по умолчанию берется из заголовка `Host`.
+В некоторых средах `url` текущей страницы или конечной точки происходит из протокола запроса (обычно `https`) и хоста, который по умолчанию берется из заголовка `Host`.
 
 Если ваше приложение находится за обратным прокси-сервером (например, используются балансировщики нагрузки или CDN), то заголовок `Host`не будет верным. В большинстве случаев базовый протокол и хост доступны через заголовки [`X-Forwarded-Host`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host) и [`X-Forwarded-Proto`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto), которые можно указать в конфигурации:
 
@@ -131,7 +131,7 @@ export default {
 
 ### host
 
-Значение, которое переопределяет значение, производное от [`config.kit.headers.host`](#configuration-headers-host).
+Значение, которое переопределяет значение, производное от [`config.kit.headers.host`](#konfiguracziya-headers-host).
 
 ### hydrate
 
@@ -211,7 +211,7 @@ export default {
 
 ### protocol
 
-Предполагается, что протоколом является `'https'` (если вы не разрабатываете локально без флага `--https`), если не установлен [`config.kit.headers.protocol`](#configuration-headers-protocol). При необходимости вы можете переопределить его здесь.
+Предполагается, что протоколом является `'https'` (если вы не разрабатываете локально без флага `--https`), если не установлен [`config.kit.headers.protocol`](#konfiguracziya-headers-protocol). При необходимости вы можете переопределить его здесь.
 
 ### router
 
