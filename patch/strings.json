@@ -1,5 +1,5 @@
 {
-    "sites/kit.svelte.dev/src/_env.ts":{
+   "sites/kit.svelte.dev/src/_env.ts":{
         "process.env.API_BASE":
         "'./api'"
     },
@@ -184,5 +184,9 @@
 
         "<Docs {sections} project=\"kit\" path=\"/documentation\" dir=\"migrating\" />":
         "<Docs {sections} owner=\"sveltejs-translations\" project=\"russian-sites\" path=\"/patch/sites/kit.svelte.dev/src/content/documentation\" dir=\"migrating\" edit_title=\"редактировать этот раздел\" />"
+    },
+    "packages/site-kit/src/lib/components/NavItem.svelte":{
+        "$page.path.":
+        "$page.url.pathname."
     }
 }
