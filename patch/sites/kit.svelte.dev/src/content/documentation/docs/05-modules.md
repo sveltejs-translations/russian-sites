@@ -21,9 +21,10 @@ import { amp, browser, dev, mode, prerendering } from '$app/env';
 ### $app/navigation
 
 ```js
-import { goto, invalidate, prefetch, prefetchRoutes } from '$app/navigation';
+import { disableScrollHandling, goto, invalidate, prefetch, prefetchRoutes } from '$app/navigation';
 ```
 
+- `disableScrollHandling`, если он вызывается при обновлении страницы после навигации (например, в `onMount` или действии), то запретит SvelteKit применять обычное управление прокруткой. Лучше избегать этого, чтобы не дезориентировать пользователей в поведении прокрутки.
 - `goto(href, { replaceState, noscroll, keepfocus, state })` возвращает `Promise`, который резолвится при навигации SvelteKit к указанному `href` (ошибка в навигации отклоняет промис). Второй аргумент является необязательным:
     - `replaceState` (boolean, по умолчанию `false`) Если `true`, заменит текущую запись `history`, а не создадет новую на `pushState`
     - `noscroll` (boolean, по умолчанию `false`) Если `true`, браузер сохранит свое положение прокрутки, а не прокрутит в верхнюю часть страницы после навигации
