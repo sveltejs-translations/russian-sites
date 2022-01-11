@@ -8,7 +8,7 @@ title: Хуки
 
 ### handle
 
-Эта функция запускается каждый раз, когда SvelteKit получает запрос - независимо от того, происходит ли это во время работы приложения или во время [пререндеринга](#ssr-and-javascript-prerender) - и определяет ответ. Он получает объект `request` и функцию с именем `resolve`, которая вызывает маршрутизатор SvelteKit и генерирует ответ (отображение страницы или вызов эндпоинта) соответственно. Это позволяет изменять заголовки или тела ответов или полностью обойти SvelteKit (например, для программной реализации эндпоинтов).
+Эта функция запускается каждый раз, когда SvelteKit получает запрос - независимо от того, происходит ли это во время работы приложения или во время [пререндеринга](#page-options-prerender) - и определяет ответ. Он получает объект `request` и функцию с именем `resolve`, которая вызывает маршрутизатор SvelteKit и генерирует ответ (отображение страницы или вызов эндпоинта) соответственно. Это позволяет изменять заголовки или тела ответов или полностью обойти SvelteKit (например, для программной реализации эндпоинтов).
 
 > Запросы на статические активы, которые включают страницы, которые уже были предварительно отрендерены, _не_ обрабатываются SvelteKit.
 
@@ -47,11 +47,15 @@ export interface Response {
  	body?: StrictBody;
 }
 
+export interface ResolveOpts {
+ 	ssr?: boolean;
+}
+
 export interface Handle<Locals = Record<string, any>, Body = unknown> {
  	(input: {
- 		request: Request<Locals, Body>;
- 		resolve(request: Request<Locals, Body>): Response | Promise<Response>;
- 	}): Response | Promise<Response>;
+ 		request: ServerRequest<Locals, Body>;
+ 		resolve(request: ServerRequest<Locals, Body>, opts?: ResolveOpts): MaybePromise<ServerResponse>;
+ 	}): MaybePromise<ServerResponse>;
 }
 ```
 Чтобы передать какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объекту `request` поле `locals`, как показано ниже:
@@ -74,6 +78,23 @@ export async function handle({ request, render }) {
 ```
 
 Вы можете добавить несколько функций в `handle` с [помощью хелпера `sequence`](#moduli-sveltejs-kit-hooks).
+
+`resolve` также поддерживает второй, необязательный параметр, который дает вам больше контроля над тем, как будет отображаться ответ. Этот параметр является объектом, который может иметь следующие поля:
+
+- `ssr` - указывает, будет ли страница загружена и отображаться на сервере.
+
+```js
+/** @type {import('@sveltejs/kit').Handle} */
+export async function handle({ request, resolve }) {
+ 	const response = await resolve(request, {
+ 		ssr: !request.path.startsWith('/admin')
+ 	});
+
+ 	return response;
+}
+ ```
+
+> Отключение [рендеринга на стороне сервера](#prilozhenie-ssr) эффективно превращает ваше приложение SvelteKit в [**одностраничное приложение** или SPA](#prilozhenie-csr-and-spa). В большинстве ситуаций это не рекомендуется ([см. приложение](#prilozhenie-ssr)). Подумайте, действительно ли уместно его отключить, и сделайте это выборочно, а не для всех запросов.
 
 ### handleError
 

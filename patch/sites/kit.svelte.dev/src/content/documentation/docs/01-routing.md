@@ -82,15 +82,19 @@ export interface EndpointOutput<Body extends DefaultBody = DefaultBody> {
 	body?: Body;
 };
 
+export type MaybePromise<T> = T | Promise<T>;
+
+export interface Fallthrough {
+	fallthrough?: true;
+}
+
+
 export interface RequestHandler<
  	Locals = Record<string, any>,
  	Input = unknown,
  	Output extends DefaultBody = DefaultBody
 > {
- 	(request: Request<Locals, Input>):
- 		| void
- 		| EndpointOutput<Output>
- 		| Promise<void | EndpointOutput<Output>>;
+ 	(request: Request<Locals, Input>): MaybePromise<Fallthrough | EndpointOutput<Output>>;
 }
 ```
 Например, наша гипотетическая страница блога `/blog/cool-article`, может запрашивать данные из `/blog/cool-article.json`, который может быть представлен эндпоинтом `src/routes/blog/[slug].json.js`:
@@ -127,7 +131,7 @@ export async function get({ params }) {
 
 Если `body` является объектом и в `headers` нет заголовка `content-type`, то он по автоматически превратится в JSON строку. Пока не обращайте внимание на `$lib`, об этом мы узнаем [позднее](#moduli-$lib).
 
-> Ничего не возвращать равносильно явному ответу 404.
+> Если возвращается `{fallthrough: true}`, SvelteKit будет [перебирать маршруты](#marshruty-dopolnitelno-perebor-marshrutov) пока один из них что-то не вернёт, или вернёт ответ с кодом 404.
 
 Для эндпоинтов, которые должны обрабатывать иные HTTP методы, например POST, экспортируйте соответствующую функцию:
 

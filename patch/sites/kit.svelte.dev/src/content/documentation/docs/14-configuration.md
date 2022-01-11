@@ -56,7 +56,6 @@ const config = {
 			register: true,
  			files: (filepath) => !/\.DS_STORE/.test(filepath)
  		},
-		ssr: true,
 		target: null,
 		trailingSlash: 'never',
 		vite: () => ({})
@@ -223,12 +222,6 @@ export default {
 Объект, содержащий ноль или более из следующих значений:
 
 - `files` - функция типа `(filepath: string) => boolean`. Когда возвращает `true`, включенные файлы будут доступны в `$service-worker.files`, или исключены если `false`.
-
-
-### ssr
-
-Включает или отключает [отрисовку на стороне сервера](#ssr-i-javascript-ssr)(SSR) для всего приложения.
-
 
 ### target
 
