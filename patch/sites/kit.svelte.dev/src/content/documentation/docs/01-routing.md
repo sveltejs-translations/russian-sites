@@ -162,6 +162,29 @@ return {
 - Данные формы (с типом содержимого `application/x-www-form-urlencoded` или `multipart/form-data`) будут разобраны только для чтения версии объекта [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
 - Все остальные данные будут предоставлены в виде `Uint8Array`
 
+#### HTTP методы
+
+Элементы HTML `<form>` изначально поддерживают только методы `GET` и `POST`. Вы можете разрешить другие методы, такие как `PUT` и `DELETE`, указав их в вашем [configuration](#konfiguracziya-methodoverride) и добавив параметр `_method=VERB` (вы можете настроить имя) в `action` формы:
+
+```js
+// svelte.config.js
+export default {
+	kit: {
+		methodOverride: {
+			allowed: ['PUT', 'PATCH', 'DELETE']
+		}
+	}
+};
+```
+
+```html
+<form method="post" action="/todos/{id}?_method=PUT">
+	<!-- form elements -->
+</form>
+```
+
+> Использование собственного поведения `<form>` гарантирует, что ваше приложение продолжит работать при сбое или отключении JavaScript.
+
 ### Приватные модули 
 
 Пути файлов, в которых есть часть начинающаяся с символа нижнего подчёркивания, такие как `src/routes/foo/_Private.svelte` или `src/routes/bar/_utils/cool-util.js`, будут спрятаны от роутера, но могут быть импортированы в другие файлы, которые ему видны.
