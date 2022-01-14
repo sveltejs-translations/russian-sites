@@ -71,7 +71,7 @@ import { getStores, navigating, page, session } from '$app/stores';
 Хранилища сами определяют нужный контекст, когда выполняется подписка на них, что означает, что вы можете импортировать и использовать их непосредственно в компонентах без шаблона. Тем не менее, его все еще нужно вызывать синхронно при инициализации компонента или страницы, когда `$`—префикс не используется. Вместо этого используйте `getStores`, чтобы безопасно `.subscribe` асинхронно.
 
 - `navigating` - это [хранилище](https://svelte.dev/tutorial/readable-stores). При запуске навигации его значением является `{ from, to }`, где `from` и `to` являются экземплярами [`URL`](https://developer.mozilla.org/en-US/docs/Web/API/URL). Когда навигация заканчивается, ее значение возвращается к `null`.
-- `page` содержит объект с текущими [`url`](https://developer.mozilla.org/en-US/docs/Web/API/URL), [`params`](#loading-input-params) и [`stuff`](#loading-output-stuff).
+- `page` содержит объект с текущими [`url`](https://developer.mozilla.org/en-US/docs/Web/API/URL), [`params`](#zagruzka-dannyh-poluchaemye-znacheniya-params) и [`stuff`](#zagruzka-dannyh-vozvrashhaemye-znacheniya-stuff).
 - `session` – хранилище, начальное значение которого получается из функции [`getSession`](#huki-getsession). Значение в хранилище можно изменять, но эти изменения не будут сохранены на сервере – при необходимости это нужно имплементировать самостоятельно.
 
 
