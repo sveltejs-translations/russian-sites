@@ -87,7 +87,7 @@ export async function handle({ request, render }) {
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ request, resolve }) {
  	const response = await resolve(request, {
- 		ssr: !request.path.startsWith('/admin')
+ 		ssr: !request.url.pathname.startsWith('/admin')
  	});
 
  	return response;

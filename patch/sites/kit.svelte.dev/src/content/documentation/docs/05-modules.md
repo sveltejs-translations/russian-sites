@@ -21,9 +21,19 @@ import { amp, browser, dev, mode, prerendering } from '$app/env';
 ### $app/navigation
 
 ```js
-import { disableScrollHandling, goto, invalidate, prefetch, prefetchRoutes } from '$app/navigation';
+import {
+ 	disableScrollHandling,
+ 	goto,
+ 	invalidate,
+ 	prefetch,
+ 	prefetchRoutes,
+ 	beforeNavigate,
+ 	afterNavigate
+ } from '$app/navigation';
 ```
 
+- `afterNavigate(({ from, to }: { from: URL, to: URL }) => void)` - функция жизненного цикла, которая запускается при монтаже компонентов и после последующей навигации, пока компонент остается смонтированным
+- `beforeNavigate(({ from, to, cancel }: { from: URL, to: URL | null, cancel: () => void }) => void)` — функция, которая запускается всякий раз, когда запускается навигация, будь то при нажатии на ссылку, вызове `goto` или с помощью кнопок истории браузера. Это включает в себя навигацию по внешним сайтам. `to` будет `null`, если пользователь закрывает страницу. Вызов `cancel` предотвратит продолжение навигации
 - `disableScrollHandling`, если он вызывается при обновлении страницы после навигации (например, в `onMount` или действии), то запретит SvelteKit применять обычное управление прокруткой. Лучше избегать этого, чтобы не дезориентировать пользователей в поведении прокрутки.
 - `goto(href, { replaceState, noscroll, keepfocus, state })` возвращает `Promise`, который резолвится при навигации SvelteKit к указанному `href` (ошибка в навигации отклоняет промис). Второй аргумент является необязательным:
     - `replaceState` (boolean, по умолчанию `false`) Если `true`, заменит текущую запись `history`, а не создадет новую на `pushState`
