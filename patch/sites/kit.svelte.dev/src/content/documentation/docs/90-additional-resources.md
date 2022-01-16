@@ -14,8 +14,7 @@ title: Дополнительные ресурсы
 
  - [Папка с примерами](https://github.com/sveltejs/kit/tree/master/examples) на GitHub включая клон HackerNews
  - [`sveltejs/realworld`](https://github.com/sveltejs/realworld) пример блога
- - [`sveltejs/sites`](https://github.com/sveltejs/sites) код этого сайта
- - [Каталог сайта в репозитории `sveltejs/svelte`](https://github.com/sveltejs/svelte/tree/master/site) содержит код для svelte.dev
+ - [`sveltejs/sites`](https://github.com/sveltejs/sites) содержит код для этого сайта и [svelte.dev](https//svelte.dev/)
 
 
 ### Интеграция
