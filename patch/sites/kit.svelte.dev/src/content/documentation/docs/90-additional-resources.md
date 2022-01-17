@@ -16,6 +16,7 @@ title: Дополнительные ресурсы
  - [`sveltejs/realworld`](https://github.com/sveltejs/realworld) пример блога
  - [`sveltejs/sites`](https://github.com/sveltejs/sites) содержит код для этого сайта и [svelte.dev](https//svelte.dev/)
 
+Пользователи SvelteKit также опубликовали множество примеров на GitHub по темам [#sveltekit](https://github.com/topics/sveltekit) и [#sveltekit-template](https://github.com/topics/sveltekit-template), а также на сайте [Svelte Society](https://sveltesociety.dev/templates#svelte-kit). Обратите внимание, что они не были проверены сопровождающими и могут быть устаревшими.
 
 ### Интеграция
 
