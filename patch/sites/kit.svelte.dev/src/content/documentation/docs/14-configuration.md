@@ -135,7 +135,7 @@ export default {
 
 ### host
 
-Значение, которое переопределяет значение, производное от [`config.kit.headers.host`](#konfiguracziya-headers-host).
+Значение, которое переопределяет значение, производное от [`config.kit.headers.host`](#konfiguracziya-headers).
 
 ### hydrate
 
@@ -227,7 +227,7 @@ export default {
 
 ### protocol
 
-Предполагается, что протоколом является `'https'` (если вы не разрабатываете локально без флага `--https`), если не установлен [`config.kit.headers.protocol`](#konfiguracziya-headers-protocol). При необходимости вы можете переопределить его здесь.
+Предполагается, что протоколом является `'https'` (если вы не разрабатываете локально без флага `--https`), если не установлен [`config.kit.headers.protocol`](#konfiguracziya-headers). При необходимости вы можете переопределить его здесь.
 
 ### router
 
