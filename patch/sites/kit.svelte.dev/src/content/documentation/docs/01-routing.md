@@ -57,28 +57,19 @@ title: Маршруты
 // type of string[] is only for set-cookie
 // everything else must be a type of string
 type ResponseHeaders = Record<string, string | string[]>;
-type RequestHeaders = Record<string, string>;
 
-export type RawBody = null | Uint8Array;
-
-type ParameterizedBody<Body = unknown> = Body extends FormData
- 	? ReadOnlyFormData
- 	: (string | RawBody | ReadOnlyFormData) & Body;
-
- export interface Request<Locals = Record<string, any>, Body = unknown> {
+export interface RequestEvent<Locals = Record<string, any>> {
+ 	request: Request;
  	url: URL;
- 	method: string;
- 	headers: RequestHeaders;
- 	rawBody: RawBody;
  	params: Record<string, string>;
- 	body: ParameterizedBody<Body>;
  	locals: Locals;
 }
 
-type DefaultBody = JSONResponse | Uint8Array;
-export interface EndpointOutput<Body extends DefaultBody = DefaultBody> {
+type Body = JSONResponse | Uint8Array | string | ReadableStream | stream.Readable;
+
+ export interface EndpointOutput {
 	status?: number;
-	headers?: ResponseHeaders;
+	headers?: HeadersInit;
 	body?: Body;
 };
 
@@ -106,9 +97,7 @@ import db from '$lib/database';
 export async function get({ params }) {
 	// у нас есть доступ к параметру `slug`, потому что
 	// файл называется [slug].json.js
-	const { slug } = params;
-
-	const article = await db.get(slug);
+	const article = await db.get(params.slug);
 
 	if (article) {
 		return {
@@ -117,6 +106,10 @@ export async function get({ params }) {
 			}
 		};
 	} 
+
+	return {
+ 		status: 404
+ 	};
 }
 ```
 <!-- > Если из функции ничего не возвращается, это вызовет ответ с кодом ошибки 404. -->
@@ -155,12 +148,13 @@ return {
 
 #### Body парсинг
 
-Свойство `body` объекта request будет предоставлено в случае POST-запросов:
+Объект `request` является экземпляром стандартного класса [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request). Таким образом, получить доступ к телу запроса легко:
 
-- Текстовые данные (с типом содержимого `text/plain`) будут разобраны в `string`
-- Данные JSON (с типом содержимого `application/json`) будут разобраны до `JSONValue` (`object`, `Array` или примитив).
-- Данные формы (с типом содержимого `application/x-www-form-urlencoded` или `multipart/form-data`) будут разобраны только для чтения версии объекта [`FormData`](https://developer.mozilla.org/en-US/docs/Web/API/FormData).
-- Все остальные данные будут предоставлены в виде `Uint8Array`
+```js
+export async function post({ request }) {
+	const data = await request.formData(); // or .json(), or .text(), etc
+}
+ ```
 
 #### HTTP методы
 

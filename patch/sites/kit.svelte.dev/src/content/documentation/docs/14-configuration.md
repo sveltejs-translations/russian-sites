@@ -26,11 +26,6 @@ const config = {
 			template: 'src/app.html'
 		},
 		floc: false,
-		headers: {
- 			host: null,
- 			protocol: null
- 		},
-		host: null,
 		hydrate: true,
 		inlineStyleThreshold: 0,
 		methodOverride: {
@@ -55,7 +50,6 @@ const config = {
 			entries: ['*'],
  			onError: 'fail'
 		},
-		protocol: null,
 		router: true,
 		serviceWorker: {
 			register: true,
@@ -112,30 +106,6 @@ Permissions-Policy: Interest-cohort = ()
 
 > Это может применяться только при серверном рендеринге — заголовки для предварительно отрисованных страниц (например, созданных с помощью [adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static)) определяются платформой хостинга.
 
-
-### headers
-
-В некоторых средах `url` текущей страницы или конечной точки происходит из протокола запроса (обычно `https`) и хоста, который по умолчанию берется из заголовка `Host`.
-
-Если ваше приложение находится за обратным прокси-сервером (например, используются балансировщики нагрузки или CDN), то заголовок `Host`не будет верным. В большинстве случаев базовый протокол и хост доступны через заголовки [`X-Forwarded-Host`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Host) и [`X-Forwarded-Proto`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-Proto), которые можно указать в конфигурации:
-
-```js
-// svelte.config.js
-export default {
-	kit: {
-		headers: {
- 			host: 'X-Forwarded-Host',
- 			protocol: 'X-Forwarded-Proto'
- 		}
-	}
-};
-```
-
-**Это следует делать только в том случае, если вы доверяете обратному прокси-серверу,** – вот почему этот параметр не указан по умолчанию.
-
-### host
-
-Значение, которое переопределяет значение, производное от [`config.kit.headers.host`](#konfiguracziya-headers).
 
 ### hydrate
 
@@ -225,10 +195,6 @@ export default {
      };
      ```
 
-### protocol
-
-Предполагается, что протоколом является `'https'` (если вы не разрабатываете локально без флага `--https`), если не установлен [`config.kit.headers.protocol`](#konfiguracziya-headers). При необходимости вы можете переопределить его здесь.
-
 ### router
 
 Включает или отключает клиентский [роутер](#parametry-straniczy-router) в приложении.
@@ -238,6 +204,7 @@ export default {
 
 Объект, содержащий ноль или более из следующих значений:
 
+- `register` - если установлено значение `false`, отключит автоматическую регистрацию сервис-воркера
 - `files` - функция типа `(filepath: string) => boolean`. Когда возвращает `true`, включенные файлы будут доступны в `$service-worker.files`, или исключены если `false`.
 
 ### target

@@ -94,7 +94,7 @@ export default function (options) {
 - Вывести код, который:
   - Импортирует `App` из `${builder.getServerDirectory()}/app.js`
   - Создаст экземпляр приложения манифестом, сгенерированный с помощью `builder.generateManifest({ relativePath })`
-  - Преобразует запросы платформы в [SvelteKit request](#huki-handle), вызовет `render` и преобразует ответ [SvelteKit response](#huki-handle) для платформы
+  - Прослушивает запросы от платформы, преобразует их в стандартный [Request](https://developer.mozilla.org/en-US/docs/Web/API/Request) при необходимости вызывает функцию `render` для создания [Response](https://developer.mozilla.org/en-US/
   - Глобально настроит `fetch` для работы на целевой платформе. SvelteKit предоставляет хелпер `@sveltejs/kit/install-fetch` для платформ, которые могут использовать `node-fetch`
 - Объединит выходные данные, чтобы избежать необходимости устанавливать зависимости на целевой платформе, если необходимо
 - Поместит статические файлы пользователя и сгенерированные JS/CSS в правильное место для целевой платформы

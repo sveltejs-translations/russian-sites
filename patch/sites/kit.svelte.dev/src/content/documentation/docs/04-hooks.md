@@ -8,11 +8,11 @@ title: Хуки
 
 ### handle
 
-Эта функция запускается каждый раз, когда SvelteKit получает запрос - независимо от того, происходит ли это во время работы приложения или во время [пререндеринга](#parametry-straniczy-prerender) - и определяет ответ. Он получает объект `request` и функцию с именем `resolve`, которая вызывает маршрутизатор SvelteKit и генерирует ответ (отображение страницы или вызов эндпоинта) соответственно. Это позволяет изменять заголовки или тела ответов или полностью обойти SvelteKit (например, для программной реализации эндпоинтов).
+Эта функция запускается каждый раз, когда SvelteKit получает запрос - происходит ли это во время работы приложения или во время [prerendering](#parametry-straniczy-prerender) - и определяет ответ. Он получает объект `event`, представляющий запрос, и функцию `resolve`, которая вызывает маршрутизатор SvelteKit и генерирует ответ (рендеринг страницы или вызов конечной точки) соответственно. Это позволяет изменять заголовки или тела ответов или полностью обойти SvelteKit (например, для программной реализации конечных точек).
 
 > Запросы на статические активы, которые включают страницы, которые уже были предварительно отрендерены, _не_ обрабатываются SvelteKit.
 
-Если функция не задана будет использоваться её вариант по умолчанию `({ request, resolve }) => resolve(request)`.
+Если функция не задана будет использоваться её вариант по умолчанию `({ event, resolve }) => resolve(event)`.
 
 ```ts
 // Declaration types for Hooks
@@ -21,41 +21,22 @@ title: Хуки
 // type of string[] is only for set-cookie
 // everything else must be a type of string
 type ResponseHeaders = Record<string, string | string[]>;
-type RequestHeaders = Record<string, string>;
 
-export type RawBody = null | Uint8Array;
-
-type ParameterizedBody<Body = unknown> = Body extends FormData
- 	? ReadOnlyFormData
- 	: (string | RawBody | ReadOnlyFormData) & Body;
-
-export interface Request<Locals = Record<string, any>, Body = unknown> {
+export interface RequestEvent<Locals = Record<string, any>> {
+	request: Request;
  	url: URL;
- 	method: string;
- 	headers: RequestHeaders;
- 	rawBody: RawBody;
 	params: Record<string, string>;
-	body: ParameterizedBody<Body>;
 	locals: Locals;
-}
-
-type StrictBody = string | Uint8Array;
-
-export interface Response {
-	status: number;
-	headers: ResponseHeaders;
- 	body?: StrictBody;
 }
 
 export interface ResolveOpts {
  	ssr?: boolean;
 }
 
-export interface Handle<Locals = Record<string, any>, Body = unknown> {
- 	(input: {
- 		request: ServerRequest<Locals, Body>;
- 		resolve(request: ServerRequest<Locals, Body>, opts?: ResolveOpts): MaybePromise<ServerResponse>;
- 	}): MaybePromise<ServerResponse>;
+export interface Handle<Locals = Record<string, any>> {
+ 	event: RequestEvent<Locals>;
+ 		resolve(event: RequestEvent<Locals>, opts?: ResolveOpts): MaybePromise<Response>;
+ 	}): MaybePromise<Response>;
 }
 ```
 Чтобы передать какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объекту `request` поле `locals`, как показано ниже:
@@ -66,14 +47,9 @@ export async function handle({ request, render }) {
 	request.locals.user = await getUserInformation(request.headers.cookie);
 
 	const response = await resolve(request);
+	response.headers.set('x-custom-header', 'potato');
 
-	return {
-		...response,
-		headers: {
-			...response.headers,
-			'x-custom-header': 'potato'
-		}
-	};
+	return response;
 }
 ```
 
@@ -106,17 +82,16 @@ export async function handle({ request, resolve }) {
 
 ```ts
 // Declaration types for handleError hook
-
-export interface HandleError<Locals = Record<string, any>, Body = unknown> {
-	(input: { error: Error & { frame?: string }; request: Request<Locals, Body> }): void;
+export interface HandleError<Locals = Record<string, any>> {
+	(input: { error: Error & { frame?: string }; event: RequestEvent<Locals> }): void;
 }
 ```
 
 ```js
 /** @type {import('@sveltejs/kit').HandleError} */
-export async function handleError({ error, request }) {
+export async function handleError({ error, event }) {
 	// example integration with https://sentry.io/
-	Sentry.captureException(error, { request });
+	Sentry.captureException(error, { event });
 }
 ```
 
@@ -125,30 +100,29 @@ export async function handleError({ error, request }) {
 
 ### getSession
 
-Эта функция принимает объект `request` и возвращает объект `session`, который [доступен на клиенте](#moduli-$app-stores) и, следовательно, должен быть безопасным для предоставления пользователям. Он запускается всякий раз, когда SvelteKit выполняет рендеринг страницы на сервере.
+Эта функция принимает объект `event` и возвращает объект `session`, который [доступен на клиенте](#moduli-$app-stores) и, следовательно, должен быть безопасным для предоставления пользователям. Он запускается всякий раз, когда SvelteKit выполняет рендеринг страницы на сервере.
 
 Если функция не задана, объект сессии будет равен `{}`.
 
 ```ts
 // Declaration types for getSession hook
-
-export interface GetSession<Locals = Record<string, any>, Body = unknown, Session = any> {
- 	(request: Request<Locals, Body>): Session | Promise<Session>;
+export interface GetSession<Locals = Record<string, any>, Session = any> {
+ 	(event: RequestEvent<Locals>): Session | Promise<Session>;
 }
 ```
 
 ```js
 /** @type {import('@sveltejs/kit').GetSession} */
-export function getSession(request) {
-	return request.locals.user
+export function getSession(event) {
+ 	return event.locals.user
  		? {
 			user: {
 				// only include properties needed client-side —
 				// exclude anything else attached to the user
 				// like access tokens etc
-				name: request.locals.user.name,
-				email: request.locals.user.email,
-				avatar: request.locals.user.avatar
+				name: event.locals.user.name,
+				email: event.locals.user.email,
+				avatar: event.locals.user.avatar
 			}
  		  }
  		: {};
