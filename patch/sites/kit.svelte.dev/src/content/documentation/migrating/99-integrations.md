@@ -9,10 +9,10 @@ title: Интеграции
 Sapper по умолчанию включает `html-minifier`. SvelteKit не включает это, но его можно добавить как [хук](/docs#huki-handle):
 
 ```js
- import { minify } from 'html-minifier';
- import { prerendering } from '$app/env';
+import { minify } from 'html-minifier';
+import { prerendering } from '$app/env';
 
- const minification_options = {
+const minification_options = {
  	collapseBooleanAttributes: true,
  	collapseWhitespace: true,
  	conservativeCollapse: true,
@@ -29,17 +29,17 @@ Sapper по умолчанию включает `html-minifier`. SvelteKit не 
  	removeStyleLinkTypeAttributes: true,
  	sortAttributes: true,
  	sortClassName: true
- };
+};
 
- export async function handle({ request, resolve }) {
-   const response = await resolve(request);
+export async function handle({ event, resolve }) {
+   const response = await resolve(event);
 
    if (prerendering && response.headers['content-type'] === 'text/html') {
      response.body = minify(response.body, minification_options);
    }
 
    return response;
- }
- ```
+}
+```
 
- Обратите внимание, что `prerendering` имеет значение `false` при использовании `svelte-kit preview` для тестирования продакшн сборки сайта, поэтому для проверки результатов минификации необходимо напрямую проверить созданные файлы HTML.
+Обратите внимание, что `prerendering` имеет значение `false` при использовании `svelte-kit preview` для тестирования продакшн сборки сайта, поэтому для проверки результатов минификации необходимо напрямую проверить созданные файлы HTML.

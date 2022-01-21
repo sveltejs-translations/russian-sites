@@ -12,9 +12,8 @@ title: Дополнительные ресурсы
 
 Мы написали и опубликовали несколько различных сайтов на Sveltekit в качестве примеров:
 
- - [Папка с примерами](https://github.com/sveltejs/kit/tree/master/examples) на GitHub включая клон HackerNews
- - [`sveltejs/realworld`](https://github.com/sveltejs/realworld) пример блога
- - [`sveltejs/sites`](https://github.com/sveltejs/sites) содержит код для этого сайта и [svelte.dev](https//svelte.dev/)
+- [`sveltejs/realworld`](https://github.com/sveltejs/realworld) пример блога
+- [`sveltejs/sites`](https://github.com/sveltejs/sites) содержит [код этого сайта](https://github.com/sveltejs/sites/tree/master/sites/kit.svelte.dev), для [svelte.dev](https://github.com/sveltejs/sites/tree/master/sites/svelte.dev), и для [HackerNews clone](https://github.com/sveltejs/sites/tree/master/sites/hn.svelte.dev)
 
 Пользователи SvelteKit также опубликовали множество примеров на GitHub по темам [#sveltekit](https://github.com/topics/sveltekit) и [#sveltekit-template](https://github.com/topics/sveltekit-template), а также на сайте [Svelte Society](https://sveltesociety.dev/templates#svelte-kit). Обратите внимание, что они не были проверены сопровождающими и могут быть устаревшими.
 

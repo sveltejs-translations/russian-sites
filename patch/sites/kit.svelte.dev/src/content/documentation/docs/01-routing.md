@@ -54,10 +54,6 @@ title: Маршруты
 // Declaration types for Endpoints
 // * declarations that are not exported are for internal use
 
-// type of string[] is only for set-cookie
-// everything else must be a type of string
-type ResponseHeaders = Record<string, string | string[]>;
-
 export interface RequestEvent<Locals = Record<string, any>> {
  	request: Request;
  	url: URL;
@@ -65,7 +61,7 @@ export interface RequestEvent<Locals = Record<string, any>> {
  	locals: Locals;
 }
 
-type Body = JSONResponse | Uint8Array | string | ReadableStream | stream.Readable;
+type Body = JSONString | Uint8Array | ReadableStream | stream.Readable;
 
  export interface EndpointOutput {
 	status?: number;
@@ -73,19 +69,13 @@ type Body = JSONResponse | Uint8Array | string | ReadableStream | stream.Readabl
 	body?: Body;
 };
 
-export type MaybePromise<T> = T | Promise<T>;
-
-export interface Fallthrough {
-	fallthrough?: true;
+type MaybePromise<T> = T | Promise<T>;
+interface Fallthrough {
+ 	fallthrough: true;
 }
 
-
-export interface RequestHandler<
- 	Locals = Record<string, any>,
- 	Input = unknown,
- 	Output extends DefaultBody = DefaultBody
-> {
- 	(request: Request<Locals, Input>): MaybePromise<Fallthrough | EndpointOutput<Output>>;
+export interface RequestHandler<Locals = Record<string, any>> {
+ 	(event: RequestEvent<Locals>): MaybePromise<Either<Response | EndpointOutput, Fallthrough>>;
 }
 ```
 Например, наша гипотетическая страница блога `/blog/cool-article`, может запрашивать данные из `/blog/cool-article.json`, который может быть представлен эндпоинтом `src/routes/blog/[slug].json.js`:
@@ -129,7 +119,7 @@ export async function get({ params }) {
 Для эндпоинтов, которые должны обрабатывать иные HTTP методы, например POST, экспортируйте соответствующую функцию:
 
 ```js
-export function post(request) {...}
+export function post(event) {...}
 ```
 
 Поскольку `delete` является зарезервированным словом JavaScript, запросы методом DELETE обрабатываются функцией с именем `del`.

@@ -7,10 +7,6 @@ title: Загрузка данных
 ```ts
 // load TypeScript type definitions
 
-export interface Fallthrough {
- 	fallthrough?: true;
-}
-
 export interface LoadInput<
  	PageParams extends Record<string, string> = Record<string, string>,
  	Stuff extends Record<string, any> = Record<string, any>,
@@ -33,7 +29,42 @@ export interface LoadOutput<
 	props?: Props;
  	stuff?: Stuff;
 	maxage?: number;
-} | Fallthrough
+}
+
+interface LoadInputExtends {
+	stuff?: Record<string, any>;
+	pageParams?: Record<string, string>;
+	session?: any;
+}
+interface LoadOutputExtends {
+	stuff?: Record<string, any>;
+	props?: Record<string, any>;
+}
+
+type MaybePromise<T> = T | Promise<T>;
+interface Fallthrough {
+	fallthrough: true;
+}
+export interface Load<
+	Input extends LoadInputExtends = Required<LoadInputExtends>,
+	Output extends LoadOutputExtends = Required<LoadOutputExtends>
+> {
+(
+	input: LoadInput<
+		InferValue<Input, 'pageParams', Record<string, string>>,
+		InferValue<Input, 'stuff', Record<string, any>>,
+		InferValue<Input, 'session', any>
+	>
+): MaybePromise<
+	Either<
+		Fallthrough,
+		LoadOutput<
+			InferValue<Output, 'props', Record<string, any>>,
+			InferValue<Output, 'stuff', Record<string, any>>
+		>
+	>
+>;
+}
 ```
 Наш пример страницы блога может содержать функцию `load`, как показано ниже:
 
@@ -138,6 +169,8 @@ SvelteKit `load` получает реализацию `fetch`, которая �
 #### redirect
 
 Если страница должна перенаправить пользователя на другую страницу (например, эта страница устарела, или пользователь должен сначала авторизоваться или ещё что-то), поместите в это свойство строку, содержащую путь по которому нужно переместить пользователя. Не забудьте указать код ответа в свойстве `status` равным числу в диапазоне `3xx`.
+
+Строка `redirect` должна быть [правильно закодированным URI](https://developer.mozilla.org/en-US/docs/Glossary/percent-encoding). Допустимы как абсолютные, так и относительные URI.
 
 #### maxage
 

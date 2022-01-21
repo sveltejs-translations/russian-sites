@@ -39,14 +39,14 @@ export interface Handle<Locals = Record<string, any>> {
  	}): MaybePromise<Response>;
 }
 ```
-Чтобы передать какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объекту `request` поле `locals`, как показано ниже:
+Чтобы передать какие-либо дополнительные данные, которые нужно иметь в эндпоинтах, добавьте объект `event.locals`, как показано ниже:
 
 ```js
 /** @type {import('@sveltejs/kit').Handle} */
-export async function handle({ request, render }) {
-	request.locals.user = await getUserInformation(request.headers.cookie);
+export async function handle({ event, resolve }) {
+ 	event.locals.user = await getUserInformation(event.request.headers.get('cookie'));
 
-	const response = await resolve(request);
+	const response = await resolve(event);
 	response.headers.set('x-custom-header', 'potato');
 
 	return response;
