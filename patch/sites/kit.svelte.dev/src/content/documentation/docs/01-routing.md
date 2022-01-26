@@ -63,10 +63,10 @@ export interface RequestEvent<Locals = Record<string, any>> {
 
 type Body = JSONString | Uint8Array | ReadableStream | stream.Readable;
 
- export interface EndpointOutput {
+ export interface EndpointOutput<Output extends Body = Body> {
 	status?: number;
-	headers?: HeadersInit;
-	body?: Body;
+	headers?: Headers | Partial<ResponseHeaders>;
+ 	body?: Output;
 };
 
 type MaybePromise<T> = T | Promise<T>;
@@ -74,8 +74,11 @@ interface Fallthrough {
  	fallthrough: true;
 }
 
-export interface RequestHandler<Locals = Record<string, any>> {
- 	(event: RequestEvent<Locals>): MaybePromise<Either<Response | EndpointOutput, Fallthrough>>;
+
+export interface RequestHandler<Locals = Record<string, any>, Output extends Body = Body> {
+ 	(event: RequestEvent<Locals>): MaybePromise<
+ 		Either<Response | EndpointOutput<Output>, Fallthrough>
+ 	>;
 }
 ```
 Например, наша гипотетическая страница блога `/blog/cool-article`, может запрашивать данные из `/blog/cool-article.json`, который может быть представлен эндпоинтом `src/routes/blog/[slug].json.js`:
