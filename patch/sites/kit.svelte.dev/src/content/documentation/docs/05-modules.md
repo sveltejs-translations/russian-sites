@@ -101,13 +101,23 @@ import { build, files, timestamp } from '$service-worker';
 import { sequence } from '@sveltejs/kit/hooks';
 
 async function first({ event, resolve }) {
-   console.log('first');
-   return await resolve(event);
+   console.log('first pre-processing');
+ 	const result = await resolve(event);
+ 	console.log('first post-processing');
+ 	return result;
 }
 async function second({ event, resolve }) {
-   console.log('second');
-   return await resolve(event);
+   console.log('second pre-processing');
+ 	const result = await resolve(event);
+ 	console.log('second post-processing');
+ 	return result;
 }
 
 export const handle = sequence(first, second);
 ```
+
+Пример выше распечатает:
+>first pre-processing
+>second pre-processing
+>second post-processing
+>first post-processing

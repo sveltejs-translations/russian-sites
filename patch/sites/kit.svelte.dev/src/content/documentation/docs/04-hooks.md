@@ -22,20 +22,21 @@ title: Хуки
 // everything else must be a type of string
 type ResponseHeaders = Record<string, string | string[]>;
 
-export interface RequestEvent<Locals = Record<string, any>> {
+export interface RequestEvent<Locals = Record<string, any>, Platform = Record<string, any>> {
 	request: Request;
  	url: URL;
 	params: Record<string, string>;
 	locals: Locals;
+	platform: Platform;
 }
 
 export interface ResolveOpts {
  	ssr?: boolean;
 }
 
-export interface Handle<Locals = Record<string, any>> {
- 	event: RequestEvent<Locals>;
- 		resolve(event: RequestEvent<Locals>, opts?: ResolveOpts): MaybePromise<Response>;
+export interface Handle<Locals = Record<string, any>, Platform = Record<string, any>> {
+ 	event: RequestEvent<Locals, Platform>;
+ 		resolve(event: RequestEvent<Locals, Platform>, opts?: ResolveOpts): MaybePromise<Response>;
  	}): MaybePromise<Response>;
 }
 ```
@@ -82,8 +83,8 @@ export async function handle({ event, resolve }) {
 
 ```ts
 // Declaration types for handleError hook
-export interface HandleError<Locals = Record<string, any>> {
-	(input: { error: Error & { frame?: string }; event: RequestEvent<Locals> }): void;
+export interface HandleError<Locals = Record<string, any>, Platform = Record<string, any>> {
+	(input: { error: Error & { frame?: string }; event: RequestEvent<Locals, Platform> }): void;
 }
 ```
 
@@ -106,8 +107,12 @@ export async function handleError({ error, event }) {
 
 ```ts
 // Declaration types for getSession hook
-export interface GetSession<Locals = Record<string, any>, Session = any> {
- 	(event: RequestEvent<Locals>): Session | Promise<Session>;
+export interface GetSession<
+ 	Locals = Record<string, any>,
+ 	Platform = Record<string, any>,
+ 	Session = any
+ > {
+ 	(event: RequestEvent<Locals, Platform>): MaybePromise<Session>;
 }
 ```
 
