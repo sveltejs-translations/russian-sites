@@ -54,10 +54,12 @@ const config = {
 			concurrency: 1,
 			crawl: true,
 			enabled: true,
+			subfolders: true,
 			entries: ['*'],
  			onError: 'fail'
 		},
 		router: true,
+		routes: (filepath) => !/(?:(?:^_|\/_)|(?:^\.|\/\.)(?!well-known))/.test(filepath),
 		serviceWorker: {
 			register: true,
  			files: (filepath) => !/\.DS_STORE/.test(filepath)
@@ -198,6 +200,7 @@ Permissions-Policy: Interest-cohort = ()
 - `crawl` — определяет, должен ли SvelteKit находить страницы для предварительной отрисовки, переходя по ссылкам с исходных страниц
 - `enabled` — установите в `false`, чтобы полностью отключить пререндер
 - `entries` — массив страниц для предварительной отрисовки или начала сканирования (при `crawl: true`). Строка `*` включает все нединамические маршруты (т.е. страницы без `[parameters]`)
+- `subfolders` - установите значение `false`, чтобы отключить вложенные папки для маршрутов: вместо `about/index.html` отрисовать `about.html`
 - `onError`
 
    - `'fail'` — (по умолчанию) прерывает сборку при обнаружении ошибки маршрутизации при переходе по ссылке
@@ -229,6 +232,9 @@ Permissions-Policy: Interest-cohort = ()
 
 Включает или отключает клиентский [роутер](#parametry-straniczy-router) в приложении.
 
+### routes
+
+Функция `(filepath: string) => boolean`, которая определяет, какие файлы создают маршруты, а какие рассматриваются как [частные модули](#routing-private-modules).
 
 ### serviceWorker
 
