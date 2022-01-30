@@ -17,6 +17,10 @@ const config = {
 		adapter: null,
 		amp: false,
 		appDir: '_app',
+		browser: {
+ 			hydrate: true,
+ 			router: true
+ 		},
 		csp: {
  			mode: 'auto',
  			directives: {
@@ -33,7 +37,6 @@ const config = {
 			template: 'src/app.html'
 		},
 		floc: false,
-		hydrate: true,
 		inlineStyleThreshold: 0,
 		methodOverride: {
  			parameter: '_method',
@@ -53,12 +56,11 @@ const config = {
 		prerender: {
 			concurrency: 1,
 			crawl: true,
+			createIndexFiles: true,
 			enabled: true,
-			subfolders: true,
 			entries: ['*'],
  			onError: 'fail'
 		},
-		router: true,
 		routes: (filepath) => !/(?:(?:^_|\/_)|(?:^\.|\/\.)(?!well-known))/.test(filepath),
 		serviceWorker: {
 			register: true,
@@ -90,6 +92,12 @@ export default config;
 ### appDir
 
 Директория относительно `paths.assets` в которой будут находиться скомпилированные JS/CSS файлы и импортированные статические ресурсы. Имена файлов в этой директории будут содержать хеши на основе их содержимого, то есть эти файлы можно кэшировать на неопределённый срок. Не должно начинаться или заканчиваться на `/`.
+
+### browser
+
+Объект, содержащий ноль или более из следующих значений `boolean`:
+- `hydrate` — следует ли [гидратировать](#page-options-hydrate) серверный HTML с помощью клиентского приложения. (Устанавливайте этот параметр в `false` только в исключительных случаях).
+- `router` - включает или отключает клиентский [роутер](#page-options-router) по всему приложению.
 
 ### csp
 
@@ -137,11 +145,6 @@ Permissions-Policy: Interest-cohort = ()
 ```
 
 > Это может применяться только при серверном рендеринге — заголовки для предварительно отрисованных страниц (например, созданных с помощью [adapter-static](https://github.com/sveltejs/kit/tree/master/packages/adapter-static)) определяются платформой хостинга.
-
-
-### hydrate
-
-Указывает, нужно ли гидрировать [гидрировать](#parametry-straniczy-hydrate) полученный с сервера HTML клиентской частью приложения. Устанавливайте этот параметр в `false` только в исключительных случаях.
 
 ### inlineStyleThreshold
 
@@ -198,9 +201,9 @@ Permissions-Policy: Interest-cohort = ()
 
 - `concurrency` - сколько страниц может быть предварительно отрендерено одновременно. JS однопоточный, но в случаях, когда производительность предварительного рендеринга привязана к сети (например, загрузка контента с удаленной CMS), это может ускорить процесс, обрабатывая другие задачи во время ожидания ответа сети.
 - `crawl` — определяет, должен ли SvelteKit находить страницы для предварительной отрисовки, переходя по ссылкам с исходных страниц
+- `createIndexFiles` - если `false`, отрисует `about.html` вместо `about/index.html`
 - `enabled` — установите в `false`, чтобы полностью отключить пререндер
 - `entries` — массив страниц для предварительной отрисовки или начала сканирования (при `crawl: true`). Строка `*` включает все нединамические маршруты (т.е. страницы без `[parameters]`)
-- `subfolders` - установите значение `false`, чтобы отключить вложенные папки для маршрутов: вместо `about/index.html` отрисовать `about.html`
 - `onError`
 
    - `'fail'` — (по умолчанию) прерывает сборку при обнаружении ошибки маршрутизации при переходе по ссылке
@@ -227,10 +230,6 @@ Permissions-Policy: Interest-cohort = ()
      	}
      };
      ```
-
-### router
-
-Включает или отключает клиентский [роутер](#parametry-straniczy-router) в приложении.
 
 ### routes
 
