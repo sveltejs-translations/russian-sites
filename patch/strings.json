@@ -1,27 +1,410 @@
 {
-   "sites/kit.svelte.dev/src/_env.ts":{
-        "process.env.API_BASE":
-        "'./api'"
+    "sites/svelte.dev/svelte.config.js":{
+        "http://localhost:8787":
+        "http://localhost:3030/ru",
+
+        "https://api.svelte.dev":
+        "https://api.svelte.cf/ru"
     },
-    "sites/kit.svelte.dev/src/lib/generate_docs.js":{
-        "[^a-z0-9-]":
-        "[^a-zа-я0-9-]"
+
+
+    "sites/svelte.dev/src/routes/index.svelte":{
+
+        "Cybernetically enhanced web apps":
+        "Кибернетически улучшенные Web-приложения",
+
+        "Write less code":
+        "Меньше кода",
+        
+        "Build boilerplate-free components using languages you already know — HTML, CSS and":
+        "Создавайте компоненты без излишних конструкций на языках, которые вы уже знаете — HTML, CSS и",
+
+        "No virtual DOM":
+        "Без виртуального DOM",
+
+        "Svelte compiles your code to tiny, framework-less vanilla JS — your app starts fast and":
+        "Svelte компилирует ваш код в оптимальный ванильный JS — приложения запускаются быстро и остаются быстрыми",
+
+        "stays fast":"",
+
+        "Truly reactive":
+        "Честная реактивность",
+
+        "No more complex state management libraries — Svelte brings reactivity to JavaScript itself":
+        "Больше никаких сложных библиотек управления состоянием — Svelte делает реактивным сам JavaScript",
+
+        ">learn more<":
+        ">узнать больше<",
+
+        "Svelte is a radical new approach to building user interfaces. Whereas traditional frameworks":
+        "Svelte — это принципиально новый подход к созданию пользовательских интерфейсов. Когда традиционные фреймворки,", 
+
+        "like React and Vue do the bulk of their work in the <em>browser</em>, Svelte shifts that":
+        "такие как React и Vue, выполняют основную часть своей работы в <em>браузере</em>, Svelte переносит эту",
+
+        "work into a <em>compile step</em> that happens when you build your app.":
+        "работу на <em>этап компиляции</em>, который происходит при сборке приложения.",
+
+        "Instead of using techniques like virtual DOM diffing, Svelte writes code that surgically":
+        "Вместо использования таких тяжелых приёмов, как сравнение состояний виртуального DOM, Svelte пишет код,",
+
+        "updates the DOM when the state of your app changes.":
+        "который точечно обновляет DOM при изменении состояния вашего приложения.",
+
+        "We're proud that Svelte was recently voted the":
+        "Мы гордимся тем, что Svelte был признан",
+
+        "most loved web framework":
+        "самым любимым web-фреймворком",
+
+        "with the":
+        "и",
+
+        "most satisfied developers":
+        "наиболее удовлетворившим",
+
+        "in a pair of industry surveys. We think you'll love it too.":
+        "в паре широких опросов разработчиков. Думаем, вы тоже полюбите его.",
+
+        "Read the introductory blog post":
+        "Прочтите вводную статью в блоге",
+
+        " to learn more.":
+        ", чтобы узнать больше.",
+
+        "See the":
+        "Подробности о поддержке TypeScript и остальных вещах ищите в статье",
+
+        "quickstart guide":
+        "Быстрый Старт",
+
+        "for TypeScript support":
+        ".",
+
+        "and more details.":
+        "",
+
+        "Learn Svelte":
+        "Изучить Svelte",
+
+        "Who's using Svelte?":
+        "Кто использует Svelte?",
+
+        "Tutorial":
+        "Учебник",
+
+        "Docs":
+        "Документация",
+
+        "Examples":
+        "Примеры",
+
+        "Blog":
+        "Блог"
     },
-    "sites/kit.svelte.dev/config.js":{
-        "UNICODE =  false":
-        "UNICODE =  true"
+
+    "sites/svelte.dev/src/routes/__layout.svelte":{
+
+        "Tutorial":
+        "Учебник",
+
+        "Docs":
+        "Документация",
+
+        "Examples":
+        "Примеры",
+
+        "Blog":
+        "Блог",
+
+        "https://kit.svelte.dev":
+        "https://ru.kit.svelte.dev",
+
+        "Discord Chat":
+        "Группа в Telegram",
+
+        "Discord":
+        "Telegram",
+
+        "GitHub Repo":
+        "Репозиторий на GitHub"
     },
-    "sites/kit.svelte.dev/package.json":{
-        "adapter-netlify":
-        "adapter-node"
+
+    "sites/svelte.dev/src/routes/chat.js":{
+        "https://discord.gg/yy75DKs":
+        "https://t.me/sveltejs"
     },
+
+    "sites/svelte.dev/src/routes/__error.svelte":{
+
+        "Yikes!":
+        "Бдыщ!",
+
+        "Encountered a {status} error":
+        "Произошла ошибка #{status}",
+
+        "Please try reloading the page":
+        "Попробуйте перезагрузить страницу",
+
+        "If the error persists, please drop by":
+        "Если ошибка сохраняется, сообщите об этом",
+        "https://svelte.dev/chat":
+        "https://t.me/sveltejs",
+        "Discord chatroom":
+        "Telegram-канале",
+        "and let us know, or raise an issue on":
+        "или опишите проблему в нашем репозитории на",
+        "Thanks!":
+        "Спасибо!",
+
+        "It looks like you're offline": 
+        "Похоже, что у вас нет сети",
+
+        "Reload the page once you've found the internet": 
+        "Перезагрузите страницу, как только появится связь"
+    },
+
+    "sites/svelte.dev/src/routes/_components/Hero.svelte":{
+
+        "Cybernetically enhanced web apps":
+        "Кибернетически улучшенные Web-приложения",
+
+        "The Svelte compiler packaging up your component code":
+        "Компилятор Svelte упаковывает ваши компоненты",
+
+        "Svelte logotype":
+        "Логотип Svelte",
+
+        "strong {":
+        "strong { max-width: 330px;"
+    },
+
+    "sites/svelte.dev/src/routes/_components/Demo.svelte":{
+
+        "Why Svelte?":
+        "Почему Svelte?",
+
+        "Hello World":
+        "Привет Мир",
+
+        "Svelte components are built on top of HTML. Just add data.":
+        "Компоненты Svelte построены поверх языка HTML с возможностью добавлять данные.",
+
+        "Scoped CSS":
+        "Изоляция стилей",
+
+        "CSS is component-scoped by default — no more style collisions or specificity wars. Or you can":
+        "CSS изолируется внутри компонентов — больше никаких конфликтов стилей и борьбы спецификаций. Впрочем, вы можете",
+
+        "use your favourite CSS-in-JS library":
+        "использовать свою любимую библиотеку CSS-in-JS",
+
+        "Reactivity":
+        "Реактивность",
+
+        "Trigger efficient, granular updates by assigning to local variables. The compiler does the rest.":
+        "Запускайте эффективные точечные обновления, просто присваивая новые значения переменным. Компилятор сделает всю магию.",
+
+        "Transitions":
+        "Анимации",
+
+        "Build beautiful UIs with a powerful, performant transition engine built right into the framework.":
+        "Создавайте красивые интерфейсы с помощью переходов, встроенных прямо в фреймворк.",
+
+        "more":
+        "больше",
+
+        "&nbsp;examples":
+        "&nbsp;примеров"
+    },
+
+    "sites/svelte.dev/src/routes/_components/Supporters/index.svelte":{
+
+        "Svelte is free and open source software, made possible by the work of hundreds of supporters.":
+        "Svelte - это свободное и бесплатное ПО, которое стало возможным благодаря труду и поддержке сотен людей.",
+
+        "Contributors":
+        "Контрибьютеры",
+
+        "Join us on":
+        "Присоединяйся к нам на",
+
+        "Donors":
+        "Спонсоры",
+
+        "Support us on":
+        "Поддержи нас на"
+    },
+
+    "sites/svelte.dev/src/routes/tutorial/random-number.js":{
+        "Failed to generate random number. Please try again":
+        "Не получилось сгенерировать случайное число. Попробуй снова."
+    },
+
+    "sites/svelte.dev/src/routes/tutorial/[slug]/index.svelte":{
+
+        "Svelte Tutorial":
+        "Учебник Svelte",
+
+        "Svelte tutorial":
+        "Учебник Svelte",
+
+        "'Reset' : 'Show me'":
+        "'Вернуть' : 'Покажи мне'",
+
+        "Next":
+        "Следующий урок",
+
+        "Edit this chapter":
+        "Редактировать эту главу",
+
+        "https://github.com/sveltejs/svelte/tree/master/site/content/tutorial/":
+        "https://github.com/sveltejs-translations/content-server/tree/master/docs/ru/svelte/tutorial/",
+
+        "'tutorial', 'input', 'output'":
+        "'учебник', 'код', 'результат'"
+    },
+
+    "sites/svelte.dev/src/routes/docs/index.svelte":{
+
+        "Svelte docs":
+        "Документация Svelte",
+
+        "Complete documentation for ":
+        "Полная документация по ",
+
+        "Docs":
+        "Документация",
+
+        "Documentation":
+        "Документация",
+
+        "https://github.com/sveltejs/svelte/edit/master/site/content/docs/":
+        "https://github.com/sveltejs-translations/content-server/tree/master/docs/ru/svelte/docs/"
+    },
+
+    "sites/svelte.dev/src/routes/examples/[slug]/index.svelte":{
+
+        "Svelte Examples":
+        "Примеры Svelte",
+
+        "Svelte examples":
+        "Примеры Svelte",
+
+        "Cybernetically enhanced web apps":
+        "Кибернетически улучшенные Web-приложения",
+
+        "Interactive example Svelte apps":
+        "Интерактивные примеры приложений Svelte",
+
+        "Examples":
+        "Примеры"
+       
+    },
+
+    "sites/svelte.dev/src/routes/repl/embed.svelte":{
+
+        "Cybernetically enhanced web apps":
+        "Кибернетически улучшенные Web-приложения",
+
+        "Interactive Svelte playground":
+        "Песочница Svelte"
+    },
+
+    "sites/svelte.dev/src/routes/repl/[id]/index.svelte":{
+
+        "Cybernetically enhanced web apps":
+        "Кибернетически улучшенные Web-приложения",
+
+        "Interactive Svelte playground":
+        "Песочница Svelte"
+    },
+
+    "sites/svelte.dev/src/routes/repl/[id]/_components/AppControls/index.svelte":{
+
+        "fullscreen editor":
+        "на полный экран",
+
+        "download zip file":
+        "скачать zip файл",
+
+        "title=\"fork\"":
+        "title=\"сделать форк\"",
+
+        "title=\"save\"":
+        "title=\"сохранить\"",
+
+        "Log in to save":
+        "Войди, чтобы сохранить"
+    },
+
+    "sites/svelte.dev/src/routes/repl/[id]/_components/AppControls/UserMenu.svelte":{
+
+        "Your saved apps":
+        "Мои сниппеты",
+
+        "Log out":
+        "Выйти"
+    },
+
+    "sites/svelte.dev/src/routes/blog/index.svelte":{
+
+        "Blog":
+        "Блог",
+
+        "Svelte blog":
+        "Блог Svelte",
+
+        "Articles about Svelte and UI development":
+        "Статьи про Svelte и разарботку интерфейсов",
+
+        "Read the article":
+        "Читать статью",
+
+        "Older posts":
+        "Прошлые статьи",
+
+        "Latest post":
+        "Последняя статья"
+    },
+
+    "sites/svelte.dev/src/routes/blog/[slug].svelte":{
+        "That post could not be found":
+        "Такая статья не найдена"
+    },
+
+    "sites/svelte.dev/src/routes/faq/index.svelte":{
+
+        "Frequently asked questions about Svelte":
+        "Часто задаваемые вопросы про Svelte",
+
+        "Frequently Asked Questions":
+        "Часто Задаваемые Вопросы",
+
+        "See also the <a href=\"https://svelte.dev/faq\" rel=\"external\">Svelte FAQ</a> for questions relating":
+        "",
+
+        "to Svelte directly.":
+        ""
+    },
+
+
+
+
+
+
+
+
+
+
+
+
     "sites/kit.svelte.dev/svelte.config.js":{
-        "adapter-netlify":
-        "adapter-node"
-    },
-    "packages/site-kit/components/Hero.svelte":{
-        "max-width: 12em;":
-        "max-width: auto;"
+        "http://localhost:3456":
+        "http://localhost:3030/ru",
+
+        "https://api.svelte.dev":
+        "https://api.svelte.cf/ru"
     },
     "sites/kit.svelte.dev/src/routes/index.svelte": {
 
@@ -30,6 +413,9 @@
 
         "The fastest way to build svelte apps": 
         "Быстрейший способ создать Svelte приложение",
+
+        "SvelteKit is the official Svelte application framework": 
+        "SvelteKit - это официальный фреймворк для приложений на Svelte",
 
         "Powered by Svelte": 
         "Основан на Svelte",
@@ -41,9 +427,11 @@
         "Best of both worlds": 
         "Лучшее из двух миров",
 
-        "All the SEO and progressive enhancement of a server-rendered app, with the slick navigation of":
-        "Все преимущества SEO и прогрессивного улучшения при рендеринге на стороне сервера вместе с удобной навигацией SPA-приложений",
-        "an SPA":"",
+        "All the SEO and progressive enhancement of a server-rendered app, with the slick navigation": 
+        "Получите первокласное SEO и серверную отрисовку приложения вместе с плавной SPA навигацией",
+        
+        "of an SPA": 
+        "",
         
         "Build fast": 
         "Быстрая сборка",
@@ -52,11 +440,14 @@
         "Мгновенный старт с поддержкой маршрутизации, отрисовки на сервере, разделения кода, работы без сети и многое другое",
         "support and more":"",
 
-        "Read the <a href=\"https://svelte.dev/blog/whats-the-deal-with-sveltekit\">introductory blog</a>":
-        "Прочтите <a href=\"https://ru.svelte.dev/blog/whats-the-deal-with-sveltekit\">вводную статью в блоге</a>",
+        "Read the":
+        "Прочтите",
+
+        "introductory blog":
+        "вводную статью в блоге",
 
         "post to learn more.":
-        ", чтобы узнать больше",
+        ", чтобы узнать больше.",
 
         "learn Svelte":
         "узнать о Svelte",
@@ -130,11 +521,11 @@
     },
     "sites/kit.svelte.dev/src/routes/docs/index.svelte":{
 
-        "https://api.svelte.dev/docs/kit/docs?content":
-        "/api/docs/kit/docs.json",
-
         "Documentation":
         "Документация",
+
+        "Complete documentation for SvelteKit":
+        "Полная документация по SvelteKit",
 
         "Docs • SvelteKit":
         "Документация • SvelteKit",
@@ -142,51 +533,131 @@
         "SvelteKit docs":
         "Документация SvelteKit",
 
-        "The fastest way to build Svelte apps":
-        "Быстрейший способ создать Svelte приложение",
+        "https://github.com/sveltejs/kit/edit/master/documentation/docs/":
+        "https://github.com/sveltejs-translations/content-server/tree/master/docs/ru/kit/docs/"
 
-        "<Docs {sections} project=\"kit\" path=\"/documentation\" />":
-        "<Docs {sections} owner=\"sveltejs-translations\" project=\"russian-sites\" path=\"/patch/sites/kit.svelte.dev/src/content/documentation\" edit_title=\"редактировать этот раздел\" />"
     },
     "sites/kit.svelte.dev/src/routes/faq/index.svelte":{
 
-        "https://api.svelte.dev/docs/kit/faq?content":
-        "/api/docs/kit/faq.json",
-
         "Frequently Asked Questions":
-        "Часто задаваемые вопросы",
+        "Часто Задаваемые Вопросы",
+
+        "Frequently asked questions about SvelteKit":
+        "Часто задаваемые вопросы о SvelteKit",
 
         "See also the <a href=\"https://svelte.dev/faq\" rel=\"external\">Svelte FAQ</a> for questions relating":
         "По вопросам, относящимся непосредственно к Svelte смотрите <a href=\"https://ru.svelte.dev/faq\" rel=\"external\">Svelte FAQ</a>.",
 
         "to Svelte directly.":
-        "",
+        ""
 
-        "The fastest way to build Svelte apps":
-        "Быстрейший способ создать Svelte приложение"
     },
     "sites/kit.svelte.dev/src/routes/migrating/index.svelte":{
-
-        "https://api.svelte.dev/docs/kit/migrating?content":
-        "/api/docs/kit/migrating.json",
-
         "Migration":
         "Миграция",
 
-        "Migration • SvelteKit":
-        "Руководство по миграции • SvelteKit",
+        "How to migrate your app from Sapper to SvelteKit":
+        "Как мигрировать ваше приложение с Sapper на SvelteKit",
 
         "SvelteKit migration guides":
         "Руководство по миграции на SvelteKit",
 
-        "The fastest way to build Svelte apps":
-        "Быстрейший способ создать Svelte приложение",
-
-        "<Docs {sections} project=\"kit\" path=\"/documentation\" dir=\"migrating\" />":
-        "<Docs {sections} owner=\"sveltejs-translations\" project=\"russian-sites\" path=\"/patch/sites/kit.svelte.dev/src/content/documentation\" dir=\"migrating\" edit_title=\"редактировать этот раздел\" />"
+        "https://github.com/sveltejs/kit/edit/master/documentation/migrating/":
+        "https://github.com/sveltejs-translations/content-server/tree/master/docs/ru/kit/migrating/"
     },
-    "packages/site-kit/src/lib/components/NavItem.svelte":{
-        "$page.path.":
-        "$page.url.pathname."
+
+
+
+
+
+
+
+    "packages/repl/src/lib/Output/index.svelte":{
+
+        "Select a component to see its compiled code":
+        "Выберите компонент, чтобы увидеть результат компиляции",
+
+        "Result":
+        "Результат",
+
+        "JS output":
+        "Вывод JS",
+
+        "CSS output":
+        "Вывод CSS",
+
+        "AST output":
+        "Вывод AST",
+
+        "Compiler options":
+        "Настройка компилятора"
+    },
+	
+	"packages/repl/src/lib/Output/Viewer.svelte":{
+
+        "loading Svelte compiler...":
+        "загрузка компилятора Svelte...",
+
+        "Clear":
+        "Очистить",
+
+        "\"Console\"":
+        "\"Консоль\""
+    },
+	
+	"packages/repl/src/lib/Output/AstView.svelte":{
+
+        "No AST available":
+        "Нет данных AST",
+
+        "The AST is not public API and may change at any point in time":
+        "Текущая структура AST не является публичным API и может быть изменена в любой момент."
+    },
+	
+	"packages/repl/src/lib/Output/ConsoleLine.svelte":{
+
+        "Assertion failed":
+        "Ошибка проверки",
+
+        "Console was cleared":
+        "Консоль была очищена",
+
+        "Message could not be cloned. Open devtools to see it":
+        "Невозможно отобразить сообщение. Откройте Инструменты Разработчика, чтобы увидеть его."
+    },
+	
+	"packages/repl/src/lib/workers/compiler/index.js":{
+
+        "`/* Add a <sty` + `le> tag to see compiled CSS */`":
+        "`/* Добавьте тег <sty` + `le>, чтобы увидеть результат компиляции CSS */`",
+
+        "Error compiling component":
+        "Ошибка при компилировании компонента"
+    },
+	
+	"packages/repl/src/lib/Input/ComponentSelector.svelte":{
+
+        "Are you sure you want to delete":
+        "Вы уверены, что хотите удалить",
+
+        "Could not find component! That's... odd":
+        "Компонент не найден! Это... странно",
+
+        "edit component name":
+        "изменить имя компонента",
+
+        "add new component":
+        "добавить новый компонент"
+    },
+
+
+
+
+
+	"packages/site-kit/src/lib/components/Hero.svelte":{
+
+        "margin-block-start: 0;":
+        "margin-block-start: 0; min-width: 380px;"
     }
+
 }
