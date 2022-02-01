@@ -1,5 +1,14 @@
 {
+    
+    "/sites/svelte.dev/package.json":{
+        "@sveltejs/adapter-auto":
+        "@sveltejs/adapter-node"
+    },
+    
     "sites/svelte.dev/svelte.config.js":{
+        "'@sveltejs/adapter-auto'":
+        "'@sveltejs/adapter-node'",
+
         "http://localhost:8787":
         "http://localhost:3030/ru",
 
@@ -397,9 +406,15 @@
 
 
 
-
+    "/sites/kit.svelte.dev/package.json":{
+        "@sveltejs/adapter-auto":
+        "@sveltejs/adapter-node"
+    },
 
     "sites/kit.svelte.dev/svelte.config.js":{
+        "'@sveltejs/adapter-auto'":
+        "'@sveltejs/adapter-node'",
+
         "http://localhost:3456":
         "http://localhost:3030/ru",
 

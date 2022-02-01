@@ -1,18 +1,18 @@
 {
   "name": "russian-sites",
-  "description": "Russian translation of the svelte.dev sites",
+  "description": "Russian translation of the svelte sites",
   "scripts": {
     "download": "trpatcher download",
     "apply": "trpatcher apply",
-    "setup": "trpatcher setup",
-    "postinstall": "npm run download && npm run apply && npm run setup",
-    "update": "npm run download && npm run apply && npm run setup",
-    "dev:kit": "node scripts/dev --kit",
-    "build:kit": "npm run apply && cd __BUILD/sites/kit.svelte.dev && npx pnpm i -D @sveltejs/adapter-node@next && npm run build  --ignore-scripts",
-    "start:kit": "cd __BUILD/sites/kit.svelte.dev/build && node index",
+    "update": "node scripts/update",
+
     "dev:svelte": "node scripts/dev --svelte",
-    "build:svelte": "npm run apply && cd __BUILD/sites/svelte.dev && npx pnpm i -D @sveltejs/adapter-node@next && npm run build  --ignore-scripts",
-    "start:svelte": "cd __BUILD/sites/svelte.dev/build && node index"
+    "build:svelte": "node scripts/build --svelte",
+    "start:svelte": "node scripts/start --svelte",
+
+    "dev:kit": "node scripts/dev --kit",
+    "build:kit": "node scripts/build --kit",
+    "start:kit": "node scripts/start --kit"
   },
   "dependencies": {
     "trpatcher": "^1.0.5"
