@@ -2,13 +2,10 @@ name: Deploy ru.kit.svelte.dev
 
 on:
   push:
-    paths:
-      - '.github/workflows/deploy-kit.yml'
-      - 'docker/Dockerfile'
-      - 'patch/strings.json'
-      - 'patch/packages/**'
-      - 'patch/sites/kit.svelte.dev/**'
-      - 'package.json'
+    paths-ignore:
+      - 'README.md'
+      - '.gitignore'
+      - '.github/workflows/deploy-svelte.yml'
 
 jobs:
   deploy:
@@ -24,7 +21,7 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
 
-      - name: Installing deps and getting original resources
+      - name: Installing deps
         run: npm install
 
       - name: Build translated site
