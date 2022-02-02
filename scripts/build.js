@@ -11,7 +11,7 @@ if(getProject() === 'kit'){
 }else{
   runSync('npx pnpm run build',DIR,{
     SUPABASE_URL:'no',
-    SUPABASE_KEY:'no',
+    SUPABASE_KEY:'no'
   });
   writeFileSync(path.join(DIR,'build','package.json'),JSON.stringify({type:'module'}));
   runSync('npm i @supabase/supabase-js cookie devalue do-not-zip flru marked dotenv yootils sourcemap-codec svelte-json-tree',path.join(DIR,'build'));

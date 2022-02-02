@@ -6,6 +6,11 @@
     },
     
     "sites/svelte.dev/svelte.config.js":{
+        "target: '#svelte',":
+        "",
+        "adapter: adapter(),":
+        "adapter: adapter({origin: 'https://ru.svelte.dev',headers: {protocol: 'x-forwarded-proto',host: 'x-forwarded-host'}}),",
+
         "'@sveltejs/adapter-auto'":
         "'@sveltejs/adapter-node'",
 
@@ -412,6 +417,11 @@
     },
 
     "sites/kit.svelte.dev/svelte.config.js":{
+        "target: '#svelte',":
+        "",
+        "adapter: adapter(),":
+        "adapter: adapter({origin: 'https://ru.kit.svelte.dev',headers: {protocol: 'x-forwarded-proto',host: 'x-forwarded-host'}}),",
+
         "'@sveltejs/adapter-auto'":
         "'@sveltejs/adapter-node'",
 
