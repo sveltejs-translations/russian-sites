@@ -5,6 +5,7 @@ const path = require('path');
 const DIR = getSiteDir();
 
 runSync('npm run update');
+runSync('npx pnpm install -D @sveltejs/kit@1.0.0-next.252',DIR);
 if(getProject() === 'kit'){
   runSync('npx pnpm run build',DIR);
   writeFileSync(path.join(DIR,'build','package.json'),JSON.stringify({type:'module'}));
