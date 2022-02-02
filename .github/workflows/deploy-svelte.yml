@@ -58,8 +58,8 @@ jobs:
                 --env GITHUB_CLIENT_ID=${{ secrets.GH_CLIENT_ID }} \
                 --env GITHUB_CLIENT_SECRET=${{ secrets.GH_CLIENT_SECRET }} \
                 --env VITE_MAPBOX_ACCESS_TOKEN=${{ secrets.MAPBOX_ACCESS_TOKEN }} \
-                --env SUPABASE_URL=123 \
-                --env SUPABASE_KEY=123 \
+                --env SUPABASE_URL=${{ secrets.SUPABASE_URL }} \
+                --env SUPABASE_KEY=${{ secrets.SUPABASE_KEY }} \
             svelte-site
             rm -rf /tmp/svelte.dev
           host: ${{ secrets.SSH_HOST }}
