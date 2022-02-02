@@ -14,5 +14,5 @@ if(getProject() === 'kit'){
     SUPABASE_KEY:'no',
   });
   writeFileSync(path.join(DIR,'build','package.json'),JSON.stringify({type:'module'}));
-  runSync('npm i @supabase/supabase-js cookie devalue do-not-zip flru marked dotenv',path.join(DIR,'build'));
+  runSync('npm i @supabase/supabase-js cookie devalue do-not-zip flru marked dotenv yootils',path.join(DIR,'build'));
 }

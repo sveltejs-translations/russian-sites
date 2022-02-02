@@ -57,6 +57,7 @@ jobs:
                 --restart=unless-stopped \
                 --env GITHUB_CLIENT_ID=${{ secrets.GH_CLIENT_ID }} \
                 --env GITHUB_CLIENT_SECRET=${{ secrets.GH_CLIENT_SECRET }} \
+                --env VITE_MAPBOX_ACCESS_TOKEN=${{ secrets.MAPBOX_ACCESS_TOKEN }} \
                 --env SUPABASE_URL=123 \
                 --env SUPABASE_KEY=123 \
             svelte-site
