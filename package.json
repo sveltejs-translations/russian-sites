@@ -5,11 +5,9 @@
     "download": "trpatcher download",
     "apply": "trpatcher apply",
     "update": "node scripts/update",
-
     "dev:svelte": "node scripts/dev --svelte",
     "build:svelte": "node scripts/build --svelte",
     "start:svelte": "node scripts/start --svelte",
-
     "dev:kit": "node scripts/dev --kit",
     "build:kit": "node scripts/build --kit",
     "start:kit": "node scripts/start --kit"

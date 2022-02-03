@@ -50,4 +50,3 @@ You can customize for your needs. Options are:
 * `adapter_config` - set adapter's options if needed (only JSON string here)
 * `api_url` - URL of the production API to fetch site content
 * `api_url_dev` - URL of the development API to fetch site content
-
