@@ -1,8 +1,8 @@
 {
     "lang": "ru",
     "repo": "https://github.com/sveltejs/sites",
-    "setup": "npx pnpm install",
-    "dev": "npm run dev",
-    "build": "svelte-kit build",
-    "start": "svelte-kit start"
+    "adapter": "@sveltejs/adapter-node@next",
+    "adapter_config": "{}",
+    "api_url": "https://api.svelte.cf/ru",
+    "api_url_dev": "http://localhost:3030/ru"
 }
