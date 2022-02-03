@@ -640,6 +640,15 @@
         "добавить новый компонент"
     },
 
+	"packages/repl/src/lib/InputOutputToggle.svelte":{
+
+        ">input<":
+        ">код<",
+
+        ">output<":
+        ">результат<"
+    },
+
 
 
 
@@ -648,6 +657,14 @@
 
         "margin-block-start: 0;":
         "margin-block-start: 0; min-width: 380px;"
+    },
+	"packages/site-kit/src/lib/components/Nav.svelte":{
+
+        "Homepage":
+        "На главную",
+
+        "Home":
+        "Домой"
     }
 
 }
