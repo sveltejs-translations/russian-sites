@@ -1,3 +1,4 @@
 node_modules
 __BUILD
 __PKG
+patch/sites/svelte.dev/.env
