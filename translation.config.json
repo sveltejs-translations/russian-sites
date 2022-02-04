@@ -1,6 +1,6 @@
 {
     "lang": "ru",
-    "repo": "https://github.com/sveltejs/sites",
+    "repo": "https://github.com/sveltejs/sites#003e92d09779b56705753ee5e96d7f17376d7b0d",
     "adapter": "@sveltejs/adapter-node@next",
     "adapter_config": "{}",
     "api_url": "https://api.svelte.cf/ru",
